@@ -28,7 +28,7 @@ namespace DBioPhoto.Domain.Models
 
     class Person
     {
-        public int PersonId { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
 
@@ -38,7 +38,7 @@ namespace DBioPhoto.Domain.Models
     enum BlossomColour { White, Red, Yellow, GreenOrNone, Blue, Violet, Pink }
     class Plant
     {
-        public int PlantId { get; set; }
+        public int Id { get; set; }
         [Required]
         public BlossomColour BlossomColour { get; set; }
         public string FirstName { get; set; }
@@ -51,7 +51,7 @@ namespace DBioPhoto.Domain.Models
 
     class Animal
     {
-        public int AnimalId { get; set; }
+        public int Id { get; set; }
         public string FirstName { get; set; }
         public string SecondName { get; set; }
         public string LatFirstName { get; set; }
@@ -62,7 +62,7 @@ namespace DBioPhoto.Domain.Models
 
     class Fungus
     {
-        public int FungusId { get; set; }
+        public int Id { get; set; }
         public string FirstName { get; set; }
         public string SecondName { get; set; }
         public string LatFirstName { get; set; }
@@ -73,7 +73,7 @@ namespace DBioPhoto.Domain.Models
 
     class Micro
     {
-        public int MicroId { get; set; }
+        public int Id { get; set; }
         public string FirstName { get; set; }
         public string SecondName { get; set; }
         public string LatFirstName { get; set; }

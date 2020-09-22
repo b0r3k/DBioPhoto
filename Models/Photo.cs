@@ -8,7 +8,7 @@ namespace DBioPhoto.Domain.Models
     enum Category { People, Countryside, Plants, Animals, Fungi, Micro }
     class Photo
     {
-        public int PhotoId { get; set; }
+        public int Id { get; set; }
         [Required]
         public DateTime TimeCreated { get; set; }
         [Required]
