@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DBioPhoto.DataAccess.Migrations
 {
     [DbContext(typeof(DBioPhotoContext))]
-    [Migration("20200922113634_CreateDBioPhotoDB")]
+    [Migration("20200922114511_CreateDBioPhotoDB")]
     partial class CreateDBioPhotoDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
