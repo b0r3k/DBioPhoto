@@ -5,9 +5,9 @@ namespace DBioPhoto.DataAccess.Data
 {
     class DBioPhotoContext : DbContext
     {
-        public DBioPhotoContext(DbContextOptions<DBioPhotoContext> options)
-            : base(options)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\v11.0;AttachDbFileName=C:\Users\pozar\DBioPhotoDB.mdf;Trusted_Connection=True;");
         }
 
         public DbSet<Photo> Photos { get; set; }
