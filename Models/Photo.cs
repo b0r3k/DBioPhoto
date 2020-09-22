@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 
-namespace DBioPhoto.Models
+namespace DBioPhoto.Domain.Models
 {
     enum Category { People, Countryside, Plants, Animals, Fungi, Micro }
     class Photo
@@ -20,11 +20,11 @@ namespace DBioPhoto.Models
         public string Comment { get; set; }
         public string Location { get; set; }
 
-        public ICollection<Person> People { get; set; }
-        public ICollection<Plant> Plants { get; set; }
-        public ICollection<Animal> Animals { get; set; }
-        public ICollection<Fungus> Fungi { get; set; }
-        public ICollection<Micro> Micros { get; set; }
+        public ICollection<PersonOnPhoto> PersonOnPhotos { get; set; }
+        public ICollection<PlantOnPhoto> PlantOnPhotos { get; set; }
+        public ICollection<AnimalOnPhoto> AnimalOnPhotos { get; set; }
+        public ICollection<FungusOnPhoto> FungusOnPhotos { get; set; }
+        public ICollection<MicroOnPhoto> MicroOnPhotos { get; set; }
 
     }
 }

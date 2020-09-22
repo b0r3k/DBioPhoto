@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace DBioPhoto.Models
+namespace DBioPhoto.Domain.Models
 {
 
     /*
@@ -31,6 +31,8 @@ namespace DBioPhoto.Models
         public int PersonId { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
+
+        public ICollection<PersonOnPhoto> PersonOnPhotos { get; set; }
     }
 
     enum BlossomColour { White, Red, Yellow, GreenOrNone, Blue, Violet, Pink }
@@ -43,6 +45,8 @@ namespace DBioPhoto.Models
         public string SecondName { get; set; }
         public string LatFirstName { get; set; }
         public string LatSecondName { get; set; }
+
+        public ICollection<PlantOnPhoto> PlantOnPhotos { get; set; }
     }
 
     class Animal
@@ -52,6 +56,8 @@ namespace DBioPhoto.Models
         public string SecondName { get; set; }
         public string LatFirstName { get; set; }
         public string LatSecondName { get; set; }
+
+        public ICollection<AnimalOnPhoto> AnimalOnPhotos { get; set; }
     }
 
     class Fungus
@@ -61,6 +67,8 @@ namespace DBioPhoto.Models
         public string SecondName { get; set; }
         public string LatFirstName { get; set; }
         public string LatSecondName { get; set; }
+
+        public ICollection<FungusOnPhoto> FungusOnPhotos { get; set; }
     }
 
     class Micro
@@ -70,5 +78,7 @@ namespace DBioPhoto.Models
         public string SecondName { get; set; }
         public string LatFirstName { get; set; }
         public string LatSecondName { get; set; }
+
+        public ICollection<MicroOnPhoto> MicroOnPhotos { get; set; }
     }
 }
