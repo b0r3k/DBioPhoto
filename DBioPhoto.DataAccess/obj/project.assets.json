@@ -5742,19 +5742,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\pozar\\.nuget\\packages\\": {}
+    "C:\\Users\\borek\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\pozar\\source\\repos\\b0r3k\\DBioPhoto\\DBioPhoto.DataAccess\\DBioPhoto.DataAccess.csproj",
+      "projectUniqueName": "C:\\Users\\borek\\Source\\Repos\\b0r3k\\DBioPhoto\\DBioPhoto.DataAccess\\DBioPhoto.DataAccess.csproj",
       "projectName": "DBioPhoto.DataAccess",
-      "projectPath": "C:\\Users\\pozar\\source\\repos\\b0r3k\\DBioPhoto\\DBioPhoto.DataAccess\\DBioPhoto.DataAccess.csproj",
-      "packagesPath": "C:\\Users\\pozar\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\pozar\\source\\repos\\b0r3k\\DBioPhoto\\DBioPhoto.DataAccess\\obj\\",
+      "projectPath": "C:\\Users\\borek\\Source\\Repos\\b0r3k\\DBioPhoto\\DBioPhoto.DataAccess\\DBioPhoto.DataAccess.csproj",
+      "packagesPath": "C:\\Users\\borek\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\borek\\Source\\Repos\\b0r3k\\DBioPhoto\\DBioPhoto.DataAccess\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\pozar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\borek\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5767,8 +5767,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\pozar\\source\\repos\\b0r3k\\DBioPhoto\\DBioPhoto.Domain\\DBioPhoto.Domain.csproj": {
-              "projectPath": "C:\\Users\\pozar\\source\\repos\\b0r3k\\DBioPhoto\\DBioPhoto.Domain\\DBioPhoto.Domain.csproj"
+            "C:\\Users\\borek\\Source\\Repos\\b0r3k\\DBioPhoto\\DBioPhoto.Domain\\DBioPhoto.Domain.csproj": {
+              "projectPath": "C:\\Users\\borek\\Source\\Repos\\b0r3k\\DBioPhoto\\DBioPhoto.Domain\\DBioPhoto.Domain.csproj"
             }
           }
         }
