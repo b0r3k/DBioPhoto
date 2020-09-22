@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DBioPhoto.Domain.Models
 {
-    class PersonOnPhoto
+    public class PersonOnPhoto
     {
         public int Id { get; set; }
         public int PersonId { get; set; }
@@ -15,7 +15,7 @@ namespace DBioPhoto.Domain.Models
         public Photo Photo { get; set; }
     }
 
-    class PlantOnPhoto
+    public class PlantOnPhoto
     {
         public int Id { get; set; }
         public int PlantId { get; set; }
@@ -25,7 +25,7 @@ namespace DBioPhoto.Domain.Models
         public Photo Photo { get; set; }
     }
 
-    class AnimalOnPhoto
+    public class AnimalOnPhoto
     {
         public int Id { get; set; }
         public int AnimalId { get; set; }
@@ -35,7 +35,7 @@ namespace DBioPhoto.Domain.Models
         public Photo Photo { get; set; }
     }
 
-    class FungusOnPhoto
+    public class FungusOnPhoto
     {
         public int Id { get; set; }
         public int FungusId { get; set; }
@@ -45,7 +45,7 @@ namespace DBioPhoto.Domain.Models
         public Photo Photo { get; set; }
     }
 
-    class MicroOnPhoto
+    public class MicroOnPhoto
     {
         public int Id { get; set; }
         public int MicroId { get; set; }

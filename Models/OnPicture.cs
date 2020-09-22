@@ -26,7 +26,7 @@ namespace DBioPhoto.Domain.Models
     I need a special database table for each category.
      */
 
-    class Person
+    public class Person
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -35,8 +35,8 @@ namespace DBioPhoto.Domain.Models
         public ICollection<PersonOnPhoto> PersonOnPhotos { get; set; }
     }
 
-    enum BlossomColour { White, Red, Yellow, GreenOrNone, Blue, Violet, Pink }
-    class Plant
+    public enum BlossomColour { White, Red, Yellow, GreenOrNone, Blue, Violet, Pink }
+    public class Plant
     {
         public int Id { get; set; }
         [Required]
@@ -49,7 +49,7 @@ namespace DBioPhoto.Domain.Models
         public ICollection<PlantOnPhoto> PlantOnPhotos { get; set; }
     }
 
-    class Animal
+    public class Animal
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -60,7 +60,7 @@ namespace DBioPhoto.Domain.Models
         public ICollection<AnimalOnPhoto> AnimalOnPhotos { get; set; }
     }
 
-    class Fungus
+    public class Fungus
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -71,7 +71,7 @@ namespace DBioPhoto.Domain.Models
         public ICollection<FungusOnPhoto> FungusOnPhotos { get; set; }
     }
 
-    class Micro
+    public class Micro
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
