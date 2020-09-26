@@ -17,4 +17,9 @@
     <ProjectReference Include="..\DBioPhoto.Domain\DBioPhoto.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\Filtering\" />
+    <Folder Include="Services\Adding\" />
+  </ItemGroup>
+
 </Project>
