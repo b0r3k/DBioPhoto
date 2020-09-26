@@ -18,15 +18,16 @@ namespace DBioPhoto.DataAccess.Services.Filtering
         }
 
         // Case sensitive?
-        public async Task<List<Photo>> GetWithCatAndCzFirstName(Category category, string name)
+        public async Task<List<Photo>> GetWithCatAndCzName(Category category, string name, bool isFirstName)
         {
             List<Photo> photos = await (
                 from p in _context.Photos.AsNoTracking()
-                where (p.Category == category) // Need to find out how to "join" tables and search based on name
+                where (p.Category == category) // Need to find out how to "join" tables and search based on name and whether it's first/second
                 orderby p.TimeCreated descending
                 select p
                 ).ToListAsync();
             return photos;
         }
+
     }
 }
