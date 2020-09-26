@@ -3,7 +3,7 @@ using DBioPhoto.Domain.Models;
 
 namespace DBioPhoto.DataAccess.Data
 {
-    class DBioPhotoContext : DbContext
+    public class DBioPhotoContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
