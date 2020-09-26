@@ -10,12 +10,21 @@ using System.Windows.Forms;
 
 namespace DBioPhoto.Frontend
 {
-    public partial class Form1 : Form
+    public partial class OpeningForm : Form
     {
-        public Form1()
+        public OpeningForm()
         {
             InitializeComponent();
         }
 
+        private void buttonWantAdd_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonWantSearch_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
