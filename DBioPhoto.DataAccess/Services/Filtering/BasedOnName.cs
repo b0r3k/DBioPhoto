@@ -18,6 +18,7 @@ namespace DBioPhoto.DataAccess.Services.Filtering
         }
 
         // Case sensitive?
+        // Maybe later change to return List<FilePath+Filename> instead of List<Photo>
         public async Task<List<Photo>> GetWithCatAndCzName(Category category, string name, bool isFirstName)
         {
             List<Photo> photos = await (
