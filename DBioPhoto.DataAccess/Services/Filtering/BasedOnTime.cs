@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
@@ -18,11 +17,11 @@ namespace DBioPhoto.DataAccess.Services.Filtering
             _context = context;
         }
 
-        public async Task<List<Photo>> GetInTimeRange(DateTime Since, DateTime Until)
+        public async Task<List<Photo>> GetInTimeRange(DateTime since, DateTime until)
         {
             List<Photo> photos = await (
                 from p in _context.Photos.AsNoTracking()
-                where (p.TimeCreated >= Since & p.TimeCreated <= Until)
+                where (p.TimeCreated >= since & p.TimeCreated <= until)
                 orderby p.TimeCreated descending
                 select p
                 ).ToListAsync();
