@@ -17,6 +17,8 @@ namespace DBioPhoto.Frontend
             InitializeComponent();
         }
 
+        // TODO volení lokace DB souboru
+
         private void buttonWantAdd_Click(object sender, EventArgs e)
         {
 
