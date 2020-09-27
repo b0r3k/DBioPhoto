@@ -5747,11 +5747,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\borek\\Source\\Repos\\b0r3k\\DBioPhoto\\DBioPhoto.DataAccess\\DBioPhoto.DataAccess.csproj",
+      "projectUniqueName": "C:\\Users\\borek\\source\\repos\\b0r3k\\DBioPhoto\\DBioPhoto.DataAccess\\DBioPhoto.DataAccess.csproj",
       "projectName": "DBioPhoto.DataAccess",
-      "projectPath": "C:\\Users\\borek\\Source\\Repos\\b0r3k\\DBioPhoto\\DBioPhoto.DataAccess\\DBioPhoto.DataAccess.csproj",
+      "projectPath": "C:\\Users\\borek\\source\\repos\\b0r3k\\DBioPhoto\\DBioPhoto.DataAccess\\DBioPhoto.DataAccess.csproj",
       "packagesPath": "C:\\Users\\borek\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\borek\\Source\\Repos\\b0r3k\\DBioPhoto\\DBioPhoto.DataAccess\\obj\\",
+      "outputPath": "C:\\Users\\borek\\source\\repos\\b0r3k\\DBioPhoto\\DBioPhoto.DataAccess\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\borek\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5767,8 +5767,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\borek\\Source\\Repos\\b0r3k\\DBioPhoto\\DBioPhoto.Domain\\DBioPhoto.Domain.csproj": {
-              "projectPath": "C:\\Users\\borek\\Source\\Repos\\b0r3k\\DBioPhoto\\DBioPhoto.Domain\\DBioPhoto.Domain.csproj"
+            "C:\\Users\\borek\\source\\repos\\b0r3k\\DBioPhoto\\DBioPhoto.Domain\\DBioPhoto.Domain.csproj": {
+              "projectPath": "C:\\Users\\borek\\source\\repos\\b0r3k\\DBioPhoto\\DBioPhoto.Domain\\DBioPhoto.Domain.csproj"
             }
           }
         }
