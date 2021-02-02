@@ -26,9 +26,20 @@ namespace DBioPhoto.Domain.Models
     I need a special database table for each category.
      */
 
+    public abstract class Organism
+    {
+        public int Id { get; set; }
+        [Required]
+        public string FirstName { get; set; }
+        public string SecondName { get; set; }
+        public string LatFirstName { get; set; }
+        public string LatSecondName { get; set; }
+    }
+
     public class Person
     {
         public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
         public string Surname { get; set; }
 
@@ -36,49 +47,25 @@ namespace DBioPhoto.Domain.Models
     }
 
     public enum BlossomColour { White, Red, Yellow, GreenOrNone, Blue, Violet, Pink }
-    public class Plant
+    public class Plant : Organism
     {
-        public int Id { get; set; }
-        [Required]
         public BlossomColour BlossomColour { get; set; }
-        public string FirstName { get; set; }
-        public string SecondName { get; set; }
-        public string LatFirstName { get; set; }
-        public string LatSecondName { get; set; }
 
         public ICollection<PlantOnPhoto> PlantOnPhotos { get; set; }
     }
 
-    public class Animal
+    public class Animal : Organism
     {
-        public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string SecondName { get; set; }
-        public string LatFirstName { get; set; }
-        public string LatSecondName { get; set; }
-
         public ICollection<AnimalOnPhoto> AnimalOnPhotos { get; set; }
     }
 
-    public class Fungus
+    public class Fungus : Organism
     {
-        public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string SecondName { get; set; }
-        public string LatFirstName { get; set; }
-        public string LatSecondName { get; set; }
-
         public ICollection<FungusOnPhoto> FungusOnPhotos { get; set; }
     }
 
-    public class Micro
+    public class Micro : Organism
     {
-        public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string SecondName { get; set; }
-        public string LatFirstName { get; set; }
-        public string LatSecondName { get; set; }
-
         public ICollection<MicroOnPhoto> MicroOnPhotos { get; set; }
     }
 }
