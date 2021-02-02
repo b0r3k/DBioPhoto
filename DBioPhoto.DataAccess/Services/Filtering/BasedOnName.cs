@@ -17,6 +17,7 @@ namespace DBioPhoto.DataAccess.Services.Filtering
             _context = context;
         }
 
+        // Dynamic LINQ queries??
         // Case sensitive?
         // Maybe later change to return List<FilePath+Filename> instead of List<Photo>
         public async Task<List<Photo>> GetWithCatAndCzName(Category category, string name, bool isFirstName)
