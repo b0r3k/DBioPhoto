@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using DBioPhoto.Domain.Models;
+using System;
+using System.IO;
 
 namespace DBioPhoto.DataAccess.Data
 {
@@ -7,9 +9,12 @@ namespace DBioPhoto.DataAccess.Data
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string dbPath = documentsPath + "\\DBioPhotoDB.mdf";
             optionsBuilder.UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;
-                                             AttachDbFilename=|DataDirectory|\DBioPhotoDB.mdf;      
-                                             Integrated Security=True");        //not sure the |DataDirectory| is working
+                                             AttachDbFilename="+dbPath+"; " +
+                                             "Integrated Security=True;" +
+                                             "Initial Catalog=DBioPhotoDB");
         }
 
         public DbSet<Photo> Photos { get; set; }
