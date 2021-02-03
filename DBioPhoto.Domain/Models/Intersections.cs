@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DBioPhoto.Domain.Models
 {
-    public class PersonOnPhoto
+    /*public class PersonOnPhoto
     {
         public int Id { get; set; }
         public int PersonId { get; set; }
@@ -53,5 +53,5 @@ namespace DBioPhoto.Domain.Models
 
         public Micro Micro { get; set; }
         public Photo Photo { get; set; }
-    }
+    }*/
 }

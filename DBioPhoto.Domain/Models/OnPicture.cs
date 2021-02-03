@@ -25,29 +25,33 @@ namespace DBioPhoto.Domain.Models
     Not using inheritance like Plant : Organism and Animal : Organism, because
     I need a special database table for each category.
      */
+    public enum OrganismType { Plant, Animal, Fungus, Micro }
+    public enum Colour { White, Red, Yellow, Green, Blue, Violet, Pink, None }
 
-    public abstract class Organism
+    public class Organism
     {
         public int Id { get; set; }
-        [Required]
+        public OrganismType OrganismType { get; set; }
         public string FirstName { get; set; }
         public string SecondName { get; set; }
         public string LatFirstName { get; set; }
         public string LatSecondName { get; set; }
+        public Colour Colour { get; set; }
+
+        public ICollection<Photo> Photos { get; set; }
     }
 
     public class Person
     {
         public int Id { get; set; }
-        [Required]
         public string Name { get; set; }
         public string Surname { get; set; }
 
-        public ICollection<PersonOnPhoto> PersonOnPhotos { get; set; }
+        public ICollection<Photo> Photos { get; set; }
+        //public ICollection<PersonOnPhoto> PersonOnPhotos { get; set; }
     }
 
-    public enum BlossomColour { White, Red, Yellow, GreenOrNone, Blue, Violet, Pink }
-    public class Plant : Organism
+    /*public class Plant : Organism
     {
         public BlossomColour BlossomColour { get; set; }
 
@@ -67,5 +71,5 @@ namespace DBioPhoto.Domain.Models
     public class Micro : Organism
     {
         public ICollection<MicroOnPhoto> MicroOnPhotos { get; set; }
-    }
+    }*/
 }

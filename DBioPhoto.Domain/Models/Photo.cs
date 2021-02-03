@@ -9,7 +9,6 @@ namespace DBioPhoto.Domain.Models
     public class Photo
     {
         public int Id { get; set; }
-        [Required]
         public DateTime TimeCreated { get; set; }
         [Required]
         public string FileName { get; set; }
@@ -20,11 +19,13 @@ namespace DBioPhoto.Domain.Models
         public string Comment { get; set; }
         public string Location { get; set; }
 
-        public ICollection<PersonOnPhoto> PersonOnPhotos { get; set; }
+        public ICollection<Person> People { get; set; }
+        public ICollection<Organism> Organisms { get; set; }
+        /*public ICollection<PersonOnPhoto> PersonOnPhotos { get; set; }
         public ICollection<PlantOnPhoto> PlantOnPhotos { get; set; }
         public ICollection<AnimalOnPhoto> AnimalOnPhotos { get; set; }
         public ICollection<FungusOnPhoto> FungusOnPhotos { get; set; }
-        public ICollection<MicroOnPhoto> MicroOnPhotos { get; set; }
+        public ICollection<MicroOnPhoto> MicroOnPhotos { get; set; }*/
 
     }
 }

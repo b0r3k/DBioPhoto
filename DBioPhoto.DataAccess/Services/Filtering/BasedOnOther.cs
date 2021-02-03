@@ -28,22 +28,22 @@ namespace DBioPhoto.DataAccess.Services.Filtering
             return photos;
         }
 
-        public async Task<List<Photo>> GetWithBlossomColour(BlossomColour blossomColour)
+        /*public async Task<List<Photo>> GetWithBlossomColour(BlossomColour blossomColour)
         {
-            /*List<Photo> photos = await (
+            List<Photo> photos = await (
                 from p in _context.Photos.AsNoTracking()
                 where (from plant in _context.Plants.AsNoTracking()
                        (where plant.BlossomColour == blossomColour)
                        select plant)
                 orderby p.TimeCreated descending
                 select p
-                ).ToListAsync();*/
+                ).ToListAsync();
             List<Photo> photos = await (            // NOT WORKING!
                 from p in _context.Photos.AsNoTracking()
                 select p
                 ).ToListAsync();
             return photos;
-        }
+        }*/
 
         public async Task<List<Photo>> GetWithCommentContains(string comment)
         {
