@@ -13,7 +13,7 @@ namespace DBioPhoto.DataAccess.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(nullable: true),
+                    FirstName = table.Column<string>(nullable: false),
                     SecondName = table.Column<string>(nullable: true),
                     LatFirstName = table.Column<string>(nullable: true),
                     LatSecondName = table.Column<string>(nullable: true)
@@ -29,7 +29,7 @@ namespace DBioPhoto.DataAccess.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(nullable: true),
+                    FirstName = table.Column<string>(nullable: false),
                     SecondName = table.Column<string>(nullable: true),
                     LatFirstName = table.Column<string>(nullable: true),
                     LatSecondName = table.Column<string>(nullable: true)
@@ -45,7 +45,7 @@ namespace DBioPhoto.DataAccess.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(nullable: true),
+                    FirstName = table.Column<string>(nullable: false),
                     SecondName = table.Column<string>(nullable: true),
                     LatFirstName = table.Column<string>(nullable: true),
                     LatSecondName = table.Column<string>(nullable: true)
@@ -61,7 +61,7 @@ namespace DBioPhoto.DataAccess.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
                     Surname = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -93,11 +93,11 @@ namespace DBioPhoto.DataAccess.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BlossomColour = table.Column<int>(nullable: false),
-                    FirstName = table.Column<string>(nullable: true),
+                    FirstName = table.Column<string>(nullable: false),
                     SecondName = table.Column<string>(nullable: true),
                     LatFirstName = table.Column<string>(nullable: true),
-                    LatSecondName = table.Column<string>(nullable: true)
+                    LatSecondName = table.Column<string>(nullable: true),
+                    BlossomColour = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

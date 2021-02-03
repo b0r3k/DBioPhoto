@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DBioPhoto.DataAccess.Migrations
 {
     [DbContext(typeof(DBioPhotoContext))]
-    [Migration("20200922151301_CreateDBioPhotoDB")]
+    [Migration("20210203061329_CreateDBioPhotoDB")]
     partial class CreateDBioPhotoDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,6 +29,7 @@ namespace DBioPhoto.DataAccess.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LatFirstName")
@@ -75,6 +76,7 @@ namespace DBioPhoto.DataAccess.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LatFirstName")
@@ -121,6 +123,7 @@ namespace DBioPhoto.DataAccess.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LatFirstName")
@@ -167,6 +170,7 @@ namespace DBioPhoto.DataAccess.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Surname")
@@ -242,6 +246,7 @@ namespace DBioPhoto.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LatFirstName")
