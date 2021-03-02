@@ -28,5 +28,11 @@ namespace DBioPhoto.Frontend
         {
 
         }
+
+        private void organismAddButton_Click(object sender, EventArgs e)
+        {
+            OrganismAddForm newGui = new OrganismAddForm();
+            newGui.Visible = true;
+        }
     }
 }
