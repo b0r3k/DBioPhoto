@@ -10,6 +10,20 @@ using System.Windows.Forms;
 
 namespace DBioPhoto.Frontend
 {
+    /*
+    Zadám složku, ono to postupně otevírá fotky a nechává si dopsat informace
+
+    -- typ -- krajina, rostliny, houby, živočichové, mikro, lidi - případně možnost přidat typ
+    -- český a latinský název -- dělit na rodové a druhové jméno
+    -- datum(na různých úrovních, měsíc, rok, rozmezí)
+    -- lokalita, případně kreslit do mapy
+    -- obecná textová poznámka
+    -- případně u živočichů bezobratlí/obratlovci, při dalším přidání to už podle rodového jména doplní
+    -- případně u rostlin byliny/stromy/keře/výtrusné
+    -- barva květu -- bílá, žlutá, červená, růžová, fialová, zelená a nevytvořený, modrá
+        -- kliknout na místo a z okolních pixelů vybrat barvu, která je nejblíž
+    -- možná přístupná databáze biolib, ze které by se daly tahat další informace
+    */
     public partial class OpeningForm : Form
     {
         public OpeningForm()
