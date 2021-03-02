@@ -31,18 +31,19 @@
             this.labelWelcome = new System.Windows.Forms.Label();
             this.labelChoose = new System.Windows.Forms.Label();
             this.labelLocation = new System.Windows.Forms.Label();
-            this.labelTODO1 = new System.Windows.Forms.Label();
             this.buttonWantAdd = new System.Windows.Forms.Button();
             this.buttonWantSearch = new System.Windows.Forms.Button();
             this.organismAddButton = new System.Windows.Forms.Button();
             this.personAddButton = new System.Windows.Forms.Button();
+            this.labelDifferentLocation = new System.Windows.Forms.Label();
+            this.locationTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // labelWelcome
             // 
             this.labelWelcome.AutoSize = true;
             this.labelWelcome.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelWelcome.Location = new System.Drawing.Point(289, 29);
+            this.labelWelcome.Location = new System.Drawing.Point(272, 25);
             this.labelWelcome.Name = "labelWelcome";
             this.labelWelcome.Size = new System.Drawing.Size(112, 41);
             this.labelWelcome.TabIndex = 0;
@@ -60,25 +61,15 @@
             // labelLocation
             // 
             this.labelLocation.AutoSize = true;
-            this.labelLocation.Location = new System.Drawing.Point(64, 101);
+            this.labelLocation.Location = new System.Drawing.Point(127, 106);
             this.labelLocation.Name = "labelLocation";
-            this.labelLocation.Size = new System.Drawing.Size(548, 15);
+            this.labelLocation.Size = new System.Drawing.Size(389, 15);
             this.labelLocation.TabIndex = 0;
-            this.labelLocation.Text = "Standardní lokací pro databázový soubor je \"...\". Pokud chcete použít jiný, zvolt" +
-    "e jeho lokaci v poli níže.";
-            // 
-            // labelTODO1
-            // 
-            this.labelTODO1.AutoSize = true;
-            this.labelTODO1.Location = new System.Drawing.Point(214, 134);
-            this.labelTODO1.Name = "labelTODO1";
-            this.labelTODO1.Size = new System.Drawing.Size(255, 15);
-            this.labelTODO1.TabIndex = 1;
-            this.labelTODO1.Text = "TADY BUDE MÍSTO PRO ZVOLENÍ DB SOUBORU";
+            this.labelLocation.Text = "Standardní lokací pro databázový soubor je Dokumenty/DBioPhoto.mdf.";
             // 
             // buttonWantAdd
             // 
-            this.buttonWantAdd.Location = new System.Drawing.Point(148, 164);
+            this.buttonWantAdd.Location = new System.Drawing.Point(136, 215);
             this.buttonWantAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonWantAdd.Name = "buttonWantAdd";
             this.buttonWantAdd.Size = new System.Drawing.Size(109, 22);
@@ -89,7 +80,7 @@
             // 
             // buttonWantSearch
             // 
-            this.buttonWantSearch.Location = new System.Drawing.Point(419, 164);
+            this.buttonWantSearch.Location = new System.Drawing.Point(407, 215);
             this.buttonWantSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonWantSearch.Name = "buttonWantSearch";
             this.buttonWantSearch.Size = new System.Drawing.Size(109, 22);
@@ -100,7 +91,7 @@
             // 
             // organismAddButton
             // 
-            this.organismAddButton.Location = new System.Drawing.Point(64, 216);
+            this.organismAddButton.Location = new System.Drawing.Point(52, 267);
             this.organismAddButton.Name = "organismAddButton";
             this.organismAddButton.Size = new System.Drawing.Size(193, 23);
             this.organismAddButton.TabIndex = 4;
@@ -110,23 +101,41 @@
             // 
             // personAddButton
             // 
-            this.personAddButton.Location = new System.Drawing.Point(419, 216);
+            this.personAddButton.Location = new System.Drawing.Point(407, 267);
             this.personAddButton.Name = "personAddButton";
             this.personAddButton.Size = new System.Drawing.Size(193, 23);
             this.personAddButton.TabIndex = 5;
             this.personAddButton.Text = "Přidat lidi do databáze";
             this.personAddButton.UseVisualStyleBackColor = true;
             // 
+            // labelDifferentLocation
+            // 
+            this.labelDifferentLocation.AutoSize = true;
+            this.labelDifferentLocation.Location = new System.Drawing.Point(175, 132);
+            this.labelDifferentLocation.Name = "labelDifferentLocation";
+            this.labelDifferentLocation.Size = new System.Drawing.Size(293, 15);
+            this.labelDifferentLocation.TabIndex = 6;
+            this.labelDifferentLocation.Text = "Pokud chcete použít jiný, zvolte jeho lokaci v poli níže.";
+            // 
+            // locationTextBox
+            // 
+            this.locationTextBox.Location = new System.Drawing.Point(162, 159);
+            this.locationTextBox.Name = "locationTextBox";
+            this.locationTextBox.Size = new System.Drawing.Size(318, 23);
+            this.locationTextBox.TabIndex = 7;
+            this.locationTextBox.Click += new System.EventHandler(this.locationTextBox_Click);
+            // 
             // OpeningForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(700, 260);
+            this.ClientSize = new System.Drawing.Size(700, 331);
+            this.Controls.Add(this.locationTextBox);
+            this.Controls.Add(this.labelDifferentLocation);
             this.Controls.Add(this.personAddButton);
             this.Controls.Add(this.organismAddButton);
             this.Controls.Add(this.buttonWantSearch);
             this.Controls.Add(this.buttonWantAdd);
-            this.Controls.Add(this.labelTODO1);
             this.Controls.Add(this.labelLocation);
             this.Controls.Add(this.labelChoose);
             this.Controls.Add(this.labelWelcome);
@@ -143,11 +152,12 @@
         private System.Windows.Forms.Label labelWelcome;
         private System.Windows.Forms.Label labelChoose;
         private System.Windows.Forms.Label labelLocation;
-        private System.Windows.Forms.Label labelTODO1;
         private System.Windows.Forms.Button buttonWantAdd;
         private System.Windows.Forms.Button buttonWantSearch;
         private System.Windows.Forms.Button organismAddButton;
         private System.Windows.Forms.Button personAddButton;
+        private System.Windows.Forms.Label labelDifferentLocation;
+        private System.Windows.Forms.TextBox locationTextBox;
     }
 }
 

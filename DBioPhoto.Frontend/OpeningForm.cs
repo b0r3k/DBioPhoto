@@ -15,9 +15,9 @@ namespace DBioPhoto.Frontend
         public OpeningForm()
         {
             InitializeComponent();
+            locationTextBox.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\DBioPhotoDB.mdf";
         }
 
-        // TODO volení lokace DB souboru
 
         private void buttonWantAdd_Click(object sender, EventArgs e)
         {
@@ -33,6 +33,24 @@ namespace DBioPhoto.Frontend
         {
             OrganismAddForm newGui = new OrganismAddForm();
             newGui.Visible = true;
+        }
+
+        private void locationTextBox_Click(object sender, EventArgs e)
+        {
+            string filePath = "";
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                openFileDialog.Filter = "mdf files (*.mdf)|*.mdf|All files (*.*)|*.*";
+                openFileDialog.FilterIndex = 2;
+                openFileDialog.RestoreDirectory = true;
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    //Get the path of specified file
+                    filePath = openFileDialog.FileName;
+                    locationTextBox.Text = filePath;
+                }
+            }
         }
     }
 }
