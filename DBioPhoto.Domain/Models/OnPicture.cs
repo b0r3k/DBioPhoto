@@ -26,7 +26,7 @@ namespace DBioPhoto.Domain.Models
     I need a special database table for each category.
      */
     public enum OrganismType { Plant, Animal, Fungus, Micro }
-    public enum Colour { White, Red, Yellow, Green, Blue, Violet, Pink, None }
+    public enum Colour { None, White, Red, Yellow, Green, Blue, Violet, Pink }
 
     public class Organism
     {
