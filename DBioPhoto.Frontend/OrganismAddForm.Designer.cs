@@ -105,14 +105,14 @@ namespace DBioPhoto.Frontend
             this.organismTypeComboBox.Location = new System.Drawing.Point(168, 27);
             this.organismTypeComboBox.Name = "organismTypeComboBox";
             this.organismTypeComboBox.Size = new System.Drawing.Size(161, 23);
-            this.organismTypeComboBox.TabIndex = 6;
+            this.organismTypeComboBox.TabIndex = 0;
             // 
             // latSecondNameTextBox
             // 
             this.latSecondNameTextBox.Location = new System.Drawing.Point(168, 143);
             this.latSecondNameTextBox.Name = "latSecondNameTextBox";
             this.latSecondNameTextBox.Size = new System.Drawing.Size(161, 23);
-            this.latSecondNameTextBox.TabIndex = 10;
+            this.latSecondNameTextBox.TabIndex = 4;
             // 
             // colourComboBox
             // 
@@ -120,35 +120,35 @@ namespace DBioPhoto.Frontend
             this.colourComboBox.Location = new System.Drawing.Point(168, 172);
             this.colourComboBox.Name = "colourComboBox";
             this.colourComboBox.Size = new System.Drawing.Size(161, 23);
-            this.colourComboBox.TabIndex = 7;
+            this.colourComboBox.TabIndex = 5;
             // 
             // firstNameTextBox
             // 
             this.firstNameTextBox.Location = new System.Drawing.Point(168, 56);
             this.firstNameTextBox.Name = "firstNameTextBox";
             this.firstNameTextBox.Size = new System.Drawing.Size(161, 23);
-            this.firstNameTextBox.TabIndex = 8;
+            this.firstNameTextBox.TabIndex = 1;
             // 
             // latFirstNameTextBox
             // 
             this.latFirstNameTextBox.Location = new System.Drawing.Point(168, 114);
             this.latFirstNameTextBox.Name = "latFirstNameTextBox";
             this.latFirstNameTextBox.Size = new System.Drawing.Size(161, 23);
-            this.latFirstNameTextBox.TabIndex = 9;
+            this.latFirstNameTextBox.TabIndex = 3;
             // 
             // secondNameTextBox
             // 
             this.secondNameTextBox.Location = new System.Drawing.Point(168, 85);
             this.secondNameTextBox.Name = "secondNameTextBox";
             this.secondNameTextBox.Size = new System.Drawing.Size(161, 23);
-            this.secondNameTextBox.TabIndex = 11;
+            this.secondNameTextBox.TabIndex = 2;
             // 
             // addToDbButton
             // 
             this.addToDbButton.Location = new System.Drawing.Point(96, 220);
             this.addToDbButton.Name = "addToDbButton";
             this.addToDbButton.Size = new System.Drawing.Size(145, 23);
-            this.addToDbButton.TabIndex = 12;
+            this.addToDbButton.TabIndex = 6;
             this.addToDbButton.Text = "Přidat do databáze";
             this.addToDbButton.UseVisualStyleBackColor = true;
             this.addToDbButton.Click += new System.EventHandler(this.addToDbButton_Click);

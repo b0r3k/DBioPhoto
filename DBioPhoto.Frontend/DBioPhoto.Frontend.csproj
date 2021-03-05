@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DBioPhoto.DataAccess\DBioPhoto.DataAccess.csproj" />
     <ProjectReference Include="..\DBioPhoto.Domain\DBioPhoto.Domain.csproj" />
   </ItemGroup>
 
