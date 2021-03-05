@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace DBioPhoto.Frontend
 {
@@ -33,22 +34,12 @@ namespace DBioPhoto.Frontend
             locationTextBox.Text = _filePath;
         }
 
-        private void ToggleActionButtons()
+        private void SetActionButtonsVisible(bool setVisible)
         {
-            if (wantAddButton.Visible)
-            {
-                wantAddButton.Visible = false;
-                wantSearchButton.Visible = false;
-                organismAddButton.Visible = false;
-                personAddButton.Visible = false;
-            }
-            else
-            {
-                wantAddButton.Visible = true;
-                wantSearchButton.Visible = true;
-                organismAddButton.Visible = true;
-                personAddButton.Visible = true;
-            }
+            wantAddButton.Visible = setVisible;
+            wantSearchButton.Visible = setVisible;
+            organismAddButton.Visible = setVisible;
+            personAddButton.Visible = setVisible;
         }
 
         private void buttonWantAdd_Click(object sender, EventArgs e)
@@ -72,7 +63,7 @@ namespace DBioPhoto.Frontend
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                openFileDialog.Filter = "mdf files (*.mdf)|*.mdf|All files (*.*)|*.*";
+                openFileDialog.Filter = "mdf files (*.mdf)|*.mdf";
                 openFileDialog.FilterIndex = 1;
                 openFileDialog.RestoreDirectory = true;
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -86,8 +77,38 @@ namespace DBioPhoto.Frontend
 
         private void chooseThisDbButton_Click(object sender, EventArgs e)
         {
+            if (Global.DbContext != null)
+            {
+                Global.DbContext.SaveChanges();
+                Global.DbContext.Dispose();
+            }
             Global.DbContext = new DataAccess.Data.DBioPhotoContext(_filePath);
-            ToggleActionButtons();
+            Global.DbContext.Database.EnsureCreated();
+            SetActionButtonsVisible(true);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                saveFileDialog.Filter = "mdf files (*.mdf)|*.mdf";
+                saveFileDialog.FilterIndex = 1;
+                saveFileDialog.RestoreDirectory = true;
+                saveFileDialog.CheckFileExists = false;
+                saveFileDialog.CheckPathExists = true;
+                if (saveFileDialog.ShowDialog() == DialogResult.OK) 
+                {
+                    _filePath = saveFileDialog.FileName;
+                    Global.DbContext = new DataAccess.Data.DBioPhotoContext(_filePath);
+                    Global.DbContext.Database.EnsureCreated();
+                    Global.DbContext.SaveChanges();
+                    Global.DbContext.Dispose();
+                    Global.DbContext = null;
+                    locationTextBox.Text = _filePath;
+                    SetActionButtonsVisible(false);
+                }
+            }
         }
     }
 }

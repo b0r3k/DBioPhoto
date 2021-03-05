@@ -38,6 +38,9 @@
             this.labelDifferentLocation = new System.Windows.Forms.Label();
             this.locationTextBox = new System.Windows.Forms.TextBox();
             this.chooseThisDbButton = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.createDbLabel = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelWelcome
@@ -134,17 +137,38 @@
             // 
             this.chooseThisDbButton.Location = new System.Drawing.Point(248, 197);
             this.chooseThisDbButton.Name = "chooseThisDbButton";
-            this.chooseThisDbButton.Size = new System.Drawing.Size(136, 23);
+            this.chooseThisDbButton.Size = new System.Drawing.Size(144, 23);
             this.chooseThisDbButton.TabIndex = 8;
             this.chooseThisDbButton.Text = "Zvolit tuto databázi";
             this.chooseThisDbButton.UseVisualStyleBackColor = true;
             this.chooseThisDbButton.Click += new System.EventHandler(this.chooseThisDbButton_Click);
             // 
+            // createDbLabel
+            // 
+            this.createDbLabel.AutoSize = true;
+            this.createDbLabel.Location = new System.Drawing.Point(175, 334);
+            this.createDbLabel.Name = "createDbLabel";
+            this.createDbLabel.Size = new System.Drawing.Size(277, 15);
+            this.createDbLabel.TabIndex = 9;
+            this.createDbLabel.Text = "Pokud chcete vytvořit novou databázi, klikněte zde:";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(248, 366);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(144, 27);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "Vytvořit novou databázi";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // OpeningForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(700, 331);
+            this.ClientSize = new System.Drawing.Size(661, 405);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.createDbLabel);
             this.Controls.Add(this.chooseThisDbButton);
             this.Controls.Add(this.locationTextBox);
             this.Controls.Add(this.labelDifferentLocation);
@@ -175,6 +199,9 @@
         private System.Windows.Forms.Label labelDifferentLocation;
         private System.Windows.Forms.TextBox locationTextBox;
         private System.Windows.Forms.Button chooseThisDbButton;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.Label createDbLabel;
+        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -9,7 +9,7 @@ namespace DBioPhoto.DataAccess.Data
     {
         private readonly string _dbPath;
 
-        public DBioPhotoContext(string dbPath)
+        public DBioPhotoContext(string dbPath, bool notFirst=true)
         {
             _dbPath = dbPath;
         }
@@ -17,10 +17,12 @@ namespace DBioPhoto.DataAccess.Data
         // Configure the db connection
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;
-                                             AttachDbFilename="+_dbPath+"; " +
+            string connectionString = String.Format(@"Data Source=(LocalDB)\MSSQLLocalDB;" +
+                                             "AttachDbFilename={0};" +
                                              "Integrated Security=True;" +
-                                             "Initial Catalog=DBioPhotoDB");
+                                             "Initial Catalog={1}", 
+                                             _dbPath, Path.GetFileNameWithoutExtension(_dbPath));
+            optionsBuilder.UseSqlServer(connectionString);
         }
 
         // Set tables
