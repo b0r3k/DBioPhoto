@@ -26,12 +26,30 @@ namespace DBioPhoto.Frontend
     */
     public partial class OpeningForm : Form
     {
+        private string _filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\DBioPhotoDB.mdf";
         public OpeningForm()
         {
             InitializeComponent();
-            locationTextBox.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\DBioPhotoDB.mdf";
+            locationTextBox.Text = _filePath;
         }
 
+        private void ToggleActionButtons()
+        {
+            if (wantAddButton.Visible)
+            {
+                wantAddButton.Visible = false;
+                wantSearchButton.Visible = false;
+                organismAddButton.Visible = false;
+                personAddButton.Visible = false;
+            }
+            else
+            {
+                wantAddButton.Visible = true;
+                wantSearchButton.Visible = true;
+                organismAddButton.Visible = true;
+                personAddButton.Visible = true;
+            }
+        }
 
         private void buttonWantAdd_Click(object sender, EventArgs e)
         {
@@ -51,7 +69,6 @@ namespace DBioPhoto.Frontend
 
         private void locationTextBox_Click(object sender, EventArgs e)
         {
-            string filePath = "";
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -61,10 +78,16 @@ namespace DBioPhoto.Frontend
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     //Get the path of specified file
-                    filePath = openFileDialog.FileName;
-                    locationTextBox.Text = filePath;
+                    _filePath = openFileDialog.FileName;
+                    locationTextBox.Text = _filePath;
                 }
             }
+        }
+
+        private void chooseThisDbButton_Click(object sender, EventArgs e)
+        {
+            Global.DbContext = new DataAccess.Data.DBioPhotoContext(_filePath);
+            ToggleActionButtons();
         }
     }
 }

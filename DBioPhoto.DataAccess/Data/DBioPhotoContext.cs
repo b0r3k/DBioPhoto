@@ -7,16 +7,11 @@ namespace DBioPhoto.DataAccess.Data
 {
     public class DBioPhotoContext : DbContext
     {
-        private static readonly string _defaultDbPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\DBioPhotoDB.mdf";
         private readonly string _dbPath;
 
         public DBioPhotoContext(string dbPath)
         {
             _dbPath = dbPath;
-        }
-        public DBioPhotoContext()
-        {
-            _dbPath = _defaultDbPath;
         }
 
         // Configure the db connection

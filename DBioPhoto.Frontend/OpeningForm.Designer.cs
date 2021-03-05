@@ -31,12 +31,13 @@
             this.labelWelcome = new System.Windows.Forms.Label();
             this.labelChoose = new System.Windows.Forms.Label();
             this.labelLocation = new System.Windows.Forms.Label();
-            this.buttonWantAdd = new System.Windows.Forms.Button();
-            this.buttonWantSearch = new System.Windows.Forms.Button();
+            this.wantAddButton = new System.Windows.Forms.Button();
+            this.wantSearchButton = new System.Windows.Forms.Button();
             this.organismAddButton = new System.Windows.Forms.Button();
             this.personAddButton = new System.Windows.Forms.Button();
             this.labelDifferentLocation = new System.Windows.Forms.Label();
             this.locationTextBox = new System.Windows.Forms.TextBox();
+            this.chooseThisDbButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelWelcome
@@ -67,27 +68,29 @@
             this.labelLocation.TabIndex = 0;
             this.labelLocation.Text = "Standardní lokací pro databázový soubor je Dokumenty/DBioPhoto.mdf.";
             // 
-            // buttonWantAdd
+            // wantAddButton
             // 
-            this.buttonWantAdd.Location = new System.Drawing.Point(136, 215);
-            this.buttonWantAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonWantAdd.Name = "buttonWantAdd";
-            this.buttonWantAdd.Size = new System.Drawing.Size(109, 22);
-            this.buttonWantAdd.TabIndex = 2;
-            this.buttonWantAdd.Text = "Chci přidávat!";
-            this.buttonWantAdd.UseVisualStyleBackColor = true;
-            this.buttonWantAdd.Click += new System.EventHandler(this.buttonWantAdd_Click);
+            this.wantAddButton.Location = new System.Drawing.Point(136, 230);
+            this.wantAddButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.wantAddButton.Name = "wantAddButton";
+            this.wantAddButton.Size = new System.Drawing.Size(109, 22);
+            this.wantAddButton.TabIndex = 2;
+            this.wantAddButton.Text = "Chci přidávat!";
+            this.wantAddButton.UseVisualStyleBackColor = true;
+            this.wantAddButton.Visible = false;
+            this.wantAddButton.Click += new System.EventHandler(this.buttonWantAdd_Click);
             // 
-            // buttonWantSearch
+            // wantSearchButton
             // 
-            this.buttonWantSearch.Location = new System.Drawing.Point(407, 215);
-            this.buttonWantSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonWantSearch.Name = "buttonWantSearch";
-            this.buttonWantSearch.Size = new System.Drawing.Size(109, 22);
-            this.buttonWantSearch.TabIndex = 3;
-            this.buttonWantSearch.Text = "Chci hledat!";
-            this.buttonWantSearch.UseVisualStyleBackColor = true;
-            this.buttonWantSearch.Click += new System.EventHandler(this.buttonWantSearch_Click);
+            this.wantSearchButton.Location = new System.Drawing.Point(407, 230);
+            this.wantSearchButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.wantSearchButton.Name = "wantSearchButton";
+            this.wantSearchButton.Size = new System.Drawing.Size(109, 22);
+            this.wantSearchButton.TabIndex = 3;
+            this.wantSearchButton.Text = "Chci hledat!";
+            this.wantSearchButton.UseVisualStyleBackColor = true;
+            this.wantSearchButton.Visible = false;
+            this.wantSearchButton.Click += new System.EventHandler(this.buttonWantSearch_Click);
             // 
             // organismAddButton
             // 
@@ -97,6 +100,7 @@
             this.organismAddButton.TabIndex = 4;
             this.organismAddButton.Text = "Přidávat organismy do databáze";
             this.organismAddButton.UseVisualStyleBackColor = true;
+            this.organismAddButton.Visible = false;
             this.organismAddButton.Click += new System.EventHandler(this.organismAddButton_Click);
             // 
             // personAddButton
@@ -107,6 +111,7 @@
             this.personAddButton.TabIndex = 5;
             this.personAddButton.Text = "Přidat lidi do databáze";
             this.personAddButton.UseVisualStyleBackColor = true;
+            this.personAddButton.Visible = false;
             // 
             // labelDifferentLocation
             // 
@@ -125,17 +130,28 @@
             this.locationTextBox.TabIndex = 7;
             this.locationTextBox.Click += new System.EventHandler(this.locationTextBox_Click);
             // 
+            // chooseThisDbButton
+            // 
+            this.chooseThisDbButton.Location = new System.Drawing.Point(248, 197);
+            this.chooseThisDbButton.Name = "chooseThisDbButton";
+            this.chooseThisDbButton.Size = new System.Drawing.Size(136, 23);
+            this.chooseThisDbButton.TabIndex = 8;
+            this.chooseThisDbButton.Text = "Zvolit tuto databázi";
+            this.chooseThisDbButton.UseVisualStyleBackColor = true;
+            this.chooseThisDbButton.Click += new System.EventHandler(this.chooseThisDbButton_Click);
+            // 
             // OpeningForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(700, 331);
+            this.Controls.Add(this.chooseThisDbButton);
             this.Controls.Add(this.locationTextBox);
             this.Controls.Add(this.labelDifferentLocation);
             this.Controls.Add(this.personAddButton);
             this.Controls.Add(this.organismAddButton);
-            this.Controls.Add(this.buttonWantSearch);
-            this.Controls.Add(this.buttonWantAdd);
+            this.Controls.Add(this.wantSearchButton);
+            this.Controls.Add(this.wantAddButton);
             this.Controls.Add(this.labelLocation);
             this.Controls.Add(this.labelChoose);
             this.Controls.Add(this.labelWelcome);
@@ -152,12 +168,13 @@
         private System.Windows.Forms.Label labelWelcome;
         private System.Windows.Forms.Label labelChoose;
         private System.Windows.Forms.Label labelLocation;
-        private System.Windows.Forms.Button buttonWantAdd;
-        private System.Windows.Forms.Button buttonWantSearch;
+        private System.Windows.Forms.Button wantAddButton;
+        private System.Windows.Forms.Button wantSearchButton;
         private System.Windows.Forms.Button organismAddButton;
         private System.Windows.Forms.Button personAddButton;
         private System.Windows.Forms.Label labelDifferentLocation;
         private System.Windows.Forms.TextBox locationTextBox;
+        private System.Windows.Forms.Button chooseThisDbButton;
     }
 }
 

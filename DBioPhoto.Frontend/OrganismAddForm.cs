@@ -54,11 +54,8 @@ namespace DBioPhoto.Frontend
         private void BgW1_DoWork(object sender, DoWorkEventArgs e)
         {
             // Add the created instance to the database
-            using (var context = new DBioPhoto.DataAccess.Data.DBioPhotoContext())
-            {
-                context.Organisms.Add((Organism)e.Argument);
-                context.SaveChanges();
-            }
+            Global.DbContext.Organisms.Add((Organism)e.Argument);
+            Global.DbContext.SaveChanges();
         }
         private void BgW1_RunWorkerEventCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
