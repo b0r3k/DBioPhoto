@@ -5,7 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 using System.IO;
 
@@ -28,10 +28,13 @@ namespace DBioPhoto.Frontend
     public partial class OpeningForm : Form
     {
         private string _filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\DBioPhotoDB.mdf";
+        private Thread firstContextCreateThread, createContextThread;
         public OpeningForm()
         {
             InitializeComponent();
             locationTextBox.Text = _filePath;
+            firstContextCreateThread = new Thread(() => FirstCreateDbContext());
+            createContextThread = new Thread(() => CreateDbContext());
         }
 
         private void SetActionButtonsVisible(bool setVisible)
@@ -77,6 +80,13 @@ namespace DBioPhoto.Frontend
 
         private void chooseThisDbButton_Click(object sender, EventArgs e)
         {
+            createContextThread.Start();
+            SetActionButtonsVisible(true);
+        }
+        private void CreateDbContext()
+        {
+            if (firstContextCreateThread.ThreadState == ThreadState.Running)
+                firstContextCreateThread.Join();
             if (Global.DbContext != null)
             {
                 Global.DbContext.SaveChanges();
@@ -84,7 +94,6 @@ namespace DBioPhoto.Frontend
             }
             Global.DbContext = new DataAccess.Data.DBioPhotoContext(_filePath);
             Global.DbContext.Database.EnsureCreated();
-            SetActionButtonsVisible(true);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -100,15 +109,19 @@ namespace DBioPhoto.Frontend
                 if (saveFileDialog.ShowDialog() == DialogResult.OK) 
                 {
                     _filePath = saveFileDialog.FileName;
-                    Global.DbContext = new DataAccess.Data.DBioPhotoContext(_filePath);
-                    Global.DbContext.Database.EnsureCreated();
-                    Global.DbContext.SaveChanges();
-                    Global.DbContext.Dispose();
-                    Global.DbContext = null;
+                    firstContextCreateThread.Start();
                     locationTextBox.Text = _filePath;
                     SetActionButtonsVisible(false);
                 }
             }
+        }
+        private void FirstCreateDbContext()
+        {
+            Global.DbContext = new DataAccess.Data.DBioPhotoContext(_filePath);
+            Global.DbContext.Database.EnsureCreated();
+            Global.DbContext.SaveChanges();
+            Global.DbContext.Dispose();
+            Global.DbContext = null;
         }
     }
 }
