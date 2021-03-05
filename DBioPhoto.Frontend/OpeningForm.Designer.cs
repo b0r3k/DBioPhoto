@@ -160,7 +160,7 @@
             this.createNewDbButton.TabIndex = 10;
             this.createNewDbButton.Text = "Vytvořit novou databázi";
             this.createNewDbButton.UseVisualStyleBackColor = true;
-            this.createNewDbButton.Click += new System.EventHandler(this.button1_Click);
+            this.createNewDbButton.Click += new System.EventHandler(this.createNewDbButton_Click);
             // 
             // OpeningForm
             // 

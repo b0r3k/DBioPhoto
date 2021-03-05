@@ -96,7 +96,7 @@ namespace DBioPhoto.Frontend
             Global.DbContext.Database.EnsureCreated();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void createNewDbButton_Click(object sender, EventArgs e)
         {
             using (SaveFileDialog saveFileDialog = new SaveFileDialog())
             {
