@@ -10,17 +10,13 @@ namespace DBioPhoto.DataAccess.Services.Adding
         {
             if (tryOrganism.FirstName == "" || tryOrganism.LatFirstName == "")
                 return "Vyplňte název";
-            var possibleCollision = dbContext.Organisms
-                                    .Where(o => o.FirstName == tryOrganism.FirstName)
-                                    .Where(o => o.SecondName == tryOrganism.SecondName)
-                                    .ToList();
-            if (possibleCollision.Count > 0)
+            else if (dbContext.Organisms
+                                    .Any(o => o.FirstName == tryOrganism.FirstName
+                                    && (o.SecondName == tryOrganism.SecondName)))
                 return "Organismus již existuje";
-            possibleCollision = dbContext.Organisms
-                                    .Where(o => o.LatFirstName == tryOrganism.LatFirstName)
-                                    .Where(o => o.LatSecondName == tryOrganism.LatSecondName)
-                                    .ToList();
-            if (possibleCollision.Count > 0)
+            else if (dbContext.Organisms
+                                    .Any(o => o.LatFirstName == tryOrganism.LatFirstName
+                                    && (o.LatSecondName== tryOrganism.LatSecondName)))
                 return "Organismus již existuje";
             else
             {
