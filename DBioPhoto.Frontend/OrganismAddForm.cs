@@ -3,11 +3,14 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
+using DBioPhoto.DataAccess.Services.Adding;
+
 namespace DBioPhoto.Frontend
 {
     public partial class OrganismAddForm : Form
     {
         private BackgroundWorker bgW1;
+        private Organism tryOrganism;
         public OrganismAddForm()
         {
             InitializeComponent();
@@ -32,11 +35,11 @@ namespace DBioPhoto.Frontend
             string latSecondName = latSecondNameTextBox.Text;
             Colour colour = (Colour)colourComboBox.SelectedItem;
 
-            Organism organism = new Organism(organismType, firstName, secondName, latFirstName, latSecondName, colour);
+            tryOrganism = new Organism(organismType, firstName, secondName, latFirstName, latSecondName, colour);
 
             // Add to db in background
             addToDbButton.Text = "Přidávám!";
-            bgW1.RunWorkerAsync(organism);
+            bgW1.RunWorkerAsync(tryOrganism);
 
             // Reset the form
             firstNameTextBox.Text = "";
@@ -48,20 +51,26 @@ namespace DBioPhoto.Frontend
         {
             // Add the created instance to the database
             // if (TryAddOrganism)
-            Global.DbContext.Organisms.Add((Organism)e.Argument);
-            Global.DbContext.SaveChanges();
+            e.Result = AddIndividual.TryAddOrganism(Global.DbContext, (Organism)e.Argument);
         }
         private void BgW1_RunWorkerEventCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            // TODO check errors, notification if already exists
-
-            // TODO only if successfull
-            ShowSuccessfull();
+            if (e.Error != null)
+                MessageBox.Show(e.Error.Message);
+            else if (e.Cancelled)
+                ShowOnButtonForThreeSecs("Operace zrušena");
+            else
+            {
+                string result = (string)e.Result;
+                ShowOnButtonForThreeSecs(result);
+                if (result != "Úspěšně přidáno!")
+                    ShowOrganismInForm(tryOrganism);
+            }
         }
-        private void ShowSuccessfull()
+        private void ShowOnButtonForThreeSecs(string textToShow)
         {
             // Show successfull, after 3 s show original again
-            addToDbButton.Text = "Úspěšně přidáno!";
+            addToDbButton.Text = textToShow;
             System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer()
             {
                 Interval = 3000,
@@ -72,6 +81,13 @@ namespace DBioPhoto.Frontend
                 addToDbButton.Text = "Přidat do databáze";
                 timer.Dispose();
             };
+        }
+        private void ShowOrganismInForm(Organism organism)
+        {
+            firstNameTextBox.Text = organism.FirstName;
+            secondNameTextBox.Text = organism.SecondName;
+            latFirstNameTextBox.Text = organism.LatFirstName;
+            latSecondNameTextBox.Text = organism.LatSecondName;
         }
     }
 }

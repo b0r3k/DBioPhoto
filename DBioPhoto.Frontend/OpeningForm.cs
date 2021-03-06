@@ -26,8 +26,6 @@ namespace DBioPhoto.Frontend
         {
             InitializeComponent();
             locationTextBox.Text = _filePath;
-            firstContextCreateThread = new Thread(() => FirstCreateDbContext());
-            createContextThread = new Thread(() => CreateDbContext());
         }
 
         private void SetActionButtonsVisible(bool setVisible)
@@ -73,12 +71,13 @@ namespace DBioPhoto.Frontend
 
         private void chooseThisDbButton_Click(object sender, EventArgs e)
         {
+            createContextThread = new Thread(() => CreateDbContext());
             createContextThread.Start();
             SetActionButtonsVisible(true);
         }
         private void CreateDbContext()
         {
-            if (firstContextCreateThread.ThreadState == ThreadState.Running)
+            if (firstContextCreateThread != null && firstContextCreateThread.ThreadState == ThreadState.Running)
                 firstContextCreateThread.Join();
             if (Global.DbContext != null)
             {
@@ -102,6 +101,7 @@ namespace DBioPhoto.Frontend
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     _filePath = saveFileDialog.FileName;
+                    firstContextCreateThread = new Thread(() => FirstCreateDbContext());
                     firstContextCreateThread.Start();
                     locationTextBox.Text = _filePath;
                     SetActionButtonsVisible(false);
