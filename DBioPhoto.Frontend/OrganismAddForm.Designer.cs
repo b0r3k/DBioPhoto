@@ -128,6 +128,7 @@ namespace DBioPhoto.Frontend
             this.firstNameTextBox.Name = "firstNameTextBox";
             this.firstNameTextBox.Size = new System.Drawing.Size(161, 23);
             this.firstNameTextBox.TabIndex = 1;
+            this.firstNameTextBox.TextChanged += new System.EventHandler(this.firstNameTextBox_TextChanged);
             // 
             // latFirstNameTextBox
             // 
