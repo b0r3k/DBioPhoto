@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using DBioPhoto.Domain.Models;
+﻿using DBioPhoto.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.IO;
 
@@ -9,7 +9,7 @@ namespace DBioPhoto.DataAccess.Data
     {
         private readonly string _dbPath;
 
-        public DBioPhotoContext(string dbPath, bool notFirst=true)
+        public DBioPhotoContext(string dbPath, bool notFirst = true)
         {
             _dbPath = dbPath;
         }
@@ -20,7 +20,7 @@ namespace DBioPhoto.DataAccess.Data
             string connectionString = String.Format(@"Data Source=(LocalDB)\MSSQLLocalDB;" +
                                              "AttachDbFilename={0};" +
                                              "Integrated Security=True;" +
-                                             "Initial Catalog={1}", 
+                                             "Initial Catalog={1}",
                                              _dbPath, Path.GetFileNameWithoutExtension(_dbPath));
             optionsBuilder.UseSqlServer(connectionString);
         }

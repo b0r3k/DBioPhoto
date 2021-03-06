@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using DBioPhoto.Domain.Models;
+using System;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using System.Threading;
-
-using DBioPhoto.Domain.Models;
-using DBioPhoto.DataAccess;
 
 namespace DBioPhoto.Frontend
 {
@@ -54,6 +47,7 @@ namespace DBioPhoto.Frontend
         private void BgW1_DoWork(object sender, DoWorkEventArgs e)
         {
             // Add the created instance to the database
+            // if (TryAddOrganism)
             Global.DbContext.Organisms.Add((Organism)e.Argument);
             Global.DbContext.SaveChanges();
         }
@@ -66,6 +60,7 @@ namespace DBioPhoto.Frontend
         }
         private void ShowSuccessfull()
         {
+            // Show successfull, after 3 s show original again
             addToDbButton.Text = "Úspěšně přidáno!";
             System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer()
             {
