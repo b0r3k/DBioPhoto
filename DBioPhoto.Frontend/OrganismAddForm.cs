@@ -1,10 +1,9 @@
-﻿using DBioPhoto.Domain.Models;
+﻿using DBioPhoto.DataAccess.Services.Adding;
+using DBioPhoto.Domain.Models;
 using System;
 using System.ComponentModel;
-using System.Windows.Forms;
-
-using DBioPhoto.DataAccess.Services.Adding;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace DBioPhoto.Frontend
 {
@@ -12,6 +11,7 @@ namespace DBioPhoto.Frontend
     {
         private BackgroundWorker bgW1;
         private Organism tryOrganism;
+        private AutoCompleteStringCollection firstNameSuggestions;
         public OrganismAddForm()
         {
             InitializeComponent();
@@ -25,15 +25,17 @@ namespace DBioPhoto.Frontend
             bgW1.DoWork += new DoWorkEventHandler(BgW1_DoWork);
             bgW1.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BgW1_RunWorkerEventCompleted);
 
+            firstNameSuggestions = new AutoCompleteStringCollection();
+            firstNameTextBox.AutoCompleteCustomSource = firstNameSuggestions;
             // Set all the textboxes to autocomplete
-            firstNameTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            /*firstNameTextBox.AutoCompleteMode = AutoCompleteMode.Suggest;
             firstNameTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            secondNameTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            secondNameTextBox.AutoCompleteMode = AutoCompleteMode.Suggest;
             secondNameTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            latFirstNameTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            latFirstNameTextBox.AutoCompleteMode = AutoCompleteMode.Suggest;
             latFirstNameTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            latSecondNameTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            latSecondNameTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            latSecondNameTextBox.AutoCompleteMode = AutoCompleteMode.Suggest;
+            latSecondNameTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;*/
         }
 
         private void addToDbButton_Click(object sender, EventArgs e)
@@ -101,17 +103,35 @@ namespace DBioPhoto.Frontend
             latSecondNameTextBox.Text = organism.LatSecondName;
         }
 
-        private void firstNameTextBox_TextChanged(object sender, EventArgs e)
+        private void firstNameTextBox_KeyUp(object sender, KeyEventArgs e)
         {
-            if (firstNameTextBox.Text.Length >= 3)
+            TextBox t = sender as TextBox;
+            if (t != null)
             {
-                string[] suggestions = Global.DbContext.Organisms.Where(o => o.FirstName.Contains(firstNameTextBox.Text)).Distinct().Select(o => o.FirstName).ToArray();
+                if (t.Text.Length == 3)
+                {
+                    string[] suggestions = Global.DbContext.Organisms.Where(o => o.FirstName.StartsWith(t.Text.ToLower())).Select(o => o.FirstName).Distinct().ToArray();
 
-                AutoCompleteStringCollection collection = new AutoCompleteStringCollection();
-                collection.AddRange(suggestions);
-
-                firstNameTextBox.AutoCompleteCustomSource = collection;
+                    firstNameSuggestions.Clear();
+                    firstNameSuggestions.AddRange(suggestions);
+                }
             }
+
+            /*
+            TextBox t = sender as TextBox;
+            if (t != null)
+            {
+                if (t.Text.Length >= 3)
+                {
+                    string[] suggestions = Global.DbContext.Organisms.Where(o => o.FirstName.StartsWith(t.Text.ToLower())).Select(o => o.FirstName).Distinct().ToArray();
+
+                    AutoCompleteStringCollection collection = new AutoCompleteStringCollection();
+                    collection.AddRange(suggestions);
+
+                    firstNameTextBox.AutoCompleteCustomSource = collection;
+                }
+            }
+            */
         }
     }
 }

@@ -124,11 +124,13 @@ namespace DBioPhoto.Frontend
             // 
             // firstNameTextBox
             // 
+            this.firstNameTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.firstNameTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.firstNameTextBox.Location = new System.Drawing.Point(168, 56);
             this.firstNameTextBox.Name = "firstNameTextBox";
             this.firstNameTextBox.Size = new System.Drawing.Size(161, 23);
             this.firstNameTextBox.TabIndex = 1;
-            this.firstNameTextBox.TextChanged += new System.EventHandler(this.firstNameTextBox_TextChanged);
+            this.firstNameTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.firstNameTextBox_KeyUp);
             // 
             // latFirstNameTextBox
             // 
