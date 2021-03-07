@@ -9,9 +9,10 @@ namespace DBioPhoto.Frontend
 {
     public partial class OrganismAddForm : Form
     {
-        private BackgroundWorker bgW1;
+        private BackgroundWorker AddingBgWorker;
+        private BackgroundWorker SuggestionsBgWorker;
         private Organism tryOrganism;
-        private AutoCompleteStringCollection firstNameSuggestions;
+        private AutoCompleteStringCollection nameSuggestions;
         public OrganismAddForm()
         {
             InitializeComponent();
@@ -20,27 +21,27 @@ namespace DBioPhoto.Frontend
             organismTypeComboBox.DataSource = Enum.GetValues(typeof(OrganismType));
             colourComboBox.DataSource = Enum.GetValues(typeof(Colour));
 
-            // Create the BackgroundWorker, bind tasks for him
-            bgW1 = new BackgroundWorker();
-            bgW1.DoWork += new DoWorkEventHandler(BgW1_DoWork);
-            bgW1.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BgW1_RunWorkerEventCompleted);
+            // Create the BackgroundWorker for adding, bind tasks for him
+            AddingBgWorker = new BackgroundWorker();
+            AddingBgWorker.DoWork += new DoWorkEventHandler(AddingBgWorker_DoWork);
+            AddingBgWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(AddingBgWorker_RunWorkerEventCompleted);
 
-            firstNameSuggestions = new AutoCompleteStringCollection();
-            firstNameTextBox.AutoCompleteCustomSource = firstNameSuggestions;
+            // Create the BackgroundWorker for suggestions, bind tasks for him
+            SuggestionsBgWorker = new BackgroundWorker();
+            SuggestionsBgWorker.DoWork += new DoWorkEventHandler(SuggestionsBgWorker_DoWork);
+            SuggestionsBgWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(SuggestionsBgWorker_RunWorkerEventCompleted);
+            
             // Set all the textboxes to autocomplete
-            /*firstNameTextBox.AutoCompleteMode = AutoCompleteMode.Suggest;
-            firstNameTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            secondNameTextBox.AutoCompleteMode = AutoCompleteMode.Suggest;
-            secondNameTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            latFirstNameTextBox.AutoCompleteMode = AutoCompleteMode.Suggest;
-            latFirstNameTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            latSecondNameTextBox.AutoCompleteMode = AutoCompleteMode.Suggest;
-            latSecondNameTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;*/
+            nameSuggestions = new AutoCompleteStringCollection();
+            firstNameTextBox.AutoCompleteCustomSource = nameSuggestions;
+            secondNameTextBox.AutoCompleteCustomSource = nameSuggestions;
+            latFirstNameTextBox.AutoCompleteCustomSource = nameSuggestions;
+            latSecondNameTextBox.AutoCompleteCustomSource = nameSuggestions;
         }
 
         private void addToDbButton_Click(object sender, EventArgs e)
         {
-            // Get the values from the form, create the instance of Organism
+            // Get the values from the form, lowecase everything, create the instance of Organism
             OrganismType organismType = (OrganismType)organismTypeComboBox.SelectedItem;
             string firstName = firstNameTextBox.Text.Trim().ToLower();
             string secondName = secondNameTextBox.Text.Trim().ToLower();
@@ -52,7 +53,7 @@ namespace DBioPhoto.Frontend
 
             // Add to db in background
             addToDbButton.Text = "Přidávám!";
-            bgW1.RunWorkerAsync(tryOrganism);
+            AddingBgWorker.RunWorkerAsync(tryOrganism);
 
             // Reset the form
             firstNameTextBox.Text = "";
@@ -60,14 +61,14 @@ namespace DBioPhoto.Frontend
             latFirstNameTextBox.Text = "";
             latSecondNameTextBox.Text = "";
         }
-        private void BgW1_DoWork(object sender, DoWorkEventArgs e)
+        private void AddingBgWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             // Add the created instance to the database
-            // if (TryAddOrganism)
             e.Result = AddIndividual.TryAddOrganism(Global.DbContext, (Organism)e.Argument);
         }
-        private void BgW1_RunWorkerEventCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void AddingBgWorker_RunWorkerEventCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            // Check if the organism was added successfully, show result, if not successfull, refill the form
             if (e.Error != null)
                 MessageBox.Show(e.Error.Message);
             else if (e.Cancelled)
@@ -82,7 +83,7 @@ namespace DBioPhoto.Frontend
         }
         private void ShowOnButtonForThreeSecs(string textToShow)
         {
-            // Show successfull, after 3 s show original again
+            // Show textToShow on the button, after 3 s show original again
             addToDbButton.Text = textToShow;
             System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer()
             {
@@ -103,6 +104,8 @@ namespace DBioPhoto.Frontend
             latSecondNameTextBox.Text = organism.LatSecondName;
         }
 
+
+        // Find suggestions in db in the background if there are 3 chars in the textbox
         private void firstNameTextBox_KeyUp(object sender, KeyEventArgs e)
         {
             TextBox t = sender as TextBox;
@@ -110,28 +113,64 @@ namespace DBioPhoto.Frontend
             {
                 if (t.Text.Length == 3)
                 {
-                    string[] suggestions = Global.DbContext.Organisms.Where(o => o.FirstName.StartsWith(t.Text.ToLower())).Select(o => o.FirstName).Distinct().ToArray();
-
-                    firstNameSuggestions.Clear();
-                    firstNameSuggestions.AddRange(suggestions);
+                    SuggestionsBgWorker.RunWorkerAsync((t.Text, 0));
                 }
             }
-
-            /*
+        }
+        private void secondNameTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
             TextBox t = sender as TextBox;
             if (t != null)
             {
-                if (t.Text.Length >= 3)
+                if (t.Text.Length == 3)
                 {
-                    string[] suggestions = Global.DbContext.Organisms.Where(o => o.FirstName.StartsWith(t.Text.ToLower())).Select(o => o.FirstName).Distinct().ToArray();
-
-                    AutoCompleteStringCollection collection = new AutoCompleteStringCollection();
-                    collection.AddRange(suggestions);
-
-                    firstNameTextBox.AutoCompleteCustomSource = collection;
+                    SuggestionsBgWorker.RunWorkerAsync((t.Text, 1));
                 }
             }
-            */
+        }
+
+        private void latFirstNameTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            TextBox t = sender as TextBox;
+            if (t != null)
+            {
+                if (t.Text.Length == 3)
+                {
+                    SuggestionsBgWorker.RunWorkerAsync((t.Text, 2));
+                }
+            }
+        }
+
+        private void latSecondNameTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            TextBox t = sender as TextBox;
+            if (t != null)
+            {
+                if (t.Text.Length == 3)
+                {
+                    SuggestionsBgWorker.RunWorkerAsync((t.Text, 3));
+                }
+            }
+        }
+
+        private void SuggestionsBgWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            // Find the suggestions in the background
+            (string beginning, int textBoxNumber) = (ValueTuple<string, int>)e.Argument;
+            e.Result = Suggestions.GetOrganismNameSuggestions(Global.DbContext, beginning, textBoxNumber);
+        }
+        private void SuggestionsBgWorker_RunWorkerEventCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            // After finding the suggestions, use them
+            if (e.Error != null)
+                MessageBox.Show(e.Error.Message);
+            else if (e.Cancelled)
+                MessageBox.Show("Operace zrušena");
+            else
+            {
+                nameSuggestions.Clear();
+                nameSuggestions.AddRange((string[])e.Result);
+            }
         }
     }
 }

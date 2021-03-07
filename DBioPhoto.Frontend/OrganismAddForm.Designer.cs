@@ -109,10 +109,13 @@ namespace DBioPhoto.Frontend
             // 
             // latSecondNameTextBox
             // 
+            this.latSecondNameTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.latSecondNameTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.latSecondNameTextBox.Location = new System.Drawing.Point(168, 143);
             this.latSecondNameTextBox.Name = "latSecondNameTextBox";
             this.latSecondNameTextBox.Size = new System.Drawing.Size(161, 23);
             this.latSecondNameTextBox.TabIndex = 4;
+            this.latSecondNameTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.latSecondNameTextBox_KeyUp);
             // 
             // colourComboBox
             // 
@@ -134,17 +137,23 @@ namespace DBioPhoto.Frontend
             // 
             // latFirstNameTextBox
             // 
+            this.latFirstNameTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.latFirstNameTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.latFirstNameTextBox.Location = new System.Drawing.Point(168, 114);
             this.latFirstNameTextBox.Name = "latFirstNameTextBox";
             this.latFirstNameTextBox.Size = new System.Drawing.Size(161, 23);
             this.latFirstNameTextBox.TabIndex = 3;
+            this.latFirstNameTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.latFirstNameTextBox_KeyUp);
             // 
             // secondNameTextBox
             // 
+            this.secondNameTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.secondNameTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.secondNameTextBox.Location = new System.Drawing.Point(168, 85);
             this.secondNameTextBox.Name = "secondNameTextBox";
             this.secondNameTextBox.Size = new System.Drawing.Size(161, 23);
             this.secondNameTextBox.TabIndex = 2;
+            this.secondNameTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.secondNameTextBox_KeyUp);
             // 
             // addToDbButton
             // 
