@@ -16,6 +16,8 @@ namespace DBioPhoto.Frontend
         public OrganismAddForm()
         {
             InitializeComponent();
+            // Set the location
+            this.Location = new System.Drawing.Point(1536, 0);
 
             // Populate the combo boxes with data from enums
             organismTypeComboBox.DataSource = Enum.GetValues(typeof(OrganismType));

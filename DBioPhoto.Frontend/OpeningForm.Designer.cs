@@ -45,9 +45,10 @@
             // 
             // labelWelcome
             // 
+            this.labelWelcome.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labelWelcome.AutoSize = true;
             this.labelWelcome.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelWelcome.Location = new System.Drawing.Point(272, 25);
+            this.labelWelcome.Location = new System.Drawing.Point(274, 25);
             this.labelWelcome.Name = "labelWelcome";
             this.labelWelcome.Size = new System.Drawing.Size(112, 41);
             this.labelWelcome.TabIndex = 0;
@@ -55,8 +56,9 @@
             // 
             // labelChoose
             // 
+            this.labelChoose.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labelChoose.AutoSize = true;
-            this.labelChoose.Location = new System.Drawing.Point(136, 79);
+            this.labelChoose.Location = new System.Drawing.Point(138, 79);
             this.labelChoose.Name = "labelChoose";
             this.labelChoose.Size = new System.Drawing.Size(371, 15);
             this.labelChoose.TabIndex = 0;
@@ -64,8 +66,9 @@
             // 
             // labelLocation
             // 
+            this.labelLocation.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labelLocation.AutoSize = true;
-            this.labelLocation.Location = new System.Drawing.Point(127, 106);
+            this.labelLocation.Location = new System.Drawing.Point(129, 106);
             this.labelLocation.Name = "labelLocation";
             this.labelLocation.Size = new System.Drawing.Size(389, 15);
             this.labelLocation.TabIndex = 0;
@@ -73,7 +76,8 @@
             // 
             // wantAddButton
             // 
-            this.wantAddButton.Location = new System.Drawing.Point(136, 230);
+            this.wantAddButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.wantAddButton.Location = new System.Drawing.Point(138, 230);
             this.wantAddButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.wantAddButton.Name = "wantAddButton";
             this.wantAddButton.Size = new System.Drawing.Size(109, 22);
@@ -85,7 +89,8 @@
             // 
             // wantSearchButton
             // 
-            this.wantSearchButton.Location = new System.Drawing.Point(407, 230);
+            this.wantSearchButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.wantSearchButton.Location = new System.Drawing.Point(409, 230);
             this.wantSearchButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.wantSearchButton.Name = "wantSearchButton";
             this.wantSearchButton.Size = new System.Drawing.Size(109, 22);
@@ -97,7 +102,8 @@
             // 
             // organismAddButton
             // 
-            this.organismAddButton.Location = new System.Drawing.Point(52, 267);
+            this.organismAddButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.organismAddButton.Location = new System.Drawing.Point(54, 267);
             this.organismAddButton.Name = "organismAddButton";
             this.organismAddButton.Size = new System.Drawing.Size(193, 23);
             this.organismAddButton.TabIndex = 4;
@@ -108,7 +114,8 @@
             // 
             // personAddButton
             // 
-            this.personAddButton.Location = new System.Drawing.Point(407, 267);
+            this.personAddButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.personAddButton.Location = new System.Drawing.Point(409, 267);
             this.personAddButton.Name = "personAddButton";
             this.personAddButton.Size = new System.Drawing.Size(193, 23);
             this.personAddButton.TabIndex = 5;
@@ -118,8 +125,9 @@
             // 
             // labelDifferentLocation
             // 
+            this.labelDifferentLocation.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labelDifferentLocation.AutoSize = true;
-            this.labelDifferentLocation.Location = new System.Drawing.Point(175, 132);
+            this.labelDifferentLocation.Location = new System.Drawing.Point(177, 132);
             this.labelDifferentLocation.Name = "labelDifferentLocation";
             this.labelDifferentLocation.Size = new System.Drawing.Size(293, 15);
             this.labelDifferentLocation.TabIndex = 6;
@@ -127,7 +135,8 @@
             // 
             // locationTextBox
             // 
-            this.locationTextBox.Location = new System.Drawing.Point(162, 159);
+            this.locationTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.locationTextBox.Location = new System.Drawing.Point(164, 159);
             this.locationTextBox.Name = "locationTextBox";
             this.locationTextBox.Size = new System.Drawing.Size(318, 23);
             this.locationTextBox.TabIndex = 7;
@@ -135,7 +144,8 @@
             // 
             // chooseThisDbButton
             // 
-            this.chooseThisDbButton.Location = new System.Drawing.Point(248, 197);
+            this.chooseThisDbButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.chooseThisDbButton.Location = new System.Drawing.Point(250, 197);
             this.chooseThisDbButton.Name = "chooseThisDbButton";
             this.chooseThisDbButton.Size = new System.Drawing.Size(144, 23);
             this.chooseThisDbButton.TabIndex = 8;
@@ -145,8 +155,9 @@
             // 
             // createDbLabel
             // 
+            this.createDbLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.createDbLabel.AutoSize = true;
-            this.createDbLabel.Location = new System.Drawing.Point(175, 334);
+            this.createDbLabel.Location = new System.Drawing.Point(177, 334);
             this.createDbLabel.Name = "createDbLabel";
             this.createDbLabel.Size = new System.Drawing.Size(277, 15);
             this.createDbLabel.TabIndex = 9;
@@ -154,7 +165,8 @@
             // 
             // createNewDbButton
             // 
-            this.createNewDbButton.Location = new System.Drawing.Point(248, 366);
+            this.createNewDbButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.createNewDbButton.Location = new System.Drawing.Point(250, 366);
             this.createNewDbButton.Name = "createNewDbButton";
             this.createNewDbButton.Size = new System.Drawing.Size(144, 27);
             this.createNewDbButton.TabIndex = 10;
@@ -166,7 +178,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(661, 405);
+            this.ClientSize = new System.Drawing.Size(664, 411);
             this.Controls.Add(this.createNewDbButton);
             this.Controls.Add(this.createDbLabel);
             this.Controls.Add(this.chooseThisDbButton);
@@ -180,6 +192,7 @@
             this.Controls.Add(this.labelChoose);
             this.Controls.Add(this.labelWelcome);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MinimumSize = new System.Drawing.Size(680, 450);
             this.Name = "OpeningForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DBioPhoto";

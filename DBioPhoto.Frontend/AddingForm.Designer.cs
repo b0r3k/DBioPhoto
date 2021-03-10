@@ -29,16 +29,29 @@ namespace DBioPhoto.Frontend
         /// </summary>
         private void InitializeComponent()
         {
+            this.organismAddButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // organismAddButton
+            // 
+            this.organismAddButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.organismAddButton.Location = new System.Drawing.Point(833, 64);
+            this.organismAddButton.Name = "organismAddButton";
+            this.organismAddButton.Size = new System.Drawing.Size(125, 23);
+            this.organismAddButton.TabIndex = 0;
+            this.organismAddButton.Text = "Přidávat organismy";
+            this.organismAddButton.UseVisualStyleBackColor = true;
+            this.organismAddButton.Click += new System.EventHandler(this.organismAddButton_Click);
             // 
             // AddingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.ClientSize = new System.Drawing.Size(1534, 1041);
+            this.Controls.Add(this.organismAddButton);
             this.Name = "AddingForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "AddingForm";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddingForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AddingForm_FormClosed);
             this.ResumeLayout(false);
@@ -46,5 +59,7 @@ namespace DBioPhoto.Frontend
         }
 
         #endregion
+
+        private System.Windows.Forms.Button organismAddButton;
     }
 }
