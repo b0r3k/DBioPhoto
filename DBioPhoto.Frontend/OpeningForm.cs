@@ -38,7 +38,9 @@ namespace DBioPhoto.Frontend
 
         private void buttonWantAdd_Click(object sender, EventArgs e)
         {
-
+            AddingForm newGui = new AddingForm();
+            newGui.Visible = true;
+            this.Visible = false;
         }
 
         private void buttonWantSearch_Click(object sender, EventArgs e)

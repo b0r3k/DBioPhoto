@@ -8,5 +8,15 @@ namespace DBioPhoto.Frontend
         {
             InitializeComponent();
         }
+
+        private void AddingForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void AddingForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Global.DbContext.SaveChanges();
+        }
     }
 }
