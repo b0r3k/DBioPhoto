@@ -33,6 +33,9 @@ namespace DBioPhoto.Frontend
             this.folderPathTextBox = new System.Windows.Forms.TextBox();
             this.folderChooseButton = new System.Windows.Forms.Button();
             this.folderChooseLabel = new System.Windows.Forms.Label();
+            this.imagesListView = new System.Windows.Forms.ListView();
+            this.selectedImagePictureBox = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.selectedImagePictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // organismAddButton
@@ -62,6 +65,7 @@ namespace DBioPhoto.Frontend
             this.folderChooseButton.TabIndex = 2;
             this.folderChooseButton.Text = "Zvolit složku";
             this.folderChooseButton.UseVisualStyleBackColor = true;
+            this.folderChooseButton.Click += new System.EventHandler(this.folderChooseButton_Click);
             // 
             // folderChooseLabel
             // 
@@ -72,11 +76,30 @@ namespace DBioPhoto.Frontend
             this.folderChooseLabel.TabIndex = 3;
             this.folderChooseLabel.Text = "Zvolte složku, kterou chcete procházet:";
             // 
+            // imagesListView
+            // 
+            this.imagesListView.HideSelection = false;
+            this.imagesListView.Location = new System.Drawing.Point(61, 755);
+            this.imagesListView.Name = "imagesListView";
+            this.imagesListView.Size = new System.Drawing.Size(906, 187);
+            this.imagesListView.TabIndex = 4;
+            this.imagesListView.UseCompatibleStateImageBehavior = false;
+            // 
+            // selectedImagePictureBox
+            // 
+            this.selectedImagePictureBox.Location = new System.Drawing.Point(61, 221);
+            this.selectedImagePictureBox.Name = "selectedImagePictureBox";
+            this.selectedImagePictureBox.Size = new System.Drawing.Size(906, 512);
+            this.selectedImagePictureBox.TabIndex = 5;
+            this.selectedImagePictureBox.TabStop = false;
+            // 
             // AddingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1534, 1041);
+            this.Controls.Add(this.selectedImagePictureBox);
+            this.Controls.Add(this.imagesListView);
             this.Controls.Add(this.folderChooseLabel);
             this.Controls.Add(this.folderChooseButton);
             this.Controls.Add(this.folderPathTextBox);
@@ -86,6 +109,7 @@ namespace DBioPhoto.Frontend
             this.Text = "AddingForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddingForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AddingForm_FormClosed);
+            ((System.ComponentModel.ISupportInitialize)(this.selectedImagePictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -97,5 +121,7 @@ namespace DBioPhoto.Frontend
         private System.Windows.Forms.TextBox folderPathTextBox;
         private System.Windows.Forms.Button folderChooseButton;
         private System.Windows.Forms.Label folderChooseLabel;
+        private System.Windows.Forms.ListView imagesListView;
+        private System.Windows.Forms.PictureBox selectedImagePictureBox;
     }
 }
