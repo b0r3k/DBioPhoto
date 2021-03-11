@@ -13,7 +13,9 @@ namespace DBioPhoto.Frontend
         private string _folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         private string[] _imagePaths;
         private ImageList _imageList;
-        private Image[] ImageThumbnails { get; set; }
+        private Image[] _imageThumbnails;
+        private Image _showedImage;
+        private int _selectedIndex;
         private BackgroundWorker LoadingImagesBgWorker;
         public AddingForm()
         {
@@ -28,37 +30,37 @@ namespace DBioPhoto.Frontend
 
         private void LoadingImagesBgWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            // Get all the images from selected directory
+            // Get all the images from selected directory, reset the thumbnails
             _imagePaths = Directory.EnumerateFiles(_folderPath, "*.jpg*", SearchOption.TopDirectoryOnly)
                 .Where(f => f.ToLower().EndsWith(".jpg") || f.ToLower().EndsWith(".jpeg") || f.ToLower().EndsWith(".png")).ToArray();
-            
-            // If there are any, get thumbnails for them
+            _imageThumbnails = new Image[_imagePaths.Length];
+            _imageList = new ImageList();
+
+            // If there are any images, get thumbnails for them
             if (_imagePaths.Length > 0)
                 GetThumbnailsForImages(_imagePaths);
         }
         private void GetThumbnailsForImages(string[] imageFiles)
         {
             // Get the thumbnails from paths
-            int numberImages = imageFiles.Length;
-            ImageThumbnails = new Image[numberImages];
-            for (int i = 0; i < numberImages; i++)
+            for (int i = 0; i < imageFiles.Length; i++)
             {
-                ImageThumbnails[i] = Image.FromFile(imageFiles[i]).GetThumbnailImage(120, 90, new Image.GetThumbnailImageAbort(() => false), IntPtr.Zero);
+                _imageThumbnails[i] = Image.FromFile(imageFiles[i]).GetThumbnailImage(120, 90, new Image.GetThumbnailImageAbort(() => false), IntPtr.Zero);
             }
 
             // Assign the thumbnails to the imageList
             _imageList = new ImageList();
             _imageList.ImageSize = new Size(120, 90);
-            _imageList.Images.AddRange(ImageThumbnails);
+            _imageList.Images.AddRange(_imageThumbnails);
         }
 
         private void LoadingImagesBgWorker_RunWorkerEventCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             // View the imageList in imagesListView
             imagesListView.LargeImageList = _imageList;
-            if (ImageThumbnails != null)
+            if (_imageThumbnails != null && _imagePaths != null && _imageThumbnails.Length == _imagePaths.Length)
             {
-                for (int itemIndex = 0; itemIndex < ImageThumbnails.Length; itemIndex++)
+                for (int itemIndex = 0; itemIndex < _imageThumbnails.Length; itemIndex++)
                 {
                     imagesListView.Items.Add(new ListViewItem(Path.GetFileName(_imagePaths[itemIndex]), itemIndex));
                 }
@@ -98,8 +100,20 @@ namespace DBioPhoto.Frontend
 
         private void folderChooseButton_Click(object sender, EventArgs e)
         {
+            // Clear the images now loaded
+            imagesListView.Items.Clear();
             // Load images in the background
             LoadingImagesBgWorker.RunWorkerAsync();
+        }
+
+        private void imagesListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (imagesListView.SelectedIndices.Count > 0)
+            {
+                _selectedIndex = imagesListView.SelectedIndices[0];
+                _showedImage = Image.FromFile(_imagePaths[_selectedIndex]);
+                selectedImagePictureBox.Image = _showedImage;
+            }
         }
     }
 }

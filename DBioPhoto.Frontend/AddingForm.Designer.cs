@@ -80,10 +80,12 @@ namespace DBioPhoto.Frontend
             // 
             this.imagesListView.HideSelection = false;
             this.imagesListView.Location = new System.Drawing.Point(61, 755);
+            this.imagesListView.MultiSelect = false;
             this.imagesListView.Name = "imagesListView";
-            this.imagesListView.Size = new System.Drawing.Size(906, 187);
+            this.imagesListView.Size = new System.Drawing.Size(900, 200);
             this.imagesListView.TabIndex = 4;
             this.imagesListView.UseCompatibleStateImageBehavior = false;
+            this.imagesListView.SelectedIndexChanged += new System.EventHandler(this.imagesListView_SelectedIndexChanged);
             // 
             // selectedImagePictureBox
             // 
