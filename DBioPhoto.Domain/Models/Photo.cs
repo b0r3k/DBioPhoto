@@ -20,5 +20,15 @@ namespace DBioPhoto.Domain.Models
 
         public ICollection<Person> People { get; set; }
         public ICollection<Organism> Organisms { get; set; }
+
+        public Photo(DateTime timeCreated, string fileName, string filePath, Category category, string comment, string location)
+        {
+            this.TimeCreated = timeCreated;
+            this.FileName = fileName;
+            this.FilePath = filePath;
+            this.Category = category;
+            this.Comment = comment;
+            this.Location = location;
+        }
     }
 }
