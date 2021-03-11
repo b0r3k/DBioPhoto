@@ -108,6 +108,7 @@ namespace DBioPhoto.Frontend
             // 
             this.organismTypeComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.organismTypeComboBox.DataSource = this.latSecondNameTextBox.Controls;
+            this.organismTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.organismTypeComboBox.FormattingEnabled = true;
             this.organismTypeComboBox.Location = new System.Drawing.Point(168, 27);
             this.organismTypeComboBox.Name = "organismTypeComboBox";
@@ -128,6 +129,7 @@ namespace DBioPhoto.Frontend
             // colourComboBox
             // 
             this.colourComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.colourComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.colourComboBox.FormattingEnabled = true;
             this.colourComboBox.Location = new System.Drawing.Point(168, 172);
             this.colourComboBox.Name = "colourComboBox";
