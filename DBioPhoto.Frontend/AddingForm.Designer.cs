@@ -178,17 +178,23 @@ namespace DBioPhoto.Frontend
             // 
             // locationTextBox
             // 
+            this.locationTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.locationTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.locationTextBox.Location = new System.Drawing.Point(1038, 187);
             this.locationTextBox.Name = "locationTextBox";
             this.locationTextBox.Size = new System.Drawing.Size(231, 23);
             this.locationTextBox.TabIndex = 14;
+            this.locationTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.locationTextBox_KeyUp);
             // 
             // commentTextBox
             // 
+            this.commentTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.commentTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.commentTextBox.Location = new System.Drawing.Point(1018, 225);
             this.commentTextBox.Name = "commentTextBox";
             this.commentTextBox.Size = new System.Drawing.Size(251, 23);
             this.commentTextBox.TabIndex = 15;
+            this.commentTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.commentTextBox_KeyUp);
             // 
             // addPhotoToDbButton
             // 

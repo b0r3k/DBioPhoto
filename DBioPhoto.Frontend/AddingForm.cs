@@ -30,6 +30,10 @@ namespace DBioPhoto.Frontend
         // Backgroundworkers
         private BackgroundWorker LoadingImagesBgWorker;
         private BackgroundWorker AddingPhotosBgWorker;
+        private BackgroundWorker PhotoInfoSuggestionsBgWorker;
+
+        // Collections for autocomplete
+        private AutoCompleteStringCollection _photoInfoSuggestions;
 
         // Regex for getting DateTime from EXIF of an image
         private static Regex _regex = new Regex(":");
@@ -51,6 +55,16 @@ namespace DBioPhoto.Frontend
             AddingPhotosBgWorker = new BackgroundWorker();
             AddingPhotosBgWorker.DoWork += new DoWorkEventHandler(AddingPhotosBgWorker_DoWork);
             AddingPhotosBgWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(AddingPhotosBgWorker_RunWorkerEventCompleted);
+
+            // Create the BackgroundWorker for photo info suggestions, bind tasks for him
+            PhotoInfoSuggestionsBgWorker = new BackgroundWorker();
+            PhotoInfoSuggestionsBgWorker.DoWork += new DoWorkEventHandler(PhotoInfoSuggestionsBgWorker_DoWork);
+            PhotoInfoSuggestionsBgWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(PhotoInfoSuggestionsBgWorker_RunWorkerEventCompleted);
+
+            // Set location and comment textboxes to autocomplete
+            _photoInfoSuggestions = new AutoCompleteStringCollection();
+            locationTextBox.AutoCompleteCustomSource = _photoInfoSuggestions;
+            commentTextBox.AutoCompleteCustomSource = _photoInfoSuggestions;
         }
 
         private void LoadingImagesBgWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -227,6 +241,49 @@ namespace DBioPhoto.Frontend
                 addPhotoToDbButton.Text = "Přidat fotku do databáze";
                 timer.Dispose();
             };
+        }
+
+        private void locationTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            TextBox t = sender as TextBox;
+            if (t != null)
+            {
+                if (t.Text.Length == 3)
+                {
+                    PhotoInfoSuggestionsBgWorker.RunWorkerAsync((t.Text, 0));
+                }
+            }
+        }
+
+        private void commentTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            TextBox t = sender as TextBox;
+            if (t != null)
+            {
+                if (t.Text.Length == 3)
+                {
+                    PhotoInfoSuggestionsBgWorker.RunWorkerAsync((t.Text, 1));
+                }
+            }
+        }
+        private void PhotoInfoSuggestionsBgWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            // Find the suggestions in the background
+            (string beginning, int textBoxNumber) = (ValueTuple<string, int>)e.Argument;
+            e.Result = Suggestions.GetPhotoInfoSuggestions(Global.DbContext, beginning, textBoxNumber);
+        }
+        private void PhotoInfoSuggestionsBgWorker_RunWorkerEventCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            // After finding the suggestions, use them
+            if (e.Error != null)
+                MessageBox.Show(e.Error.Message);
+            else if (e.Cancelled)
+                MessageBox.Show("Operace zrušena");
+            else
+            {
+                _photoInfoSuggestions.Clear();
+                _photoInfoSuggestions.AddRange((string[])e.Result);
+            }
         }
     }
 }
