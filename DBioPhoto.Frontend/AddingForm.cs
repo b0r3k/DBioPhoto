@@ -108,6 +108,7 @@ namespace DBioPhoto.Frontend
 
         private void imagesListView_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // When selecting an image, show it and save the index
             if (imagesListView.SelectedIndices.Count > 0)
             {
                 _selectedIndex = imagesListView.SelectedIndices[0];
