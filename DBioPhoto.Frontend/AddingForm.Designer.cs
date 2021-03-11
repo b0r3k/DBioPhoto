@@ -39,6 +39,8 @@ namespace DBioPhoto.Frontend
             this.showedPhotoPathTextBox = new System.Windows.Forms.TextBox();
             this.showedPhotoDateLabel = new System.Windows.Forms.Label();
             this.showedPhotoDateTextBox = new System.Windows.Forms.TextBox();
+            this.categoryLabel = new System.Windows.Forms.Label();
+            this.categoryComboBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.selectedImagePictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -133,11 +135,31 @@ namespace DBioPhoto.Frontend
             this.showedPhotoDateTextBox.Size = new System.Drawing.Size(242, 23);
             this.showedPhotoDateTextBox.TabIndex = 9;
             // 
+            // categoryLabel
+            // 
+            this.categoryLabel.AutoSize = true;
+            this.categoryLabel.Location = new System.Drawing.Point(947, 152);
+            this.categoryLabel.Name = "categoryLabel";
+            this.categoryLabel.Size = new System.Drawing.Size(60, 15);
+            this.categoryLabel.TabIndex = 10;
+            this.categoryLabel.Text = "Kategorie:";
+            // 
+            // categoryComboBox
+            // 
+            this.categoryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.categoryComboBox.FormattingEnabled = true;
+            this.categoryComboBox.Location = new System.Drawing.Point(1013, 149);
+            this.categoryComboBox.Name = "categoryComboBox";
+            this.categoryComboBox.Size = new System.Drawing.Size(256, 23);
+            this.categoryComboBox.TabIndex = 11;
+            // 
             // AddingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1534, 1041);
+            this.Controls.Add(this.categoryComboBox);
+            this.Controls.Add(this.categoryLabel);
             this.Controls.Add(this.showedPhotoDateTextBox);
             this.Controls.Add(this.showedPhotoDateLabel);
             this.Controls.Add(this.showedPhotoPathTextBox);
@@ -171,5 +193,7 @@ namespace DBioPhoto.Frontend
         private System.Windows.Forms.TextBox showedPhotoPathTextBox;
         private System.Windows.Forms.Label showedPhotoDateLabel;
         private System.Windows.Forms.TextBox showedPhotoDateTextBox;
+        private System.Windows.Forms.Label categoryLabel;
+        private System.Windows.Forms.ComboBox categoryComboBox;
     }
 }

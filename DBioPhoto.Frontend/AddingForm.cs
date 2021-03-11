@@ -8,6 +8,7 @@ using System.Linq;
 using System.Drawing.Imaging;
 using System.Text;
 using System.Text.RegularExpressions;
+using DBioPhoto.Domain.Models;
 
 namespace DBioPhoto.Frontend
 {
@@ -27,6 +28,9 @@ namespace DBioPhoto.Frontend
         {
             InitializeComponent();
             this.Location = new System.Drawing.Point(0, 0);
+
+            // Populate the combo box with data from enum
+            categoryComboBox.DataSource = Enum.GetValues(typeof(Category));
 
             // Create the BackgroundWorker for adding, bind tasks for him
             LoadingImagesBgWorker = new BackgroundWorker();
