@@ -9,7 +9,7 @@ namespace DBioPhoto.DataAccess.Services.Adding
         public static string TryAddPhoto(DBioPhotoContext dbContext, Photo tryPhoto)
         {
             // No photo selected
-            if (tryPhoto.FileName == "" || tryPhoto.FilePath == "")
+            if (tryPhoto.FileName == null || tryPhoto.FileName == "" || tryPhoto.FilePath == null || tryPhoto.FilePath == "")
                 return "Zvolte fotku";
 
             // Photo already in db, update
