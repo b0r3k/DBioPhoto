@@ -20,11 +20,5 @@ namespace DBioPhoto.Domain.Models
 
         public ICollection<Person> People { get; set; }
         public ICollection<Organism> Organisms { get; set; }
-        /*public ICollection<PersonOnPhoto> PersonOnPhotos { get; set; }
-        public ICollection<PlantOnPhoto> PlantOnPhotos { get; set; }
-        public ICollection<AnimalOnPhoto> AnimalOnPhotos { get; set; }
-        public ICollection<FungusOnPhoto> FungusOnPhotos { get; set; }
-        public ICollection<MicroOnPhoto> MicroOnPhotos { get; set; }*/
-
     }
 }
