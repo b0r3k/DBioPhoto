@@ -9,21 +9,31 @@ using System.Drawing.Imaging;
 using System.Text;
 using System.Text.RegularExpressions;
 using DBioPhoto.Domain.Models;
+using DBioPhoto.DataAccess.Services.Adding;
 
 namespace DBioPhoto.Frontend
 {
     public partial class AddingForm : Form
     {
+        // Information about folder and thumbnails
         private string _folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         private string[] _imagePaths;
         private ImageList _imageList;
         private Image[] _imageThumbnails;
+
+        // Information about currently selected photo
         private Image _showedImage;
         private string _showedImagePath;
         private DateTime _showedImageDate;
-        private static Regex _regex = new Regex(":");
         private int _selectedIndex;
+
+        // Backgroundworkers
         private BackgroundWorker LoadingImagesBgWorker;
+        private BackgroundWorker AddingPhotosBgWorker;
+
+        // Regex for getting DateTime from EXIF of an image
+        private static Regex _regex = new Regex(":");
+
         public AddingForm()
         {
             InitializeComponent();
@@ -32,10 +42,15 @@ namespace DBioPhoto.Frontend
             // Populate the combo box with data from enum
             categoryComboBox.DataSource = Enum.GetValues(typeof(Category));
 
-            // Create the BackgroundWorker for adding, bind tasks for him
+            // Create the BackgroundWorker for loading of images, bind tasks for him
             LoadingImagesBgWorker = new BackgroundWorker();
             LoadingImagesBgWorker.DoWork += new DoWorkEventHandler(LoadingImagesBgWorker_DoWork);
             LoadingImagesBgWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(LoadingImagesBgWorker_RunWorkerEventCompleted);
+
+            // Create the BackgroundWorker for adding photos, bind tasks for him
+            AddingPhotosBgWorker = new BackgroundWorker();
+            AddingPhotosBgWorker.DoWork += new DoWorkEventHandler(AddingPhotosBgWorker_DoWork);
+            AddingPhotosBgWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(AddingPhotosBgWorker_RunWorkerEventCompleted);
         }
 
         private void LoadingImagesBgWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -118,7 +133,7 @@ namespace DBioPhoto.Frontend
 
         private void imagesListView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // When selecting an image, show it and save the index
+            // When selecting an image, show it and save the index, get the datetime of creation
             if (imagesListView.SelectedIndices.Count > 0)
             {
                 _selectedIndex = imagesListView.SelectedIndices[0];
@@ -134,6 +149,7 @@ namespace DBioPhoto.Frontend
 
         private DateTime GetDateTakenFromImage(Image image)
         {
+            // Try to get the datetime of creation property from image and parse it
             PropertyItem propItem = null;
             try
             {
@@ -147,6 +163,58 @@ namespace DBioPhoto.Frontend
             }
             else
                 return new FileInfo(_showedImagePath).LastWriteTime;
+        }
+
+        private void addPhotoToDbButton_Click(object sender, EventArgs e)
+        {
+            // Get the values from the form, lowecase everything, create the instance of Organism
+            DateTime date = _showedImageDate;
+            string fileName = Path.GetFileName(_showedImagePath);
+            string filePath = _showedImagePath;
+            Category category = (Category)categoryComboBox.SelectedItem;
+            string comment = commentTextBox.Text.Trim().ToLower();
+            string location = locationTextBox.Text.Trim().ToLower();
+
+            Photo tryPhoto = new Photo(date, fileName, filePath, category, comment, location);
+
+            // Add to db in background
+            addPhotoToDbButton.Text = "Přidávám!";
+            AddingPhotosBgWorker.RunWorkerAsync(tryPhoto);
+
+            // Not resetting this form, because it can be useful to use the location again
+        }
+        private void AddingPhotosBgWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            // Add the created instance to the database
+            e.Result = AddPhoto.TryAddPhoto(Global.DbContext, (Photo)e.Argument);
+        }
+        private void AddingPhotosBgWorker_RunWorkerEventCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            // Check if the photo was added successfully, show result, if not successfull, refill the form
+            if (e.Error != null)
+                MessageBox.Show(e.Error.Message);
+            else if (e.Cancelled)
+                ShowOnPhotoToDbButtonForThreeSecs("Operace zrušena");
+            else
+            {
+                string result = (string)e.Result;
+                ShowOnPhotoToDbButtonForThreeSecs(result);
+            }
+        }
+        private void ShowOnPhotoToDbButtonForThreeSecs(string textToShow)
+        {
+            // Show textToShow on the button, after 3 s show original again
+            addPhotoToDbButton.Text = textToShow;
+            System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer()
+            {
+                Interval = 3000,
+                Enabled = true
+            };
+            timer.Tick += (sender, e) =>
+            {
+                addPhotoToDbButton.Text = "Přidat fotku do databáze";
+                timer.Dispose();
+            };
         }
     }
 }
