@@ -39,8 +39,18 @@ namespace DBioPhoto.Frontend
 
         private void buttonWantAdd_Click(object sender, EventArgs e)
         {
-            AddingForm newGui = new AddingForm();
-            newGui.Visible = true;
+            // If already opened, bring to front, else create new
+            if (Application.OpenForms.OfType<AddingForm>().Count() == 1)
+            {
+                AddingForm openedForm = Application.OpenForms.OfType<AddingForm>().First();
+                openedForm.WindowState = FormWindowState.Normal;
+                openedForm.BringToFront();
+            }
+            else
+            {
+                AddingForm newGui = new AddingForm();
+                newGui.Visible = true;
+            }
             this.Visible = false;
         }
 
