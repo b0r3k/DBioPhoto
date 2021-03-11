@@ -5,6 +5,9 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Drawing.Imaging;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace DBioPhoto.Frontend
 {
@@ -15,6 +18,9 @@ namespace DBioPhoto.Frontend
         private ImageList _imageList;
         private Image[] _imageThumbnails;
         private Image _showedImage;
+        private string _showedImagePath;
+        private DateTime _showedImageDate;
+        private static Regex _regex = new Regex(":");
         private int _selectedIndex;
         private BackgroundWorker LoadingImagesBgWorker;
         public AddingForm()
@@ -112,9 +118,31 @@ namespace DBioPhoto.Frontend
             if (imagesListView.SelectedIndices.Count > 0)
             {
                 _selectedIndex = imagesListView.SelectedIndices[0];
-                _showedImage = Image.FromFile(_imagePaths[_selectedIndex]);
+                _showedImagePath = _imagePaths[_selectedIndex];
+                _showedImage = Image.FromFile(_showedImagePath);
+                _showedImageDate = GetDateTakenFromImage(_showedImage);
+
                 selectedImagePictureBox.Image = _showedImage;
+                showedPhotoPathTextBox.Text = _showedImagePath;
+                showedPhotoDateTextBox.Text = _showedImageDate.ToString();
             }
+        }
+
+        private DateTime GetDateTakenFromImage(Image image)
+        {
+            PropertyItem propItem = null;
+            try
+            {
+                propItem = image.GetPropertyItem(36867);
+            }
+            catch { }
+            if (propItem != null)
+            {
+                string dateTaken = _regex.Replace(Encoding.UTF8.GetString(propItem.Value), "-", 2);
+                return DateTime.Parse(dateTaken);
+            }
+            else
+                return new FileInfo(_showedImagePath).LastWriteTime;
         }
     }
 }

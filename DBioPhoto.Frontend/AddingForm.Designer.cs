@@ -35,6 +35,10 @@ namespace DBioPhoto.Frontend
             this.folderChooseLabel = new System.Windows.Forms.Label();
             this.imagesListView = new System.Windows.Forms.ListView();
             this.selectedImagePictureBox = new System.Windows.Forms.PictureBox();
+            this.showedPhotoPathLabel = new System.Windows.Forms.Label();
+            this.showedPhotoPathTextBox = new System.Windows.Forms.TextBox();
+            this.showedPhotoDateLabel = new System.Windows.Forms.Label();
+            this.showedPhotoDateTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.selectedImagePictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -79,27 +83,65 @@ namespace DBioPhoto.Frontend
             // imagesListView
             // 
             this.imagesListView.HideSelection = false;
-            this.imagesListView.Location = new System.Drawing.Point(61, 755);
+            this.imagesListView.Location = new System.Drawing.Point(32, 782);
             this.imagesListView.MultiSelect = false;
             this.imagesListView.Name = "imagesListView";
-            this.imagesListView.Size = new System.Drawing.Size(900, 200);
+            this.imagesListView.Size = new System.Drawing.Size(900, 216);
             this.imagesListView.TabIndex = 4;
             this.imagesListView.UseCompatibleStateImageBehavior = false;
             this.imagesListView.SelectedIndexChanged += new System.EventHandler(this.imagesListView_SelectedIndexChanged);
             // 
             // selectedImagePictureBox
             // 
-            this.selectedImagePictureBox.Location = new System.Drawing.Point(61, 221);
+            this.selectedImagePictureBox.Location = new System.Drawing.Point(32, 83);
             this.selectedImagePictureBox.Name = "selectedImagePictureBox";
-            this.selectedImagePictureBox.Size = new System.Drawing.Size(906, 512);
+            this.selectedImagePictureBox.Size = new System.Drawing.Size(900, 675);
             this.selectedImagePictureBox.TabIndex = 5;
             this.selectedImagePictureBox.TabStop = false;
+            // 
+            // showedPhotoPathLabel
+            // 
+            this.showedPhotoPathLabel.AutoSize = true;
+            this.showedPhotoPathLabel.Location = new System.Drawing.Point(947, 86);
+            this.showedPhotoPathLabel.Name = "showedPhotoPathLabel";
+            this.showedPhotoPathLabel.Size = new System.Drawing.Size(39, 15);
+            this.showedPhotoPathLabel.TabIndex = 6;
+            this.showedPhotoPathLabel.Text = "Cesta:";
+            // 
+            // showedPhotoPathTextBox
+            // 
+            this.showedPhotoPathTextBox.Location = new System.Drawing.Point(992, 83);
+            this.showedPhotoPathTextBox.Name = "showedPhotoPathTextBox";
+            this.showedPhotoPathTextBox.ReadOnly = true;
+            this.showedPhotoPathTextBox.Size = new System.Drawing.Size(277, 23);
+            this.showedPhotoPathTextBox.TabIndex = 7;
+            // 
+            // showedPhotoDateLabel
+            // 
+            this.showedPhotoDateLabel.AutoSize = true;
+            this.showedPhotoDateLabel.Location = new System.Drawing.Point(947, 118);
+            this.showedPhotoDateLabel.Name = "showedPhotoDateLabel";
+            this.showedPhotoDateLabel.Size = new System.Drawing.Size(74, 15);
+            this.showedPhotoDateLabel.TabIndex = 8;
+            this.showedPhotoDateLabel.Text = "Čas pořízení:";
+            // 
+            // showedPhotoDateTextBox
+            // 
+            this.showedPhotoDateTextBox.Location = new System.Drawing.Point(1027, 115);
+            this.showedPhotoDateTextBox.Name = "showedPhotoDateTextBox";
+            this.showedPhotoDateTextBox.ReadOnly = true;
+            this.showedPhotoDateTextBox.Size = new System.Drawing.Size(242, 23);
+            this.showedPhotoDateTextBox.TabIndex = 9;
             // 
             // AddingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1534, 1041);
+            this.Controls.Add(this.showedPhotoDateTextBox);
+            this.Controls.Add(this.showedPhotoDateLabel);
+            this.Controls.Add(this.showedPhotoPathTextBox);
+            this.Controls.Add(this.showedPhotoPathLabel);
             this.Controls.Add(this.selectedImagePictureBox);
             this.Controls.Add(this.imagesListView);
             this.Controls.Add(this.folderChooseLabel);
@@ -125,5 +167,9 @@ namespace DBioPhoto.Frontend
         private System.Windows.Forms.Label folderChooseLabel;
         private System.Windows.Forms.ListView imagesListView;
         private System.Windows.Forms.PictureBox selectedImagePictureBox;
+        private System.Windows.Forms.Label showedPhotoPathLabel;
+        private System.Windows.Forms.TextBox showedPhotoPathTextBox;
+        private System.Windows.Forms.Label showedPhotoDateLabel;
+        private System.Windows.Forms.TextBox showedPhotoDateTextBox;
     }
 }
