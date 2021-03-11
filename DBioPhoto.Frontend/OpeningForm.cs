@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -50,8 +51,18 @@ namespace DBioPhoto.Frontend
 
         private void organismAddButton_Click(object sender, EventArgs e)
         {
-            OrganismAddForm newGui = new OrganismAddForm();
-            newGui.Visible = true;
+            // If already opened, bring to front, else create new
+            if (Application.OpenForms.OfType<OrganismAddForm>().Count() == 1)
+            {
+                OrganismAddForm openedForm = Application.OpenForms.OfType<OrganismAddForm>().First();
+                openedForm.WindowState = FormWindowState.Normal;
+                openedForm.BringToFront();
+            }
+            else
+            {
+                OrganismAddForm newGui = new OrganismAddForm();
+                newGui.Visible = true;
+            }
         }
 
         private void locationTextBox_Click(object sender, EventArgs e)
