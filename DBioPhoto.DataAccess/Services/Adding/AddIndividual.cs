@@ -8,7 +8,6 @@ namespace DBioPhoto.DataAccess.Services.Adding
     {
         public static string TryAddOrganism(DBioPhotoContext dbContext, Organism tryOrganism)
         {
-            tryOrganism.LatSecondName = tryOrganism.LatSecondName.ToLower();
             if (tryOrganism.FirstName == "" || tryOrganism.LatFirstName == "")
                 return "Vyplňte název";
             else if (dbContext.Organisms
