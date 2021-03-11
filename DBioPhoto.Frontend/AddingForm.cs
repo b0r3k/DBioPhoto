@@ -105,6 +105,8 @@ namespace DBioPhoto.Frontend
         private void organismAddButton_Click(object sender, System.EventArgs e)
         {
             OrganismAddForm newGui = new OrganismAddForm();
+            newGui.StartPosition = FormStartPosition.Manual;
+            newGui.Location = new Point(1536, 0);
             newGui.Visible = true;
         }
 

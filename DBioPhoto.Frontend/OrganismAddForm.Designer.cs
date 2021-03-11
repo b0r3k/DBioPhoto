@@ -199,7 +199,7 @@ namespace DBioPhoto.Frontend
             this.Controls.Add(this.secondNameLabel);
             this.Controls.Add(this.firstNameLabel);
             this.Name = "OrganismAddForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "OrganismAddForm";
             this.ResumeLayout(false);
             this.PerformLayout();
