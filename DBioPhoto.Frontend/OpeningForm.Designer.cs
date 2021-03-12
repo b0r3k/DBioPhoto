@@ -38,7 +38,6 @@
             this.labelDifferentLocation = new System.Windows.Forms.Label();
             this.locationTextBox = new System.Windows.Forms.TextBox();
             this.chooseThisDbButton = new System.Windows.Forms.Button();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.createDbLabel = new System.Windows.Forms.Label();
             this.createNewDbButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -213,7 +212,6 @@
         private System.Windows.Forms.Label labelDifferentLocation;
         private System.Windows.Forms.TextBox locationTextBox;
         private System.Windows.Forms.Button chooseThisDbButton;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Label createDbLabel;
         private System.Windows.Forms.Button createNewDbButton;
     }
