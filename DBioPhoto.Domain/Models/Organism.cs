@@ -15,7 +15,7 @@ namespace DBioPhoto.Domain.Models
         public string LatSecondName { get; set; }
         public Colour Colour { get; set; }
 
-        public ICollection<Photo> Photos { get; set; }
+        public List<Photo> Photos { get; set; }
 
         public Organism(OrganismType organismType, string firstName, string secondName, string latFirstName, string latSecondName, Colour colour)
         {
@@ -25,6 +25,10 @@ namespace DBioPhoto.Domain.Models
             LatFirstName = latFirstName;
             LatSecondName = latSecondName;
             Colour = colour;
+
+            this.Photos = new List<Photo>();
         }
+        public override string ToString()
+            => FirstName + " " + SecondName + " (" + LatFirstName + " " + LatSecondName + ") /" + OrganismType + "/";
     }
 }
