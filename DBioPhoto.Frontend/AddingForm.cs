@@ -24,6 +24,7 @@ namespace DBioPhoto.Frontend
         // Information about currently selected photo
         private Image _showedImage;
         private string _showedImagePath;
+        private string _showedImageRelativePath;
         private DateTime _showedImageDate;
         private int _selectedIndex;
 
@@ -151,10 +152,15 @@ namespace DBioPhoto.Frontend
 
         private void folderChooseButton_Click(object sender, EventArgs e)
         {
-            // Clear the images now loaded
-            imagesListView.Items.Clear();
-            // Load images in the background
-            LoadingImagesBgWorker.RunWorkerAsync();
+            if (_folderPath.Contains(Global.RootFolder))
+            {
+                // Clear the images now loaded
+                imagesListView.Items.Clear();
+                // Load images in the background
+                LoadingImagesBgWorker.RunWorkerAsync();
+            }
+            else
+                MessageBox.Show("Tato složka není ve zvoleném kořenovém adresáři, databáze by nefungovala správně! Zvolte jinou.");
         }
 
         private void imagesListView_SelectedIndexChanged(object sender, EventArgs e)
@@ -164,11 +170,13 @@ namespace DBioPhoto.Frontend
             {
                 _selectedIndex = imagesListView.SelectedIndices[0];
                 _showedImagePath = _imagePaths[_selectedIndex];
+                _showedImageRelativePath = _showedImagePath.Replace(Global.RootFolder, "");
                 _showedImage = Image.FromFile(_showedImagePath);
                 _showedImageDate = GetDateTakenFromImage(_showedImage);
 
                 selectedImagePictureBox.Image = _showedImage;
                 showedPhotoPathTextBox.Text = _showedImagePath;
+                showedPhotoRelativePathTextBox.Text = _showedImageRelativePath;
                 showedPhotoDateTextBox.Text = _showedImageDate.ToString();
             }
         }
@@ -196,7 +204,7 @@ namespace DBioPhoto.Frontend
             // Get the values from the form, lowecase everything, create the instance of Organism
             DateTime date = _showedImageDate;
             string fileName = Path.GetFileName(_showedImagePath);
-            string filePath = _showedImagePath;
+            string filePath = _showedImageRelativePath;
             Category category = (Category)categoryComboBox.SelectedItem;
             string comment = commentTextBox.Text.Trim().ToLower();
             string location = locationTextBox.Text.Trim().ToLower();

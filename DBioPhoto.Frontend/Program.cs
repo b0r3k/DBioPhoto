@@ -22,5 +22,6 @@ namespace DBioPhoto.Frontend
     static class Global
     {
         public static DBioPhotoContext DbContext { get; set; }
+        public static string RootFolder { get; set; }
     }
 }

@@ -96,9 +96,10 @@ namespace DBioPhoto.Frontend
 
         private void chooseThisDbButton_Click(object sender, EventArgs e)
         {
-            // If file exists, open db connection to it
+            // If file exists, open db connection to it, save RootFolder path
             if (File.Exists(_filePath))
             {
+                Global.RootFolder = Path.GetDirectoryName(_filePath);
                 createContextThread = new Thread(() => CreateDbContext());
                 createContextThread.Start();
                 SetActionButtonsVisible(true);

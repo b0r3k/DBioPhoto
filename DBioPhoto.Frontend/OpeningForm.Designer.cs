@@ -57,21 +57,23 @@
             // 
             this.labelChoose.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labelChoose.AutoSize = true;
-            this.labelChoose.Location = new System.Drawing.Point(138, 79);
+            this.labelChoose.Location = new System.Drawing.Point(64, 82);
             this.labelChoose.Name = "labelChoose";
-            this.labelChoose.Size = new System.Drawing.Size(371, 15);
+            this.labelChoose.Size = new System.Drawing.Size(529, 15);
             this.labelChoose.TabIndex = 0;
-            this.labelChoose.Text = "Jako první vyberte, zda chcete do databáze přidávat, nebo v ní hledat.";
+            this.labelChoose.Text = "Jako první vyberte databázový soubor. Jeho umístění také určuje kořenový adresář " +
+    "pro adresy fotek.";
             // 
             // labelLocation
             // 
             this.labelLocation.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labelLocation.AutoSize = true;
-            this.labelLocation.Location = new System.Drawing.Point(129, 106);
+            this.labelLocation.Location = new System.Drawing.Point(43, 108);
             this.labelLocation.Name = "labelLocation";
-            this.labelLocation.Size = new System.Drawing.Size(370, 15);
+            this.labelLocation.Size = new System.Drawing.Size(571, 15);
             this.labelLocation.TabIndex = 0;
-            this.labelLocation.Text = "Standardní lokací pro databázový soubor je Obrázky/DBioPhoto.mdf.";
+            this.labelLocation.Text = "Standardní lokací pro databázový soubor je Obrázky/DBioPhoto.mdf a kořenovým adre" +
+    "sářem jsou Obrázky.";
             // 
             // wantAddButton
             // 

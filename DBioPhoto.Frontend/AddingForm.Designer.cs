@@ -46,6 +46,8 @@ namespace DBioPhoto.Frontend
             this.locationTextBox = new System.Windows.Forms.TextBox();
             this.commentTextBox = new System.Windows.Forms.TextBox();
             this.addPhotoToDbButton = new System.Windows.Forms.Button();
+            this.showedPhotoRelativePathLabel = new System.Windows.Forms.Label();
+            this.showedPhotoRelativePathTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.selectedImagePictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -117,16 +119,16 @@ namespace DBioPhoto.Frontend
             // 
             // showedPhotoPathTextBox
             // 
-            this.showedPhotoPathTextBox.Location = new System.Drawing.Point(992, 83);
+            this.showedPhotoPathTextBox.Location = new System.Drawing.Point(1157, 83);
             this.showedPhotoPathTextBox.Name = "showedPhotoPathTextBox";
             this.showedPhotoPathTextBox.ReadOnly = true;
-            this.showedPhotoPathTextBox.Size = new System.Drawing.Size(277, 23);
+            this.showedPhotoPathTextBox.Size = new System.Drawing.Size(231, 23);
             this.showedPhotoPathTextBox.TabIndex = 7;
             // 
             // showedPhotoDateLabel
             // 
             this.showedPhotoDateLabel.AutoSize = true;
-            this.showedPhotoDateLabel.Location = new System.Drawing.Point(947, 118);
+            this.showedPhotoDateLabel.Location = new System.Drawing.Point(947, 158);
             this.showedPhotoDateLabel.Name = "showedPhotoDateLabel";
             this.showedPhotoDateLabel.Size = new System.Drawing.Size(74, 15);
             this.showedPhotoDateLabel.TabIndex = 8;
@@ -134,16 +136,16 @@ namespace DBioPhoto.Frontend
             // 
             // showedPhotoDateTextBox
             // 
-            this.showedPhotoDateTextBox.Location = new System.Drawing.Point(1027, 115);
+            this.showedPhotoDateTextBox.Location = new System.Drawing.Point(1157, 155);
             this.showedPhotoDateTextBox.Name = "showedPhotoDateTextBox";
             this.showedPhotoDateTextBox.ReadOnly = true;
-            this.showedPhotoDateTextBox.Size = new System.Drawing.Size(242, 23);
+            this.showedPhotoDateTextBox.Size = new System.Drawing.Size(231, 23);
             this.showedPhotoDateTextBox.TabIndex = 9;
             // 
             // categoryLabel
             // 
             this.categoryLabel.AutoSize = true;
-            this.categoryLabel.Location = new System.Drawing.Point(947, 152);
+            this.categoryLabel.Location = new System.Drawing.Point(947, 192);
             this.categoryLabel.Name = "categoryLabel";
             this.categoryLabel.Size = new System.Drawing.Size(60, 15);
             this.categoryLabel.TabIndex = 10;
@@ -153,15 +155,15 @@ namespace DBioPhoto.Frontend
             // 
             this.categoryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.categoryComboBox.FormattingEnabled = true;
-            this.categoryComboBox.Location = new System.Drawing.Point(1013, 149);
+            this.categoryComboBox.Location = new System.Drawing.Point(1157, 189);
             this.categoryComboBox.Name = "categoryComboBox";
-            this.categoryComboBox.Size = new System.Drawing.Size(256, 23);
+            this.categoryComboBox.Size = new System.Drawing.Size(231, 23);
             this.categoryComboBox.TabIndex = 11;
             // 
             // commentLabel
             // 
             this.commentLabel.AutoSize = true;
-            this.commentLabel.Location = new System.Drawing.Point(947, 228);
+            this.commentLabel.Location = new System.Drawing.Point(947, 268);
             this.commentLabel.Name = "commentLabel";
             this.commentLabel.Size = new System.Drawing.Size(65, 15);
             this.commentLabel.TabIndex = 12;
@@ -170,7 +172,7 @@ namespace DBioPhoto.Frontend
             // locationLabel
             // 
             this.locationLabel.AutoSize = true;
-            this.locationLabel.Location = new System.Drawing.Point(947, 190);
+            this.locationLabel.Location = new System.Drawing.Point(947, 230);
             this.locationLabel.Name = "locationLabel";
             this.locationLabel.Size = new System.Drawing.Size(85, 15);
             this.locationLabel.TabIndex = 13;
@@ -180,7 +182,7 @@ namespace DBioPhoto.Frontend
             // 
             this.locationTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.locationTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.locationTextBox.Location = new System.Drawing.Point(1038, 187);
+            this.locationTextBox.Location = new System.Drawing.Point(1157, 227);
             this.locationTextBox.Name = "locationTextBox";
             this.locationTextBox.Size = new System.Drawing.Size(231, 23);
             this.locationTextBox.TabIndex = 14;
@@ -190,15 +192,15 @@ namespace DBioPhoto.Frontend
             // 
             this.commentTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.commentTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.commentTextBox.Location = new System.Drawing.Point(1018, 225);
+            this.commentTextBox.Location = new System.Drawing.Point(1157, 265);
             this.commentTextBox.Name = "commentTextBox";
-            this.commentTextBox.Size = new System.Drawing.Size(251, 23);
+            this.commentTextBox.Size = new System.Drawing.Size(231, 23);
             this.commentTextBox.TabIndex = 15;
             this.commentTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.commentTextBox_KeyUp);
             // 
             // addPhotoToDbButton
             // 
-            this.addPhotoToDbButton.Location = new System.Drawing.Point(1027, 265);
+            this.addPhotoToDbButton.Location = new System.Drawing.Point(1086, 303);
             this.addPhotoToDbButton.Name = "addPhotoToDbButton";
             this.addPhotoToDbButton.Size = new System.Drawing.Size(145, 23);
             this.addPhotoToDbButton.TabIndex = 16;
@@ -206,11 +208,30 @@ namespace DBioPhoto.Frontend
             this.addPhotoToDbButton.UseVisualStyleBackColor = true;
             this.addPhotoToDbButton.Click += new System.EventHandler(this.addPhotoToDbButton_Click);
             // 
+            // showedPhotoRelativePathLabel
+            // 
+            this.showedPhotoRelativePathLabel.AutoSize = true;
+            this.showedPhotoRelativePathLabel.Location = new System.Drawing.Point(947, 120);
+            this.showedPhotoRelativePathLabel.Name = "showedPhotoRelativePathLabel";
+            this.showedPhotoRelativePathLabel.Size = new System.Drawing.Size(204, 15);
+            this.showedPhotoRelativePathLabel.TabIndex = 17;
+            this.showedPhotoRelativePathLabel.Text = "Relativní cesta (uložena do databáze):";
+            // 
+            // showedPhotoRelativePathTextBox
+            // 
+            this.showedPhotoRelativePathTextBox.Location = new System.Drawing.Point(1157, 117);
+            this.showedPhotoRelativePathTextBox.Name = "showedPhotoRelativePathTextBox";
+            this.showedPhotoRelativePathTextBox.ReadOnly = true;
+            this.showedPhotoRelativePathTextBox.Size = new System.Drawing.Size(231, 23);
+            this.showedPhotoRelativePathTextBox.TabIndex = 18;
+            // 
             // AddingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1534, 1041);
+            this.Controls.Add(this.showedPhotoRelativePathTextBox);
+            this.Controls.Add(this.showedPhotoRelativePathLabel);
             this.Controls.Add(this.addPhotoToDbButton);
             this.Controls.Add(this.commentTextBox);
             this.Controls.Add(this.locationTextBox);
@@ -258,5 +279,7 @@ namespace DBioPhoto.Frontend
         private System.Windows.Forms.TextBox locationTextBox;
         private System.Windows.Forms.TextBox commentTextBox;
         private System.Windows.Forms.Button addPhotoToDbButton;
+        private System.Windows.Forms.Label showedPhotoRelativePathLabel;
+        private System.Windows.Forms.TextBox showedPhotoRelativePathTextBox;
     }
 }
