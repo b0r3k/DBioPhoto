@@ -37,5 +37,20 @@ namespace DBioPhoto.DataAccess.Services.Adding
                     return new string[0];
             }
         }
+
+        public static string[] GetPhotoContentSuggestions(DBioPhotoContext dbContext, string beginning, int textBoxNumber)
+        {
+            switch (textBoxNumber)
+            {
+                case 0:
+                    return dbContext.Organisms.Where(o => o.FirstName.StartsWith(beginning.ToLower()) || o.LatFirstName.StartsWith(beginning.ToLower()))
+                        .Select(o => o.ToString()).Distinct().ToArray();
+                case 1:
+                    return dbContext.People.Where(p => p.Name.StartsWith(beginning.ToLower()) || p.Nickname.StartsWith(beginning.ToLower()))
+                        .Select(p => p.ToString()).Distinct().ToArray();
+                default:
+                    return new string[0];
+            }
+        }
     }
 }

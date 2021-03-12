@@ -33,9 +33,11 @@ namespace DBioPhoto.Frontend
         private BackgroundWorker AddingPhotosBgWorker;
         private BackgroundWorker PhotoInfoSuggestionsBgWorker;
         private BackgroundWorker OnPhotoGettingBgWorker;
+        private BackgroundWorker PhotoContentSuggestionsBgWorker;
 
         // Collections for autocomplete
         private AutoCompleteStringCollection _photoInfoSuggestions;
+        private AutoCompleteStringCollection _photoContentSuggestions;
 
         // Regex for getting DateTime from EXIF of an image
         private static Regex _regex = new Regex(":");
@@ -68,10 +70,20 @@ namespace DBioPhoto.Frontend
             OnPhotoGettingBgWorker.DoWork += new DoWorkEventHandler(OnPhotoGettingBgWorker_DoWork);
             OnPhotoGettingBgWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(OnPhotoGettingBgWorker_RunWorkerEventCompleted);
 
+            // Create the BackgroundWorker for getting suggestion of organisms and people, bind tasks for him
+            PhotoContentSuggestionsBgWorker = new BackgroundWorker();
+            PhotoContentSuggestionsBgWorker.DoWork += new DoWorkEventHandler(PhotoContentSuggestionsBgWorker_DoWork);
+            PhotoContentSuggestionsBgWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(PhotoContentSuggestionsBgWorker_RunWorkerEventCompleted);
+
             // Set location and comment textboxes to autocomplete
             _photoInfoSuggestions = new AutoCompleteStringCollection();
             locationTextBox.AutoCompleteCustomSource = _photoInfoSuggestions;
             commentTextBox.AutoCompleteCustomSource = _photoInfoSuggestions;
+
+            // Set photo content textboxes to autocomplete
+            _photoContentSuggestions = new AutoCompleteStringCollection();
+            organismNameTextBox.AutoCompleteCustomSource = _photoContentSuggestions;
+            personNameOrNickTextBox.AutoCompleteCustomSource = _photoContentSuggestions;
         }
 
         private void LoadingImagesBgWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -162,8 +174,15 @@ namespace DBioPhoto.Frontend
             {
                 // Clear the images now loaded
                 imagesListView.Items.Clear();
+                selectedImagePictureBox.Image = null;
+                
+                // Reset showedImage values
+                _showedImage = null;
+                _showedImagePath = null;
+                _showedImageRelativePath = null;
+                
                 // Load images in the background
-                LoadingImagesBgWorker.RunWorkerAsync();
+                 LoadingImagesBgWorker.RunWorkerAsync();
             }
             else
                 MessageBox.Show("Tato složka není ve zvoleném kořenovém adresáři, databáze by nefungovala správně! Zvolte jinou.");
@@ -342,6 +361,59 @@ namespace DBioPhoto.Frontend
                 AddPhoto.RemovePersonFromPhoto(Global.DbContext, _showedImageRelativePath, peopleOnPhotoListBox.SelectedIndex);
                 OnPhotoGettingBgWorker.RunWorkerAsync();
             }
+        }
+
+        private void organismNameTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            TextBox t = sender as TextBox;
+            if (t != null)
+            {
+                if (t.Text.Length == 3)
+                {
+                    PhotoContentSuggestionsBgWorker.RunWorkerAsync((t.Text, 0));
+                }
+            }
+        }
+        private void personNameOrNickTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            TextBox t = sender as TextBox;
+            if (t != null)
+            {
+                if (t.Text.Length == 3)
+                {
+                    PhotoContentSuggestionsBgWorker.RunWorkerAsync((t.Text, 1));
+                }
+            }
+        }
+        private void PhotoContentSuggestionsBgWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            // Find the suggestions in the background
+            (string beginning, int textBoxNumber) = (ValueTuple<string, int>)e.Argument;
+            e.Result = Suggestions.GetPhotoContentSuggestions(Global.DbContext, beginning, textBoxNumber);
+        }
+        private void PhotoContentSuggestionsBgWorker_RunWorkerEventCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            // After finding the suggestions, use them
+            if (e.Error != null)
+                MessageBox.Show(e.Error.Message);
+            else if (e.Cancelled)
+                MessageBox.Show("Operace zrušena");
+            else
+            {
+                _photoContentSuggestions.Clear();
+                _photoContentSuggestions.AddRange((string[])e.Result);
+            }
+        }
+
+        private void addOrganismToPhotoButton_Click(object sender, EventArgs e)
+        {
+            string tryOrganismInfo = organismNameTextBox.Text;
+            string[] tryOrganismNames = tryOrganismInfo.Split(' ');
+            if (tryOrganismNames.Length >= 2 && _showedImageRelativePath != null)
+            {
+                AddPhoto.TryAddOrganismToPhoto(Global.DbContext, _showedImageRelativePath, tryOrganismNames[0], tryOrganismNames[1]);
+            }
+            OnPhotoGettingBgWorker.RunWorkerAsync();
         }
     }
 }

@@ -52,15 +52,22 @@ namespace DBioPhoto.Frontend
             this.peopleOnPhotoListBox = new System.Windows.Forms.ListBox();
             this.removeOrganismFromPhotoButton = new System.Windows.Forms.Button();
             this.removePersonFromPhotoButton = new System.Windows.Forms.Button();
+            this.organismNameLabel = new System.Windows.Forms.Label();
+            this.personNameOrNickLabel = new System.Windows.Forms.Label();
+            this.organismNameTextBox = new System.Windows.Forms.TextBox();
+            this.addOrganismToPhotoButton = new System.Windows.Forms.Button();
+            this.personNameOrNickTextBox = new System.Windows.Forms.TextBox();
+            this.addPersonToPhotoButton = new System.Windows.Forms.Button();
+            this.personAddButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.selectedImagePictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // organismAddButton
             // 
             this.organismAddButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.organismAddButton.Location = new System.Drawing.Point(1370, 50);
+            this.organismAddButton.Location = new System.Drawing.Point(1313, 394);
             this.organismAddButton.Name = "organismAddButton";
-            this.organismAddButton.Size = new System.Drawing.Size(119, 23);
+            this.organismAddButton.Size = new System.Drawing.Size(124, 23);
             this.organismAddButton.TabIndex = 0;
             this.organismAddButton.Text = "Přidávat organismy";
             this.organismAddButton.UseVisualStyleBackColor = true;
@@ -233,7 +240,7 @@ namespace DBioPhoto.Frontend
             // 
             this.organismsOnPhotoListBox.FormattingEnabled = true;
             this.organismsOnPhotoListBox.ItemHeight = 15;
-            this.organismsOnPhotoListBox.Location = new System.Drawing.Point(947, 385);
+            this.organismsOnPhotoListBox.Location = new System.Drawing.Point(947, 394);
             this.organismsOnPhotoListBox.Name = "organismsOnPhotoListBox";
             this.organismsOnPhotoListBox.Size = new System.Drawing.Size(360, 154);
             this.organismsOnPhotoListBox.TabIndex = 19;
@@ -242,14 +249,14 @@ namespace DBioPhoto.Frontend
             // 
             this.peopleOnPhotoListBox.FormattingEnabled = true;
             this.peopleOnPhotoListBox.ItemHeight = 15;
-            this.peopleOnPhotoListBox.Location = new System.Drawing.Point(947, 587);
+            this.peopleOnPhotoListBox.Location = new System.Drawing.Point(947, 619);
             this.peopleOnPhotoListBox.Name = "peopleOnPhotoListBox";
             this.peopleOnPhotoListBox.Size = new System.Drawing.Size(360, 139);
             this.peopleOnPhotoListBox.TabIndex = 20;
             // 
             // removeOrganismFromPhotoButton
             // 
-            this.removeOrganismFromPhotoButton.Location = new System.Drawing.Point(1313, 444);
+            this.removeOrganismFromPhotoButton.Location = new System.Drawing.Point(1313, 509);
             this.removeOrganismFromPhotoButton.Name = "removeOrganismFromPhotoButton";
             this.removeOrganismFromPhotoButton.Size = new System.Drawing.Size(124, 39);
             this.removeOrganismFromPhotoButton.TabIndex = 21;
@@ -259,7 +266,7 @@ namespace DBioPhoto.Frontend
             // 
             // removePersonFromPhotoButton
             // 
-            this.removePersonFromPhotoButton.Location = new System.Drawing.Point(1313, 635);
+            this.removePersonFromPhotoButton.Location = new System.Drawing.Point(1313, 719);
             this.removePersonFromPhotoButton.Name = "removePersonFromPhotoButton";
             this.removePersonFromPhotoButton.Size = new System.Drawing.Size(124, 39);
             this.removePersonFromPhotoButton.TabIndex = 22;
@@ -267,11 +274,84 @@ namespace DBioPhoto.Frontend
             this.removePersonFromPhotoButton.UseVisualStyleBackColor = true;
             this.removePersonFromPhotoButton.Click += new System.EventHandler(this.removePersonFromPhotoButton_Click);
             // 
+            // organismNameLabel
+            // 
+            this.organismNameLabel.AutoSize = true;
+            this.organismNameLabel.Location = new System.Drawing.Point(947, 347);
+            this.organismNameLabel.Name = "organismNameLabel";
+            this.organismNameLabel.Size = new System.Drawing.Size(207, 15);
+            this.organismNameLabel.TabIndex = 23;
+            this.organismNameLabel.Text = "Český nebo latinský název organismu:";
+            // 
+            // personNameOrNickLabel
+            // 
+            this.personNameOrNickLabel.AutoSize = true;
+            this.personNameOrNickLabel.Location = new System.Drawing.Point(947, 572);
+            this.personNameOrNickLabel.Name = "personNameOrNickLabel";
+            this.personNameOrNickLabel.Size = new System.Drawing.Size(227, 15);
+            this.personNameOrNickLabel.TabIndex = 24;
+            this.personNameOrNickLabel.Text = "Jméno a příjmení nebo přezdívka člověka:";
+            // 
+            // organismNameTextBox
+            // 
+            this.organismNameTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.organismNameTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.organismNameTextBox.Location = new System.Drawing.Point(947, 365);
+            this.organismNameTextBox.Name = "organismNameTextBox";
+            this.organismNameTextBox.Size = new System.Drawing.Size(259, 23);
+            this.organismNameTextBox.TabIndex = 25;
+            this.organismNameTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.organismNameTextBox_KeyUp);
+            // 
+            // addOrganismToPhotoButton
+            // 
+            this.addOrganismToPhotoButton.Location = new System.Drawing.Point(1212, 365);
+            this.addOrganismToPhotoButton.Name = "addOrganismToPhotoButton";
+            this.addOrganismToPhotoButton.Size = new System.Drawing.Size(95, 23);
+            this.addOrganismToPhotoButton.TabIndex = 26;
+            this.addOrganismToPhotoButton.Text = "Přidat na fotku";
+            this.addOrganismToPhotoButton.UseVisualStyleBackColor = true;
+            this.addOrganismToPhotoButton.Click += new System.EventHandler(this.addOrganismToPhotoButton_Click);
+            // 
+            // personNameOrNickTextBox
+            // 
+            this.personNameOrNickTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.personNameOrNickTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.personNameOrNickTextBox.Location = new System.Drawing.Point(947, 590);
+            this.personNameOrNickTextBox.Name = "personNameOrNickTextBox";
+            this.personNameOrNickTextBox.Size = new System.Drawing.Size(259, 23);
+            this.personNameOrNickTextBox.TabIndex = 27;
+            this.personNameOrNickTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.personNameOrNickTextBox_KeyUp);
+            // 
+            // addPersonToPhotoButton
+            // 
+            this.addPersonToPhotoButton.Location = new System.Drawing.Point(1212, 590);
+            this.addPersonToPhotoButton.Name = "addPersonToPhotoButton";
+            this.addPersonToPhotoButton.Size = new System.Drawing.Size(95, 23);
+            this.addPersonToPhotoButton.TabIndex = 28;
+            this.addPersonToPhotoButton.Text = "Přidat na fotku";
+            this.addPersonToPhotoButton.UseVisualStyleBackColor = true;
+            // 
+            // personAddButton
+            // 
+            this.personAddButton.Location = new System.Drawing.Point(1313, 619);
+            this.personAddButton.Name = "personAddButton";
+            this.personAddButton.Size = new System.Drawing.Size(124, 23);
+            this.personAddButton.TabIndex = 29;
+            this.personAddButton.Text = "Přidávat lidi";
+            this.personAddButton.UseVisualStyleBackColor = true;
+            // 
             // AddingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1534, 1041);
+            this.Controls.Add(this.personAddButton);
+            this.Controls.Add(this.addPersonToPhotoButton);
+            this.Controls.Add(this.personNameOrNickTextBox);
+            this.Controls.Add(this.addOrganismToPhotoButton);
+            this.Controls.Add(this.organismNameTextBox);
+            this.Controls.Add(this.personNameOrNickLabel);
+            this.Controls.Add(this.organismNameLabel);
             this.Controls.Add(this.removePersonFromPhotoButton);
             this.Controls.Add(this.removeOrganismFromPhotoButton);
             this.Controls.Add(this.peopleOnPhotoListBox);
@@ -331,5 +411,12 @@ namespace DBioPhoto.Frontend
         private System.Windows.Forms.ListBox peopleOnPhotoListBox;
         private System.Windows.Forms.Button removeOrganismFromPhotoButton;
         private System.Windows.Forms.Button removePersonFromPhotoButton;
+        private System.Windows.Forms.Label organismNameLabel;
+        private System.Windows.Forms.Label personNameOrNickLabel;
+        private System.Windows.Forms.TextBox organismNameTextBox;
+        private System.Windows.Forms.Button addOrganismToPhotoButton;
+        private System.Windows.Forms.TextBox personNameOrNickTextBox;
+        private System.Windows.Forms.Button addPersonToPhotoButton;
+        private System.Windows.Forms.Button personAddButton;
     }
 }
