@@ -40,12 +40,16 @@ namespace DBioPhoto.DataAccess.Services.Adding
 
         public static void RemoveOrganismFromPhoto(DBioPhotoContext dbContext, string fileRelativePath, int indexInList)
         {
-            dbContext.Photos.Where(p => p.FilePath == fileRelativePath).Select(p => p).FirstOrDefault().Organisms.RemoveAt(indexInList);
+            Photo photo = dbContext.Photos.Where(p => p.FilePath == fileRelativePath).Select(p => p).FirstOrDefault();
+            if (indexInList < photo.Organisms.Count)
+                photo.Organisms.RemoveAt(indexInList);
             dbContext.SaveChanges();
         }
         public static void RemovePersonFromPhoto(DBioPhotoContext dbContext, string fileRelativePath, int indexInList)
         {
-            dbContext.Photos.Where(p => p.FilePath == fileRelativePath).Select(p => p).FirstOrDefault().People.RemoveAt(indexInList);
+            Photo photo = dbContext.Photos.Where(p => p.FilePath == fileRelativePath).Select(p => p).FirstOrDefault();
+            if (indexInList < photo.People.Count)
+                photo.People.RemoveAt(indexInList);
             dbContext.SaveChanges();
         }
     }
