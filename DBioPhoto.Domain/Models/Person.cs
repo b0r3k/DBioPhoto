@@ -9,6 +9,16 @@ namespace DBioPhoto.Domain.Models
         public string Nickname { get; set; }
         public string Surname { get; set; }
 
-        public ICollection<Photo> Photos { get; set; }
+        public List<Photo> Photos { get; set; }
+        public Person(string name, string nickname, string surname)
+        {
+            Name = name;
+            Nickname = nickname;
+            Surname = surname;
+
+            Photos = new List<Photo>();
+        }
+        public override string ToString()
+            => Name + " '" + Nickname + "' " + Surname;
     }
 }
