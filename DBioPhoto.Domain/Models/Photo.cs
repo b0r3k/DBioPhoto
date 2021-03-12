@@ -18,8 +18,8 @@ namespace DBioPhoto.Domain.Models
         public string Comment { get; set; }
         public string Location { get; set; }
 
-        public ICollection<Person> People { get; set; }
-        public ICollection<Organism> Organisms { get; set; }
+        public List<Person> People { get; set; }
+        public List<Organism> Organisms { get; set; }
 
         public Photo(DateTime timeCreated, string fileName, string filePath, Category category, string comment, string location)
         {
@@ -29,6 +29,9 @@ namespace DBioPhoto.Domain.Models
             this.Category = category;
             this.Comment = comment;
             this.Location = location;
+
+            this.People = new List<Person>();
+            this.Organisms = new List<Organism>();
         }
     }
 }
