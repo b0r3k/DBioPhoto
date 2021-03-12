@@ -48,6 +48,8 @@ namespace DBioPhoto.Frontend
             this.addPhotoToDbButton = new System.Windows.Forms.Button();
             this.showedPhotoRelativePathLabel = new System.Windows.Forms.Label();
             this.showedPhotoRelativePathTextBox = new System.Windows.Forms.TextBox();
+            this.organismsOnPhotoListBox = new System.Windows.Forms.ListBox();
+            this.peopleOnPhotoListBox = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.selectedImagePictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -225,11 +227,31 @@ namespace DBioPhoto.Frontend
             this.showedPhotoRelativePathTextBox.Size = new System.Drawing.Size(231, 23);
             this.showedPhotoRelativePathTextBox.TabIndex = 18;
             // 
+            // organismsOnPhotoListBox
+            // 
+            this.organismsOnPhotoListBox.FormattingEnabled = true;
+            this.organismsOnPhotoListBox.ItemHeight = 15;
+            this.organismsOnPhotoListBox.Location = new System.Drawing.Point(947, 385);
+            this.organismsOnPhotoListBox.Name = "organismsOnPhotoListBox";
+            this.organismsOnPhotoListBox.Size = new System.Drawing.Size(441, 154);
+            this.organismsOnPhotoListBox.TabIndex = 19;
+            // 
+            // peopleOnPhotoListBox
+            // 
+            this.peopleOnPhotoListBox.FormattingEnabled = true;
+            this.peopleOnPhotoListBox.ItemHeight = 15;
+            this.peopleOnPhotoListBox.Location = new System.Drawing.Point(947, 587);
+            this.peopleOnPhotoListBox.Name = "peopleOnPhotoListBox";
+            this.peopleOnPhotoListBox.Size = new System.Drawing.Size(441, 139);
+            this.peopleOnPhotoListBox.TabIndex = 20;
+            // 
             // AddingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1534, 1041);
+            this.Controls.Add(this.peopleOnPhotoListBox);
+            this.Controls.Add(this.organismsOnPhotoListBox);
             this.Controls.Add(this.showedPhotoRelativePathTextBox);
             this.Controls.Add(this.showedPhotoRelativePathLabel);
             this.Controls.Add(this.addPhotoToDbButton);
@@ -281,5 +303,7 @@ namespace DBioPhoto.Frontend
         private System.Windows.Forms.Button addPhotoToDbButton;
         private System.Windows.Forms.Label showedPhotoRelativePathLabel;
         private System.Windows.Forms.TextBox showedPhotoRelativePathTextBox;
+        private System.Windows.Forms.ListBox organismsOnPhotoListBox;
+        private System.Windows.Forms.ListBox peopleOnPhotoListBox;
     }
 }

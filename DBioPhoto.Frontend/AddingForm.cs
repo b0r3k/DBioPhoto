@@ -32,6 +32,7 @@ namespace DBioPhoto.Frontend
         private BackgroundWorker LoadingImagesBgWorker;
         private BackgroundWorker AddingPhotosBgWorker;
         private BackgroundWorker PhotoInfoSuggestionsBgWorker;
+        private BackgroundWorker OnPhotoGettingBgWorker;
 
         // Collections for autocomplete
         private AutoCompleteStringCollection _photoInfoSuggestions;
@@ -61,6 +62,11 @@ namespace DBioPhoto.Frontend
             PhotoInfoSuggestionsBgWorker = new BackgroundWorker();
             PhotoInfoSuggestionsBgWorker.DoWork += new DoWorkEventHandler(PhotoInfoSuggestionsBgWorker_DoWork);
             PhotoInfoSuggestionsBgWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(PhotoInfoSuggestionsBgWorker_RunWorkerEventCompleted);
+
+            // Create the BackgroundWorker for getting lists of stuff on the photo, bind tasks for him
+            OnPhotoGettingBgWorker = new BackgroundWorker();
+            OnPhotoGettingBgWorker.DoWork += new DoWorkEventHandler(OnPhotoGettingBgWorker_DoWork);
+            OnPhotoGettingBgWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(OnPhotoGettingBgWorker_RunWorkerEventCompleted);
 
             // Set location and comment textboxes to autocomplete
             _photoInfoSuggestions = new AutoCompleteStringCollection();
@@ -165,19 +171,23 @@ namespace DBioPhoto.Frontend
 
         private void imagesListView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // When selecting an image, show it and save the index, get the datetime of creation
             if (imagesListView.SelectedIndices.Count > 0)
             {
+                // When selecting an image, save the index, path, get the datetime of creation
                 _selectedIndex = imagesListView.SelectedIndices[0];
                 _showedImagePath = _imagePaths[_selectedIndex];
                 _showedImageRelativePath = _showedImagePath.Replace(Global.RootFolder, "");
                 _showedImage = Image.FromFile(_showedImagePath);
                 _showedImageDate = GetDateTakenFromImage(_showedImage);
 
+                // View the image, view info in textboxes
                 selectedImagePictureBox.Image = _showedImage;
                 showedPhotoPathTextBox.Text = _showedImagePath;
                 showedPhotoRelativePathTextBox.Text = _showedImageRelativePath;
                 showedPhotoDateTextBox.Text = _showedImageDate.ToString();
+
+                // Get what's on the photo in the background, populate the ListBoxes with it
+                OnPhotoGettingBgWorker.RunWorkerAsync();
             }
         }
 
@@ -291,6 +301,26 @@ namespace DBioPhoto.Frontend
             {
                 _photoInfoSuggestions.Clear();
                 _photoInfoSuggestions.AddRange((string[])e.Result);
+            }
+        }
+
+        private void OnPhotoGettingBgWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            // Find in db what's on the photo in the background
+            e.Result = (AddPhoto.QueryOrganismsOnPhoto(Global.DbContext, _showedImageRelativePath), AddPhoto.QueryPeopleOnPhoto(Global.DbContext, _showedImageRelativePath));
+        }
+        private void OnPhotoGettingBgWorker_RunWorkerEventCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            // After finding the organisms and people, show it in the listboxes
+            if (e.Error != null)
+                MessageBox.Show(e.Error.Message);
+            else if (e.Cancelled)
+                MessageBox.Show("Operace zrušena");
+            else
+            {
+                (List<Organism> organismsOnPhoto, List<Person> peopleOnPhoto) = (ValueTuple<List<Organism>, List<Person>>)e.Result;
+                organismsOnPhotoListBox.DataSource = organismsOnPhoto;
+                peopleOnPhotoListBox.DataSource = peopleOnPhoto;
             }
         }
     }
