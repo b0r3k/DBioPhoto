@@ -81,7 +81,7 @@ namespace DBioPhoto.Frontend
             // Open OpenFileDialog and get path to the file chosen there
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
                 openFileDialog.Filter = "mdf files (*.mdf)|*.mdf";
                 openFileDialog.FilterIndex = 1;
                 openFileDialog.RestoreDirectory = true;
