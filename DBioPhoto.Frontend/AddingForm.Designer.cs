@@ -50,6 +50,8 @@ namespace DBioPhoto.Frontend
             this.showedPhotoRelativePathTextBox = new System.Windows.Forms.TextBox();
             this.organismsOnPhotoListBox = new System.Windows.Forms.ListBox();
             this.peopleOnPhotoListBox = new System.Windows.Forms.ListBox();
+            this.removeOrganismFromPhotoButton = new System.Windows.Forms.Button();
+            this.removePersonFromPhotoButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.selectedImagePictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -233,7 +235,7 @@ namespace DBioPhoto.Frontend
             this.organismsOnPhotoListBox.ItemHeight = 15;
             this.organismsOnPhotoListBox.Location = new System.Drawing.Point(947, 385);
             this.organismsOnPhotoListBox.Name = "organismsOnPhotoListBox";
-            this.organismsOnPhotoListBox.Size = new System.Drawing.Size(441, 154);
+            this.organismsOnPhotoListBox.Size = new System.Drawing.Size(360, 154);
             this.organismsOnPhotoListBox.TabIndex = 19;
             // 
             // peopleOnPhotoListBox
@@ -242,14 +244,36 @@ namespace DBioPhoto.Frontend
             this.peopleOnPhotoListBox.ItemHeight = 15;
             this.peopleOnPhotoListBox.Location = new System.Drawing.Point(947, 587);
             this.peopleOnPhotoListBox.Name = "peopleOnPhotoListBox";
-            this.peopleOnPhotoListBox.Size = new System.Drawing.Size(441, 139);
+            this.peopleOnPhotoListBox.Size = new System.Drawing.Size(360, 139);
             this.peopleOnPhotoListBox.TabIndex = 20;
+            // 
+            // removeOrganismFromPhotoButton
+            // 
+            this.removeOrganismFromPhotoButton.Location = new System.Drawing.Point(1313, 444);
+            this.removeOrganismFromPhotoButton.Name = "removeOrganismFromPhotoButton";
+            this.removeOrganismFromPhotoButton.Size = new System.Drawing.Size(124, 39);
+            this.removeOrganismFromPhotoButton.TabIndex = 21;
+            this.removeOrganismFromPhotoButton.Text = "Odebrat organismus z fotky";
+            this.removeOrganismFromPhotoButton.UseVisualStyleBackColor = true;
+            this.removeOrganismFromPhotoButton.Click += new System.EventHandler(this.removeOrganismFromPhotoButton_Click);
+            // 
+            // removePersonFromPhotoButton
+            // 
+            this.removePersonFromPhotoButton.Location = new System.Drawing.Point(1313, 635);
+            this.removePersonFromPhotoButton.Name = "removePersonFromPhotoButton";
+            this.removePersonFromPhotoButton.Size = new System.Drawing.Size(124, 39);
+            this.removePersonFromPhotoButton.TabIndex = 22;
+            this.removePersonFromPhotoButton.Text = "Odebrat člověka z fotky";
+            this.removePersonFromPhotoButton.UseVisualStyleBackColor = true;
+            this.removePersonFromPhotoButton.Click += new System.EventHandler(this.removePersonFromPhotoButton_Click);
             // 
             // AddingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1534, 1041);
+            this.Controls.Add(this.removePersonFromPhotoButton);
+            this.Controls.Add(this.removeOrganismFromPhotoButton);
             this.Controls.Add(this.peopleOnPhotoListBox);
             this.Controls.Add(this.organismsOnPhotoListBox);
             this.Controls.Add(this.showedPhotoRelativePathTextBox);
@@ -305,5 +329,7 @@ namespace DBioPhoto.Frontend
         private System.Windows.Forms.TextBox showedPhotoRelativePathTextBox;
         private System.Windows.Forms.ListBox organismsOnPhotoListBox;
         private System.Windows.Forms.ListBox peopleOnPhotoListBox;
+        private System.Windows.Forms.Button removeOrganismFromPhotoButton;
+        private System.Windows.Forms.Button removePersonFromPhotoButton;
     }
 }

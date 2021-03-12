@@ -323,5 +323,25 @@ namespace DBioPhoto.Frontend
                 peopleOnPhotoListBox.DataSource = peopleOnPhoto;
             }
         }
+
+        private void removeOrganismFromPhotoButton_Click(object sender, EventArgs e)
+        {
+            // Remove organism from photo, update the listbox
+            if (organismsOnPhotoListBox.SelectedIndices.Count == 1)
+            {
+                AddPhoto.RemoveOrganismFromPhoto(Global.DbContext, _showedImageRelativePath, organismsOnPhotoListBox.SelectedIndex);
+                OnPhotoGettingBgWorker.RunWorkerAsync();
+            }
+        }
+
+        private void removePersonFromPhotoButton_Click(object sender, EventArgs e)
+        {
+            // Remove person from photo, update the listbox
+            if (peopleOnPhotoListBox.SelectedIndices.Count == 1)
+            {
+                AddPhoto.RemovePersonFromPhoto(Global.DbContext, _showedImageRelativePath, peopleOnPhotoListBox.SelectedIndex);
+                OnPhotoGettingBgWorker.RunWorkerAsync();
+            }
+        }
     }
 }
