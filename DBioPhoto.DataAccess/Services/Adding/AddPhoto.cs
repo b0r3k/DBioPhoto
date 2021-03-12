@@ -37,5 +37,16 @@ namespace DBioPhoto.DataAccess.Services.Adding
 
         public static List<Person> QueryPeopleOnPhoto(DBioPhotoContext dbContext, string fileRelativePath)
             => dbContext.Photos.Where(p => p.FilePath == fileRelativePath).Select(p => p.People).ToList().FirstOrDefault();
+
+        public static void RemoveOrganismFromPhoto(DBioPhotoContext dbContext, string fileRelativePath, int indexInList)
+        {
+            dbContext.Photos.Where(p => p.FilePath == fileRelativePath).Select(p => p).FirstOrDefault().Organisms.RemoveAt(indexInList);
+            dbContext.SaveChanges();
+        }
+        public static void RemovePersonFromPhoto(DBioPhotoContext dbContext, string fileRelativePath, int indexInList)
+        {
+            dbContext.Photos.Where(p => p.FilePath == fileRelativePath).Select(p => p).FirstOrDefault().People.RemoveAt(indexInList);
+            dbContext.SaveChanges();
+        }
     }
 }
