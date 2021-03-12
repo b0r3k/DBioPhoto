@@ -330,6 +330,7 @@ namespace DBioPhoto.Frontend
             this.addPersonToPhotoButton.TabIndex = 28;
             this.addPersonToPhotoButton.Text = "Přidat na fotku";
             this.addPersonToPhotoButton.UseVisualStyleBackColor = true;
+            this.addPersonToPhotoButton.Click += new System.EventHandler(this.addPersonToPhotoButton_Click);
             // 
             // personAddButton
             // 
@@ -339,6 +340,7 @@ namespace DBioPhoto.Frontend
             this.personAddButton.TabIndex = 29;
             this.personAddButton.Text = "Přidávat lidi";
             this.personAddButton.UseVisualStyleBackColor = true;
+            this.personAddButton.Click += new System.EventHandler(this.personAddButton_Click);
             // 
             // AddingForm
             // 

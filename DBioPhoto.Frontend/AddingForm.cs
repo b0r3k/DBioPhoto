@@ -34,6 +34,7 @@ namespace DBioPhoto.Frontend
         private BackgroundWorker PhotoInfoSuggestionsBgWorker;
         private BackgroundWorker OnPhotoGettingBgWorker;
         private BackgroundWorker PhotoContentSuggestionsBgWorker;
+        private BackgroundWorker AddingContentToPhotoBgWorker;
 
         // Collections for autocomplete
         private AutoCompleteStringCollection _photoInfoSuggestions;
@@ -84,6 +85,11 @@ namespace DBioPhoto.Frontend
             _photoContentSuggestions = new AutoCompleteStringCollection();
             organismNameTextBox.AutoCompleteCustomSource = _photoContentSuggestions;
             personNameOrNickTextBox.AutoCompleteCustomSource = _photoContentSuggestions;
+
+            // Create the BackgroundWorker for adding content to photos, bind tasks for him
+            AddingContentToPhotoBgWorker = new BackgroundWorker();
+            AddingContentToPhotoBgWorker.DoWork += new DoWorkEventHandler(AddingContentToPhotoBgWorker_DoWork);
+            AddingContentToPhotoBgWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(AddingContentToPhotoBgWorker_RunWorkerEventCompleted);
         }
 
         private void LoadingImagesBgWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -241,7 +247,6 @@ namespace DBioPhoto.Frontend
             Photo tryPhoto = new Photo(date, fileName, filePath, category, comment, location);
 
             // Add to db in background
-            addPhotoToDbButton.Text = "Přidávám!";
             AddingPhotosBgWorker.RunWorkerAsync(tryPhoto);
 
             // Not resetting this form, because it can be useful to use the location again
@@ -257,17 +262,18 @@ namespace DBioPhoto.Frontend
             if (e.Error != null)
                 MessageBox.Show(e.Error.Message);
             else if (e.Cancelled)
-                ShowOnPhotoToDbButtonForThreeSecs("Operace zrušena");
+                ShowOnButtonForThreeSecs("Operace zrušena", addPhotoToDbButton);
             else
             {
                 string result = (string)e.Result;
-                ShowOnPhotoToDbButtonForThreeSecs(result);
+                ShowOnButtonForThreeSecs(result, addPhotoToDbButton);
             }
         }
-        private void ShowOnPhotoToDbButtonForThreeSecs(string textToShow)
+        private void ShowOnButtonForThreeSecs(string textToShow, Button button)
         {
             // Show textToShow on the button, after 3 s show original again
-            addPhotoToDbButton.Text = textToShow;
+            string oldText = button.Text;
+            button.Text = textToShow;
             System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer()
             {
                 Interval = 3000,
@@ -275,7 +281,7 @@ namespace DBioPhoto.Frontend
             };
             timer.Tick += (sender, e) =>
             {
-                addPhotoToDbButton.Text = "Přidat fotku do databáze";
+                button.Text = oldText;
                 timer.Dispose();
             };
         }
@@ -405,15 +411,69 @@ namespace DBioPhoto.Frontend
             }
         }
 
+
         private void addOrganismToPhotoButton_Click(object sender, EventArgs e)
         {
             string tryOrganismInfo = organismNameTextBox.Text;
             string[] tryOrganismNames = tryOrganismInfo.Split(' ');
             if (tryOrganismNames.Length >= 2 && _showedImageRelativePath != null)
             {
-                AddPhoto.TryAddOrganismToPhoto(Global.DbContext, _showedImageRelativePath, tryOrganismNames[0], tryOrganismNames[1]);
+                AddingContentToPhotoBgWorker.RunWorkerAsync((tryOrganismNames, true));
             }
             OnPhotoGettingBgWorker.RunWorkerAsync();
+        }
+
+        private void addPersonToPhotoButton_Click(object sender, EventArgs e)
+        {
+            string tryPersonInfo = personNameOrNickTextBox.Text;
+            string[] tryPersonNames = tryPersonInfo.Split(' ');
+            if (tryPersonNames.Length >= 3 && _showedImageRelativePath != null)
+            {
+                AddingContentToPhotoBgWorker.RunWorkerAsync((tryPersonNames, false));
+            }
+        }
+
+        private void AddingContentToPhotoBgWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            // Try to add the content to photo in the background
+            (string[] names, bool addingOrganism) = (ValueTuple<string[], bool>)e.Argument;
+            if (addingOrganism)
+                e.Result = (AddPhoto.TryAddOrganismToPhoto(Global.DbContext, _showedImageRelativePath, names[0], names[1]), true);
+            else
+                e.Result = (AddPhoto.TryAddPersonToPhoto(Global.DbContext, _showedImageRelativePath, names[0], names[2]), false);
+        }
+        private void AddingContentToPhotoBgWorker_RunWorkerEventCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            // Show the result
+            if (e.Error != null)
+                MessageBox.Show(e.Error.Message);
+            else if (e.Cancelled)
+                MessageBox.Show("Operace zrušena");
+            else
+            {
+                (bool successfull, bool addingOrganism) = (ValueTuple<bool, bool>)e.Result;
+                if (successfull)
+                {
+                    if (addingOrganism)
+                        ShowOnButtonForThreeSecs("Úspěšně přidáno!", addOrganismToPhotoButton);
+                    else
+                        ShowOnButtonForThreeSecs("Úspěšně přidáno!", addPersonToPhotoButton);
+
+                    OnPhotoGettingBgWorker.RunWorkerAsync();
+                }
+                else
+                {
+                    if (addingOrganism)
+                        ShowOnButtonForThreeSecs("Nešlo přidat.", addOrganismToPhotoButton);
+                    else
+                        ShowOnButtonForThreeSecs("Nešlo přidat.", addPersonToPhotoButton);
+                }
+            }
+        }
+
+
+        private void personAddButton_Click(object sender, EventArgs e)
+        {
         }
     }
 }

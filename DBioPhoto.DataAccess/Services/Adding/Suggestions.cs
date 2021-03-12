@@ -10,47 +10,67 @@ namespace DBioPhoto.DataAccess.Services.Adding
     {
         public static string[] GetOrganismNameSuggestions(DBioPhotoContext dbContext, string beginning, int textBoxNumber)
         {
+            string[] suggestions;
             switch (textBoxNumber)
             {
                 case 0:
-                    return dbContext.Organisms.Where(o => o.FirstName.StartsWith(beginning.ToLower())).Select(o => o.FirstName).Distinct().ToArray();
+                    suggestions = dbContext.Organisms.Where(o => o.FirstName.StartsWith(beginning.ToLower())).Select(o => o.FirstName).Distinct().ToArray();
+                    break;
                 case 1:
-                    return dbContext.Organisms.Where(o => o.SecondName.StartsWith(beginning.ToLower())).Select(o => o.SecondName).Distinct().ToArray();
+                    suggestions = dbContext.Organisms.Where(o => o.SecondName.StartsWith(beginning.ToLower())).Select(o => o.SecondName).Distinct().ToArray();
+                    break;
                 case 2:
-                    return dbContext.Organisms.Where(o => o.LatFirstName.StartsWith(beginning.ToLower())).Select(o => o.LatFirstName).Distinct().ToArray();
+                    suggestions = dbContext.Organisms.Where(o => o.LatFirstName.StartsWith(beginning.ToLower())).Select(o => o.LatFirstName).Distinct().ToArray();
+                    break;
                 case 3:
-                    return dbContext.Organisms.Where(o => o.LatSecondName.StartsWith(beginning.ToLower())).Select(o => o.LatSecondName).Distinct().ToArray();
+                    suggestions = dbContext.Organisms.Where(o => o.LatSecondName.StartsWith(beginning.ToLower())).Select(o => o.LatSecondName).Distinct().ToArray();
+                    break;
                 default:
-                    return new string[0];
+                    suggestions = new string[0];
+                    break;
             }
+            dbContext.SaveChanges();
+            return suggestions;
         }
 
         public static string[] GetPhotoInfoSuggestions(DBioPhotoContext dbContext, string beginning, int textBoxNumber)
         {
+            string[] suggestions;
             switch (textBoxNumber)
             {
                 case 0:
-                    return dbContext.Photos.Where(p => p.Location.StartsWith(beginning.ToLower())).Select(p => p.Location).Distinct().ToArray();
+                    suggestions = dbContext.Photos.Where(p => p.Location.StartsWith(beginning.ToLower())).Select(p => p.Location).Distinct().ToArray();
+                    break;
                 case 1:
-                    return dbContext.Photos.Where(p => p.Comment.StartsWith(beginning.ToLower())).Select(p => p.Comment).Distinct().ToArray();
+                    suggestions = dbContext.Photos.Where(p => p.Comment.StartsWith(beginning.ToLower())).Select(p => p.Comment).Distinct().ToArray();
+                    break;
                 default:
-                    return new string[0];
+                    suggestions = new string[0];
+                    break;
             }
+            dbContext.SaveChanges();
+            return suggestions;
         }
 
         public static string[] GetPhotoContentSuggestions(DBioPhotoContext dbContext, string beginning, int textBoxNumber)
         {
+            string[] suggestions;
             switch (textBoxNumber)
             {
                 case 0:
-                    return dbContext.Organisms.Where(o => o.FirstName.StartsWith(beginning.ToLower()) || o.LatFirstName.StartsWith(beginning.ToLower()))
+                    suggestions = dbContext.Organisms.Where(o => o.FirstName.StartsWith(beginning.ToLower()) || o.LatFirstName.StartsWith(beginning.ToLower()))
                         .Select(o => o.ToString()).Distinct().ToArray();
+                    break;
                 case 1:
-                    return dbContext.People.Where(p => p.Name.StartsWith(beginning.ToLower()) || p.Nickname.StartsWith(beginning.ToLower()))
+                    suggestions = dbContext.People.Where(p => p.Name.StartsWith(beginning.ToLower()) || p.Nickname.StartsWith(beginning.ToLower()))
                         .Select(p => p.ToString()).Distinct().ToArray();
+                    break;
                 default:
-                    return new string[0];
+                    suggestions = new string[0];
+                    break;
             }
+            dbContext.SaveChanges();
+            return suggestions;
         }
     }
 }

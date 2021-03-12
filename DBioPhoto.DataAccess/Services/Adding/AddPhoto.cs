@@ -35,10 +35,18 @@ namespace DBioPhoto.DataAccess.Services.Adding
         }
 
         public static List<Organism> QueryOrganismsOnPhoto(DBioPhotoContext dbContext, string fileRelativePath)
-            => dbContext.Photos.Where(p => p.FilePath == fileRelativePath).Select(p => p.Organisms).ToList().FirstOrDefault();
+        {
+            List<Organism> organismsOnPhoto = dbContext.Photos.Where(p => p.FilePath == fileRelativePath).Select(p => p.Organisms).ToList().FirstOrDefault();
+            dbContext.SaveChanges();
+            return organismsOnPhoto;
+        }
 
-        public static List<Person> QueryPeopleOnPhoto(DBioPhotoContext dbContext, string fileRelativePath)
-            => dbContext.Photos.Where(p => p.FilePath == fileRelativePath).Select(p => p.People).ToList().FirstOrDefault();
+    public static List<Person> QueryPeopleOnPhoto(DBioPhotoContext dbContext, string fileRelativePath)
+        {
+            List<Person> peopleOnPhoto = dbContext.Photos.Where(p => p.FilePath == fileRelativePath).Select(p => p.People).ToList().FirstOrDefault();
+            dbContext.SaveChanges();
+            return peopleOnPhoto;
+        }
 
 
         public static void RemoveOrganismFromPhoto(DBioPhotoContext dbContext, string fileRelativePath, int indexInList)
@@ -62,24 +70,35 @@ namespace DBioPhoto.DataAccess.Services.Adding
             Photo photo = dbContext.Photos.Where(p => p.FilePath == photoRelativePath).Include(p => p.Organisms).FirstOrDefault();
             Organism organism = dbContext.Organisms.Where(o => o.FirstName == organismFirstName && o.SecondName == organismSecondName).FirstOrDefault();
             if (photo == null || organism == null)
+            {
+                dbContext.SaveChanges();
                 return false;
+            }
             else if (photo.Organisms.Contains(organism))
+            {
+                dbContext.SaveChanges();
                 return false;
+            }
             else
             {
                 photo.Organisms.Add(organism);
-                dbContext.SaveChanges();
                 return true;
             }
         }
-        public static bool TryAddPersonToPhoto(DBioPhotoContext dbContext, string photoRelativePath, string personName, string personNickname, string personSurname)
+        public static bool TryAddPersonToPhoto(DBioPhotoContext dbContext, string photoRelativePath, string personName, string personSurname)
         {
             Photo photo = dbContext.Photos.Where(p => p.FilePath == photoRelativePath).Include(p => p.People).FirstOrDefault();
-            Person person = dbContext.People.Where(p => p.Name == personName && p.Nickname == personNickname && p.Surname == personSurname).FirstOrDefault();
+            Person person = dbContext.People.Where(p => p.Name == personName && p.Surname == personSurname).FirstOrDefault();
             if (photo == null || person == null)
+            {
+                dbContext.SaveChanges();
                 return false;
+            }
             else if (photo.People.Contains(person))
+            {
+                dbContext.SaveChanges();
                 return false;
+            }
             else
             {
                 photo.People.Add(person);
