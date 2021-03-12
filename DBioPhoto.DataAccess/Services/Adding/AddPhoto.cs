@@ -1,5 +1,6 @@
 ﻿using DBioPhoto.DataAccess.Data;
 using DBioPhoto.Domain.Models;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DBioPhoto.DataAccess.Services.Adding
@@ -30,5 +31,11 @@ namespace DBioPhoto.DataAccess.Services.Adding
                 return "Úspěšně přidáno!";
             }
         }
+
+        public static List<Organism> QueryOrganismsOnPhoto(DBioPhotoContext dbContext, string fileRelativePath)
+            => dbContext.Photos.Where(p => p.FilePath == fileRelativePath).Select(p => p.Organisms).ToList().FirstOrDefault();
+
+        public static List<Person> QueryPeopleOnPhoto(DBioPhotoContext dbContext, string fileRelativePath)
+            => dbContext.Photos.Where(p => p.FilePath == fileRelativePath).Select(p => p.People).ToList().FirstOrDefault();
     }
 }
