@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -21,7 +22,7 @@ namespace DBioPhoto.Frontend
     */
     public partial class OpeningForm : Form
     {
-        private string _filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\DBioPhotoDB.mdf";
+        private string _filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) + "\\DBioPhotoDB.mdf";
         private Thread firstContextCreateThread, createContextThread;
         public OpeningForm()
         {
@@ -77,6 +78,7 @@ namespace DBioPhoto.Frontend
 
         private void locationTextBox_Click(object sender, EventArgs e)
         {
+            // Open OpenFileDialog and get path to the file chosen there
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -94,12 +96,19 @@ namespace DBioPhoto.Frontend
 
         private void chooseThisDbButton_Click(object sender, EventArgs e)
         {
-            createContextThread = new Thread(() => CreateDbContext());
-            createContextThread.Start();
-            SetActionButtonsVisible(true);
+            // If file exists, open db connection to it
+            if (File.Exists(_filePath))
+            {
+                createContextThread = new Thread(() => CreateDbContext());
+                createContextThread.Start();
+                SetActionButtonsVisible(true);
+            }
+            else
+                MessageBox.Show("První vytvořte databázi!");
         }
         private void CreateDbContext()
         {
+            // Create db context, if creating first db, wait for it
             if (firstContextCreateThread != null && firstContextCreateThread.ThreadState == ThreadState.Running)
                 firstContextCreateThread.Join();
             if (Global.DbContext != null)
@@ -113,9 +122,10 @@ namespace DBioPhoto.Frontend
 
         private void createNewDbButton_Click(object sender, EventArgs e)
         {
+            // Open SaveFileDialog, create new db where selected (in other thread)
             using (SaveFileDialog saveFileDialog = new SaveFileDialog())
             {
-                saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
                 saveFileDialog.Filter = "mdf files (*.mdf)|*.mdf";
                 saveFileDialog.FilterIndex = 1;
                 saveFileDialog.RestoreDirectory = true;
@@ -133,6 +143,7 @@ namespace DBioPhoto.Frontend
         }
         private void FirstCreateDbContext()
         {
+            // Create new db and db file where selected
             Global.DbContext = new DataAccess.Data.DBioPhotoContext(_filePath);
             Global.DbContext.Database.EnsureCreated();
             Global.DbContext.SaveChanges();

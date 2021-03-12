@@ -70,9 +70,9 @@
             this.labelLocation.AutoSize = true;
             this.labelLocation.Location = new System.Drawing.Point(129, 106);
             this.labelLocation.Name = "labelLocation";
-            this.labelLocation.Size = new System.Drawing.Size(389, 15);
+            this.labelLocation.Size = new System.Drawing.Size(370, 15);
             this.labelLocation.TabIndex = 0;
-            this.labelLocation.Text = "Standardní lokací pro databázový soubor je Dokumenty/DBioPhoto.mdf.";
+            this.labelLocation.Text = "Standardní lokací pro databázový soubor je Obrázky/DBioPhoto.mdf.";
             // 
             // wantAddButton
             // 

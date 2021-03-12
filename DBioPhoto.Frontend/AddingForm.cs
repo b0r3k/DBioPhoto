@@ -16,7 +16,7 @@ namespace DBioPhoto.Frontend
     public partial class AddingForm : Form
     {
         // Information about folder and thumbnails
-        private string _folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        private string _folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
         private string[] _imagePaths;
         private ImageList _imageList;
         private Image[] _imageThumbnails;
@@ -139,7 +139,7 @@ namespace DBioPhoto.Frontend
             // Let user choose the folder, save the path
             using (FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog())
             {
-                folderBrowserDialog.RootFolder = Environment.SpecialFolder.MyDocuments;
+                folderBrowserDialog.RootFolder = Environment.SpecialFolder.MyPictures;
                 if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
                 {
                     //Get the path of selected folder
