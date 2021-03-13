@@ -21,7 +21,6 @@ namespace DBioPhoto.DataAccess.Services.Adding
             else
             {
                 dbContext.Organisms.Add(tryOrganism);
-                dbContext.SaveChanges();
                 return "Úspěšně přidáno!";
             }
         }

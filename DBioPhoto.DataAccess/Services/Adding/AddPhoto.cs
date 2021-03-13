@@ -21,7 +21,6 @@ namespace DBioPhoto.DataAccess.Services.Adding
                 existingPhoto.Category = tryPhoto.Category;
                 existingPhoto.Comment = tryPhoto.Comment;
                 existingPhoto.Location = tryPhoto.Location;
-                dbContext.SaveChanges();
                 return "Úspěšně aktualizováno!";
             }
 
@@ -29,7 +28,6 @@ namespace DBioPhoto.DataAccess.Services.Adding
             else
             {
                 dbContext.Photos.Add(tryPhoto);
-                dbContext.SaveChanges();
                 return "Úspěšně přidáno!";
             }
         }
@@ -37,14 +35,12 @@ namespace DBioPhoto.DataAccess.Services.Adding
         public static List<Organism> QueryOrganismsOnPhoto(DBioPhotoContext dbContext, string fileRelativePath)
         {
             List<Organism> organismsOnPhoto = dbContext.Photos.Where(p => p.FilePath == fileRelativePath).Select(p => p.Organisms).ToList().FirstOrDefault();
-            dbContext.SaveChanges();
             return organismsOnPhoto;
         }
 
     public static List<Person> QueryPeopleOnPhoto(DBioPhotoContext dbContext, string fileRelativePath)
         {
             List<Person> peopleOnPhoto = dbContext.Photos.Where(p => p.FilePath == fileRelativePath).Select(p => p.People).ToList().FirstOrDefault();
-            dbContext.SaveChanges();
             return peopleOnPhoto;
         }
 
@@ -54,14 +50,12 @@ namespace DBioPhoto.DataAccess.Services.Adding
             Photo photo = dbContext.Photos.Where(p => p.FilePath == fileRelativePath).Include(p => p.Organisms).FirstOrDefault();
             if (indexInList < photo.Organisms.Count)
                 photo.Organisms.RemoveAt(indexInList);
-            dbContext.SaveChanges();
         }
         public static void RemovePersonFromPhoto(DBioPhotoContext dbContext, string fileRelativePath, int indexInList)
         {
             Photo photo = dbContext.Photos.Where(p => p.FilePath == fileRelativePath).Include(p => p.People).FirstOrDefault();
             if (indexInList < photo.People.Count)
                 photo.People.RemoveAt(indexInList);
-            dbContext.SaveChanges();
         }
 
 
@@ -71,12 +65,10 @@ namespace DBioPhoto.DataAccess.Services.Adding
             Organism organism = dbContext.Organisms.Where(o => o.FirstName == organismFirstName && o.SecondName == organismSecondName).FirstOrDefault();
             if (photo == null || organism == null)
             {
-                dbContext.SaveChanges();
                 return false;
             }
             else if (photo.Organisms.Contains(organism))
             {
-                dbContext.SaveChanges();
                 return false;
             }
             else
@@ -91,18 +83,15 @@ namespace DBioPhoto.DataAccess.Services.Adding
             Person person = dbContext.People.Where(p => p.Name == personName && p.Surname == personSurname).FirstOrDefault();
             if (photo == null || person == null)
             {
-                dbContext.SaveChanges();
                 return false;
             }
             else if (photo.People.Contains(person))
             {
-                dbContext.SaveChanges();
                 return false;
             }
             else
             {
                 photo.People.Add(person);
-                dbContext.SaveChanges();
                 return true;
             }
         }

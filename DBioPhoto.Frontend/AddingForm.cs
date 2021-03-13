@@ -138,7 +138,6 @@ namespace DBioPhoto.Frontend
 
         private void AddingForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Global.DbContext.SaveChanges();
         }
 
         private void organismAddButton_Click(object sender, System.EventArgs e)
@@ -253,8 +252,11 @@ namespace DBioPhoto.Frontend
         }
         private void AddingPhotosBgWorker_DoWork(object sender, DoWorkEventArgs e)
         {
+            var usedContext = new DataAccess.Data.DBioPhotoContext(Global.DbFilePath);
             // Add the created instance to the database
-            e.Result = AddPhoto.TryAddPhoto(Global.DbContext, (Photo)e.Argument);
+            e.Result = AddPhoto.TryAddPhoto(usedContext, (Photo)e.Argument);
+            usedContext.SaveChanges();
+            usedContext.Dispose();
         }
         private void AddingPhotosBgWorker_RunWorkerEventCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
@@ -289,31 +291,28 @@ namespace DBioPhoto.Frontend
         private void locationTextBox_KeyUp(object sender, KeyEventArgs e)
         {
             TextBox t = sender as TextBox;
-            if (t != null)
+            if (t != null && t.Text.Length == 3 && !PhotoInfoSuggestionsBgWorker.IsBusy)
             {
-                if (t.Text.Length == 3)
-                {
-                    PhotoInfoSuggestionsBgWorker.RunWorkerAsync((t.Text, 0));
-                }
+                PhotoInfoSuggestionsBgWorker.RunWorkerAsync((t.Text, 0));
             }
         }
 
         private void commentTextBox_KeyUp(object sender, KeyEventArgs e)
         {
             TextBox t = sender as TextBox;
-            if (t != null)
+            if (t != null && t.Text.Length == 3 && !PhotoInfoSuggestionsBgWorker.IsBusy)
             {
-                if (t.Text.Length == 3)
-                {
-                    PhotoInfoSuggestionsBgWorker.RunWorkerAsync((t.Text, 1));
-                }
+                PhotoInfoSuggestionsBgWorker.RunWorkerAsync((t.Text, 1));
             }
         }
         private void PhotoInfoSuggestionsBgWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             // Find the suggestions in the background
+            var usedContext = new DataAccess.Data.DBioPhotoContext(Global.DbFilePath);
             (string beginning, int textBoxNumber) = (ValueTuple<string, int>)e.Argument;
-            e.Result = Suggestions.GetPhotoInfoSuggestions(Global.DbContext, beginning, textBoxNumber);
+            e.Result = Suggestions.GetPhotoInfoSuggestions(usedContext, beginning, textBoxNumber);
+            usedContext.SaveChanges();
+            usedContext.Dispose();
         }
         private void PhotoInfoSuggestionsBgWorker_RunWorkerEventCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
@@ -332,7 +331,10 @@ namespace DBioPhoto.Frontend
         private void OnPhotoGettingBgWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             // Find in db what's on the photo in the background
-            e.Result = (AddPhoto.QueryOrganismsOnPhoto(Global.DbContext, _showedImageRelativePath), AddPhoto.QueryPeopleOnPhoto(Global.DbContext, _showedImageRelativePath));
+            var usedContext = new DataAccess.Data.DBioPhotoContext(Global.DbFilePath);
+            e.Result = (AddPhoto.QueryOrganismsOnPhoto(usedContext, _showedImageRelativePath), AddPhoto.QueryPeopleOnPhoto(usedContext, _showedImageRelativePath));
+            usedContext.SaveChanges();
+            usedContext.Dispose();
         }
         private void OnPhotoGettingBgWorker_RunWorkerEventCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
@@ -354,7 +356,10 @@ namespace DBioPhoto.Frontend
             // Remove organism from photo, update the listbox
             if (organismsOnPhotoListBox.SelectedIndices.Count == 1)
             {
-                AddPhoto.RemoveOrganismFromPhoto(Global.DbContext, _showedImageRelativePath, organismsOnPhotoListBox.SelectedIndex);
+                var usedContext = new DataAccess.Data.DBioPhotoContext(Global.DbFilePath);
+                AddPhoto.RemoveOrganismFromPhoto(usedContext, _showedImageRelativePath, organismsOnPhotoListBox.SelectedIndex);
+                usedContext.SaveChanges();
+                usedContext.Dispose();
                 OnPhotoGettingBgWorker.RunWorkerAsync();
             }
         }
@@ -364,7 +369,10 @@ namespace DBioPhoto.Frontend
             // Remove person from photo, update the listbox
             if (peopleOnPhotoListBox.SelectedIndices.Count == 1)
             {
-                AddPhoto.RemovePersonFromPhoto(Global.DbContext, _showedImageRelativePath, peopleOnPhotoListBox.SelectedIndex);
+                var usedContext = new DataAccess.Data.DBioPhotoContext(Global.DbFilePath);
+                AddPhoto.RemovePersonFromPhoto(usedContext, _showedImageRelativePath, peopleOnPhotoListBox.SelectedIndex);
+                usedContext.SaveChanges();
+                usedContext.Dispose();
                 OnPhotoGettingBgWorker.RunWorkerAsync();
             }
         }
@@ -372,30 +380,27 @@ namespace DBioPhoto.Frontend
         private void organismNameTextBox_KeyUp(object sender, KeyEventArgs e)
         {
             TextBox t = sender as TextBox;
-            if (t != null)
+            if (t != null && t.Text.Length == 3 && !PhotoContentSuggestionsBgWorker.IsBusy)
             {
-                if (t.Text.Length == 3)
-                {
-                    PhotoContentSuggestionsBgWorker.RunWorkerAsync((t.Text, 0));
-                }
+                PhotoContentSuggestionsBgWorker.RunWorkerAsync((t.Text, 0));
             }
         }
         private void personNameOrNickTextBox_KeyUp(object sender, KeyEventArgs e)
         {
             TextBox t = sender as TextBox;
-            if (t != null)
+            if (t != null && t.Text.Length == 3 && !PhotoContentSuggestionsBgWorker.IsBusy)
             {
-                if (t.Text.Length == 3)
-                {
-                    PhotoContentSuggestionsBgWorker.RunWorkerAsync((t.Text, 1));
-                }
+                PhotoContentSuggestionsBgWorker.RunWorkerAsync((t.Text, 1));
             }
         }
         private void PhotoContentSuggestionsBgWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             // Find the suggestions in the background
+            var usedContext = new DataAccess.Data.DBioPhotoContext(Global.DbFilePath);
             (string beginning, int textBoxNumber) = (ValueTuple<string, int>)e.Argument;
-            e.Result = Suggestions.GetPhotoContentSuggestions(Global.DbContext, beginning, textBoxNumber);
+            e.Result = Suggestions.GetPhotoContentSuggestions(usedContext, beginning, textBoxNumber);
+            usedContext.SaveChanges();
+            usedContext.Dispose();
         }
         private void PhotoContentSuggestionsBgWorker_RunWorkerEventCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
@@ -437,10 +442,13 @@ namespace DBioPhoto.Frontend
         {
             // Try to add the content to photo in the background
             (string[] names, bool addingOrganism) = (ValueTuple<string[], bool>)e.Argument;
+            var usedContext = new DataAccess.Data.DBioPhotoContext(Global.DbFilePath);
             if (addingOrganism)
-                e.Result = (AddPhoto.TryAddOrganismToPhoto(Global.DbContext, _showedImageRelativePath, names[0], names[1]), true);
+                e.Result = (AddPhoto.TryAddOrganismToPhoto(usedContext, _showedImageRelativePath, names[0], names[1]), true);
             else
-                e.Result = (AddPhoto.TryAddPersonToPhoto(Global.DbContext, _showedImageRelativePath, names[0], names[2]), false);
+                e.Result = (AddPhoto.TryAddPersonToPhoto(usedContext, _showedImageRelativePath, names[0], names[2]), false);
+            usedContext.SaveChanges();
+            usedContext.Dispose();
         }
         private void AddingContentToPhotoBgWorker_RunWorkerEventCompleted(object sender, RunWorkerCompletedEventArgs e)
         {

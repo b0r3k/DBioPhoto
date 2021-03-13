@@ -64,7 +64,10 @@ namespace DBioPhoto.Frontend
         private void AddingBgWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             // Add the created instance to the database
-            e.Result = AddIndividual.TryAddOrganism(Global.DbContext, (Organism)e.Argument);
+            var usedContext = new DataAccess.Data.DBioPhotoContext(Global.DbFilePath);
+            e.Result = AddIndividual.TryAddOrganism(usedContext, (Organism)e.Argument);
+            usedContext.SaveChanges();
+            usedContext.Dispose();
         }
         private void AddingBgWorker_RunWorkerEventCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
@@ -109,55 +112,46 @@ namespace DBioPhoto.Frontend
         private void firstNameTextBox_KeyUp(object sender, KeyEventArgs e)
         {
             TextBox t = sender as TextBox;
-            if (t != null)
+            if (t != null && t.Text.Length == 3 && !SuggestionsBgWorker.IsBusy)
             {
-                if (t.Text.Length == 3)
-                {
-                    SuggestionsBgWorker.RunWorkerAsync((t.Text, 0));
-                }
+                SuggestionsBgWorker.RunWorkerAsync((t.Text, 0));
             }
         }
         private void secondNameTextBox_KeyUp(object sender, KeyEventArgs e)
         {
             TextBox t = sender as TextBox;
-            if (t != null)
+            if (t != null && t.Text.Length == 3 && !SuggestionsBgWorker.IsBusy)
             {
-                if (t.Text.Length == 3)
-                {
-                    SuggestionsBgWorker.RunWorkerAsync((t.Text, 1));
-                }
+                SuggestionsBgWorker.RunWorkerAsync((t.Text, 1));
             }
         }
 
         private void latFirstNameTextBox_KeyUp(object sender, KeyEventArgs e)
         {
             TextBox t = sender as TextBox;
-            if (t != null)
+            if (t != null && t.Text.Length == 3 && !SuggestionsBgWorker.IsBusy)
             {
-                if (t.Text.Length == 3)
-                {
-                    SuggestionsBgWorker.RunWorkerAsync((t.Text, 2));
-                }
+                SuggestionsBgWorker.RunWorkerAsync((t.Text, 2));
             }
         }
 
         private void latSecondNameTextBox_KeyUp(object sender, KeyEventArgs e)
         {
             TextBox t = sender as TextBox;
-            if (t != null)
+            if (t != null && t.Text.Length == 3 && !SuggestionsBgWorker.IsBusy)
             {
-                if (t.Text.Length == 3)
-                {
-                    SuggestionsBgWorker.RunWorkerAsync((t.Text, 3));
-                }
+                SuggestionsBgWorker.RunWorkerAsync((t.Text, 3));
             }
         }
 
         private void SuggestionsBgWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             // Find the suggestions in the background
+            var usedContext = new DataAccess.Data.DBioPhotoContext(Global.DbFilePath);
             (string beginning, int textBoxNumber) = (ValueTuple<string, int>)e.Argument;
-            e.Result = Suggestions.GetOrganismNameSuggestions(Global.DbContext, beginning, textBoxNumber);
+            e.Result = Suggestions.GetOrganismNameSuggestions(usedContext, beginning, textBoxNumber);
+            usedContext.SaveChanges();
+            usedContext.Dispose();
         }
         private void SuggestionsBgWorker_RunWorkerEventCompleted(object sender, RunWorkerCompletedEventArgs e)
         {

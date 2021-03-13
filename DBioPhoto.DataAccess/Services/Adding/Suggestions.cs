@@ -29,7 +29,6 @@ namespace DBioPhoto.DataAccess.Services.Adding
                     suggestions = new string[0];
                     break;
             }
-            dbContext.SaveChanges();
             return suggestions;
         }
 
@@ -48,7 +47,6 @@ namespace DBioPhoto.DataAccess.Services.Adding
                     suggestions = new string[0];
                     break;
             }
-            dbContext.SaveChanges();
             return suggestions;
         }
 
@@ -69,7 +67,6 @@ namespace DBioPhoto.DataAccess.Services.Adding
                     suggestions = new string[0];
                     break;
             }
-            dbContext.SaveChanges();
             return suggestions;
         }
     }

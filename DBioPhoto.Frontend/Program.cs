@@ -23,5 +23,6 @@ namespace DBioPhoto.Frontend
     {
         public static DBioPhotoContext DbContext { get; set; }
         public static string RootFolder { get; set; }
+        public static string DbFilePath { get; set; }
     }
 }
