@@ -210,6 +210,9 @@ namespace DBioPhoto.Frontend
                 showedPhotoRelativePathTextBox.Text = _showedImageRelativePath;
                 showedPhotoDateTextBox.Text = _showedImageDate.ToString();
 
+                // Calling GarbageCollctor to get rid of old image
+                GC.Collect();
+
                 // Get what's on the photo in the background, populate the ListBoxes with it
                 OnPhotoGettingBgWorker.RunWorkerAsync();
             }
