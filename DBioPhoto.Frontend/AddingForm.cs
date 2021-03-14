@@ -201,6 +201,10 @@ namespace DBioPhoto.Frontend
                 _selectedIndex = imagesListView.SelectedIndices[0];
                 _showedImagePath = _imagePaths[_selectedIndex];
                 _showedImageRelativePath = _showedImagePath.Replace(Global.RootFolder, "");
+
+                if (_showedImage != null)
+                    _showedImage.Dispose();
+
                 _showedImage = Image.FromFile(_showedImagePath);
                 _showedImageDate = GetDateTakenFromImage(_showedImage);
 
@@ -209,9 +213,6 @@ namespace DBioPhoto.Frontend
                 showedPhotoPathTextBox.Text = _showedImagePath;
                 showedPhotoRelativePathTextBox.Text = _showedImageRelativePath;
                 showedPhotoDateTextBox.Text = _showedImageDate.ToString();
-
-                // Calling GarbageCollctor to get rid of old image
-                GC.Collect();
 
                 // Get what's on the photo in the background, populate the ListBoxes with it
                 OnPhotoGettingBgWorker.RunWorkerAsync();
