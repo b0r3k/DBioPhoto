@@ -144,6 +144,22 @@ namespace DBioPhoto.Frontend
                 }
             }
         }
+
+        private void personAddButton_Click(object sender, EventArgs e)
+        {
+            if (Application.OpenForms.OfType<PersonAddForm>().Count() == 1)
+            {
+                PersonAddForm openedForm = Application.OpenForms.OfType<PersonAddForm>().First();
+                openedForm.WindowState = FormWindowState.Normal;
+                openedForm.BringToFront();
+            }
+            else
+            {
+                PersonAddForm newGui = new PersonAddForm();
+                newGui.Visible = true;
+            }
+        }
+
         private void FirstCreateDbContext()
         {
             // Create new db and db file where selected

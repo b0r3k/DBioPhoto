@@ -123,6 +123,7 @@
             this.personAddButton.Text = "Přidat lidi do databáze";
             this.personAddButton.UseVisualStyleBackColor = true;
             this.personAddButton.Visible = false;
+            this.personAddButton.Click += new System.EventHandler(this.personAddButton_Click);
             // 
             // labelDifferentLocation
             // 
