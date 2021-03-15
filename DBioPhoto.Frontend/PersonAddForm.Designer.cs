@@ -67,6 +67,8 @@ namespace DBioPhoto.Frontend
             // 
             // nameTextBox
             // 
+            this.nameTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.nameTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.nameTextBox.Location = new System.Drawing.Point(139, 56);
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(168, 23);
@@ -74,6 +76,8 @@ namespace DBioPhoto.Frontend
             // 
             // surnameTextBox
             // 
+            this.surnameTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.surnameTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.surnameTextBox.Location = new System.Drawing.Point(139, 93);
             this.surnameTextBox.Name = "surnameTextBox";
             this.surnameTextBox.Size = new System.Drawing.Size(168, 23);
@@ -81,6 +85,8 @@ namespace DBioPhoto.Frontend
             // 
             // nickTextBox
             // 
+            this.nickTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.nickTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.nickTextBox.Location = new System.Drawing.Point(139, 132);
             this.nickTextBox.Name = "nickTextBox";
             this.nickTextBox.Size = new System.Drawing.Size(168, 23);
@@ -94,6 +100,7 @@ namespace DBioPhoto.Frontend
             this.addToDbButton.TabIndex = 6;
             this.addToDbButton.Text = "Přidat do databáze";
             this.addToDbButton.UseVisualStyleBackColor = true;
+            this.addToDbButton.Click += new System.EventHandler(this.addToDbButton_Click);
             // 
             // PersonAddForm
             // 

@@ -24,5 +24,21 @@ namespace DBioPhoto.DataAccess.Services.Adding
                 return "Úspěšně přidáno!";
             }
         }
+
+        public static string TryAddPerson(DBioPhotoContext dbContext, Person tryPerson)
+        {
+            if (tryPerson.Name == "" || tryPerson.Surname == "")
+                return "Vyplňte jméno";
+            else if (dbContext.People
+                                    .Any(p => (p.Name == tryPerson.Name)
+                                    && (p.Surname == tryPerson.Surname) 
+                                    && (p.Nickname == tryPerson.Nickname)))
+                return "Člověk již existuje";
+            else
+            {
+                dbContext.People.Add(tryPerson);
+                return "Úspěšně přidáno!";
+            }
+        }
     }
 }
