@@ -1,6 +1,7 @@
 ﻿using System.Windows.Forms;
 using DBioPhoto.Domain.Models;
 using DBioPhoto.DataAccess.Services.Adding;
+using DBioPhoto.DataAccess.Data;
 using System;
 using System.Threading.Tasks;
 
@@ -10,6 +11,8 @@ namespace DBioPhoto.Frontend
     {
         private AutoCompleteStringCollection _nameSuggestions;
         private Person _tryPerson;
+        private DBioPhotoContext _addingContext;
+        private DBioPhotoContext _suggestionsContext;
         public PersonAddForm()
         {
             InitializeComponent();
@@ -20,29 +23,33 @@ namespace DBioPhoto.Frontend
             surnameTextBox.AutoCompleteCustomSource = _nameSuggestions;
             nickTextBox.AutoCompleteCustomSource = _nameSuggestions;
 
-            Global.DbContext = new DataAccess.Data.DBioPhotoContext(Global.DbFilePath);
+            _addingContext = new DBioPhotoContext(Global.DbFilePath);
+            _suggestionsContext = new DBioPhotoContext(Global.DbFilePath);
         }
 
         private void addToDbButton_Click(object sender, System.EventArgs e)
         {
+            // Get the values from form, create instance of Person
             string name = nameTextBox.Text.Trim().ToLower();
             string surname = surnameTextBox.Text.Trim().ToLower();
             string nick = nickTextBox.Text.Trim().ToLower();
 
             _tryPerson = new Person(name, nick, surname);
 
-            Task.Run(() => TryAddPersonInAnotherThread(this, _tryPerson));
+            // Add to ThreadPool task to TryAddPerson
+            Task.Run(() => TryAddPersonLocking(_tryPerson));
         }
 
-        private void TryAddPersonInAnotherThread(PersonAddForm form, Person tryPerson)
+        private void TryAddPersonLocking(Person tryPerson)
         {
             string result;
-            lock (Global.DbContext)
+            // Lock the DbContext until finished
+            lock (_addingContext)
             {
-                result = AddIndividual.TryAddPerson(Global.DbContext, tryPerson);
-                Global.DbContext.SaveChanges();
+                result = AddIndividual.TryAddPerson(_addingContext, tryPerson);
             }
-            form.Invoke(new Action( () => form.ShowOnButtonForThreeSecs(result) ));
+            // Invoke showing result on the main thread
+            Invoke(new Action( () => ShowOnButtonForThreeSecs(result) ));
         }
         private void ShowOnButtonForThreeSecs(string textToShow)
         {

@@ -37,6 +37,7 @@ namespace DBioPhoto.DataAccess.Services.Adding
             else
             {
                 dbContext.People.Add(tryPerson);
+                dbContext.SaveChanges();
                 return "Úspěšně přidáno!";
             }
         }
