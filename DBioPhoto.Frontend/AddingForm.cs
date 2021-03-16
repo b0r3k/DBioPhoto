@@ -33,14 +33,10 @@ namespace DBioPhoto.Frontend
         // DbContexts
         private DBioPhotoContext _photoAddingContext;
         private DBioPhotoContext _photoInfoSuggestionsContext;
-        private DBioPhotoContext _photoContentSuggestionsContext;
+        private DBioPhotoContext _photoContentContext;
 
         // Backgroundworkers
         private BackgroundWorker LoadingImagesBgWorker;
-        private BackgroundWorker AddingPhotosBgWorker;
-        private BackgroundWorker PhotoInfoSuggestionsBgWorker;
-        private BackgroundWorker OnPhotoGettingBgWorker;
-        private BackgroundWorker PhotoContentSuggestionsBgWorker;
         private BackgroundWorker AddingContentToPhotoBgWorker;
 
         // Collections for autocomplete
@@ -61,17 +57,12 @@ namespace DBioPhoto.Frontend
             // Create the DbContexts
             _photoAddingContext = new DBioPhotoContext(Global.DbFilePath);
             _photoInfoSuggestionsContext = new DBioPhotoContext(Global.DbFilePath);
-            _photoContentSuggestionsContext = new DBioPhotoContext(Global.DbFilePath);
+            _photoContentContext = new DBioPhotoContext(Global.DbFilePath);
 
             // Create the BackgroundWorker for loading of images, bind tasks for him
             LoadingImagesBgWorker = new BackgroundWorker();
             LoadingImagesBgWorker.DoWork += new DoWorkEventHandler(LoadingImagesBgWorker_DoWork);
             LoadingImagesBgWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(LoadingImagesBgWorker_RunWorkerEventCompleted);
-
-            // Create the BackgroundWorker for getting lists of stuff on the photo, bind tasks for him
-            OnPhotoGettingBgWorker = new BackgroundWorker();
-            OnPhotoGettingBgWorker.DoWork += new DoWorkEventHandler(OnPhotoGettingBgWorker_DoWork);
-            OnPhotoGettingBgWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(OnPhotoGettingBgWorker_RunWorkerEventCompleted);
 
             // Set location and comment textboxes to autocomplete
             _photoInfoSuggestions = new AutoCompleteStringCollection();
@@ -179,7 +170,8 @@ namespace DBioPhoto.Frontend
                 selectedImagePictureBox.Image = null;
                 
                 // Reset showedImage values
-                _showedImage.Dispose();
+                if (_showedImage != null)
+                    _showedImage.Dispose();
                 _showedImage = null;
                 _showedImagePath = null;
                 _showedImageRelativePath = null;
@@ -213,7 +205,7 @@ namespace DBioPhoto.Frontend
                 showedPhotoDateTextBox.Text = _showedImageDate.ToString();
 
                 // Get what's on the photo in the background, populate the ListBoxes with it
-                OnPhotoGettingBgWorker.RunWorkerAsync();
+                Task.Run(() => GetPhotoContentLocking(_showedImageRelativePath));
             }
         }
 
@@ -236,6 +228,7 @@ namespace DBioPhoto.Frontend
         }
 
 
+
         private void addPhotoToDbButton_Click(object sender, EventArgs e)
         {
             // Get the values from the form, lowecase everything, create the instance of Organism
@@ -253,6 +246,7 @@ namespace DBioPhoto.Frontend
 
             // Not resetting this form, because it can be useful to use the location again
         }
+
         private void TryAddPhotoLocking(Photo tryPhoto)
         {
             string result;
@@ -261,9 +255,10 @@ namespace DBioPhoto.Frontend
             {
                 result = AddPhoto.TryAddPhoto(_photoAddingContext, tryPhoto);
             }
-            // Invoke showing result on the main thread, if unsuccessfull, invoke also showing the person
+            // Invoke showing result on the main thread
             Invoke(new Action( () => Global.ShowOnButtonForThreeSecs(result, addPhotoToDbButton) ));
         }
+
 
 
         // When there are 3 chars in textbox and keyup, get autocomplete suggestions for that box in other thread
@@ -283,6 +278,7 @@ namespace DBioPhoto.Frontend
                 Task.Run( () => GetPhotoInfoSuggestionsLocking(t.Text, 1) );
             }
         }
+
         // Get suggestions from db, lock context for it
         private void GetPhotoInfoSuggestionsLocking(string beginning, int textBoxNumber)
         {
@@ -296,27 +292,16 @@ namespace DBioPhoto.Frontend
             Invoke(new Action(() => { _photoInfoSuggestions.Clear(); _photoInfoSuggestions.AddRange(result); }));
         }
 
-        private void OnPhotoGettingBgWorker_DoWork(object sender, DoWorkEventArgs e)
+
+        private void GetPhotoContentLocking(string imageRelativePath)
         {
-            // Find in db what's on the photo in the background
-            var usedContext = new DataAccess.Data.DBioPhotoContext(Global.DbFilePath);
-            e.Result = (AddPhoto.QueryOrganismsOnPhoto(usedContext, _showedImageRelativePath), AddPhoto.QueryPeopleOnPhoto(usedContext, _showedImageRelativePath));
-            usedContext.SaveChanges();
-            usedContext.Dispose();
-        }
-        private void OnPhotoGettingBgWorker_RunWorkerEventCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            // After finding the organisms and people, show it in the listboxes
-            if (e.Error != null)
-                MessageBox.Show(e.Error.Message);
-            else if (e.Cancelled)
-                MessageBox.Show("Operace zrušena");
-            else
+            List<Organism> organismsOnPhoto;
+            List<Person> peopleOnPhoto;
+            lock (_photoContentContext)
             {
-                (List<Organism> organismsOnPhoto, List<Person> peopleOnPhoto) = (ValueTuple<List<Organism>, List<Person>>)e.Result;
-                organismsOnPhotoListBox.DataSource = organismsOnPhoto;
-                peopleOnPhotoListBox.DataSource = peopleOnPhoto;
+                (organismsOnPhoto, peopleOnPhoto) = AddPhoto.GetPhotoContent(_photoContentContext, imageRelativePath);
             }
+            Invoke(new Action( () => { organismsOnPhotoListBox.DataSource = organismsOnPhoto; peopleOnPhotoListBox.DataSource = peopleOnPhoto; } ));
         }
 
         private void removeOrganismFromPhotoButton_Click(object sender, EventArgs e)
@@ -328,7 +313,7 @@ namespace DBioPhoto.Frontend
                 AddPhoto.RemoveOrganismFromPhoto(usedContext, _showedImageRelativePath, organismsOnPhotoListBox.SelectedIndex);
                 usedContext.SaveChanges();
                 usedContext.Dispose();
-                OnPhotoGettingBgWorker.RunWorkerAsync();
+                Task.Run( () => GetPhotoContentLocking(_showedImageRelativePath) );
             }
         }
 
@@ -341,9 +326,10 @@ namespace DBioPhoto.Frontend
                 AddPhoto.RemovePersonFromPhoto(usedContext, _showedImageRelativePath, peopleOnPhotoListBox.SelectedIndex);
                 usedContext.SaveChanges();
                 usedContext.Dispose();
-                OnPhotoGettingBgWorker.RunWorkerAsync();
+                Task.Run(() => GetPhotoContentLocking(_showedImageRelativePath));
             }
         }
+
 
 
         // When there are 3 chars in textbox and keyup, get autocomplete suggestions for that box in other thread
@@ -369,13 +355,14 @@ namespace DBioPhoto.Frontend
         {
             string[] result;
             // Lock the DbContext until finished
-            lock (_photoContentSuggestionsContext)
+            lock (_photoContentContext)
             {
-                result = Suggestions.GetPhotoContentSuggestions(_photoContentSuggestionsContext, beginning, textBoxNumber);
+                result = Suggestions.GetPhotoContentSuggestions(_photoContentContext, beginning, textBoxNumber);
             }
             // Invoke using results for autocomplete on the main thread
             Invoke(new Action(() => { _photoContentSuggestions.Clear(); _photoContentSuggestions.AddRange(result); }));
         }
+
 
 
         private void addOrganismToPhotoButton_Click(object sender, EventArgs e)
@@ -385,8 +372,9 @@ namespace DBioPhoto.Frontend
             if (tryOrganismNames.Length >= 2 && _showedImageRelativePath != null)
             {
                 AddingContentToPhotoBgWorker.RunWorkerAsync((tryOrganismNames, true));
+                organismNameTextBox.Text = "";
             }
-            OnPhotoGettingBgWorker.RunWorkerAsync();
+            Task.Run(() => GetPhotoContentLocking(_showedImageRelativePath));
         }
 
         private void addPersonToPhotoButton_Click(object sender, EventArgs e)
@@ -396,7 +384,9 @@ namespace DBioPhoto.Frontend
             if (tryPersonNames.Length >= 3 && _showedImageRelativePath != null)
             {
                 AddingContentToPhotoBgWorker.RunWorkerAsync((tryPersonNames, false));
+                personNameOrNickTextBox.Text = "";
             }
+            Task.Run(() => GetPhotoContentLocking(_showedImageRelativePath));
         }
 
         private void AddingContentToPhotoBgWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -428,7 +418,7 @@ namespace DBioPhoto.Frontend
                     else
                         Global.ShowOnButtonForThreeSecs("Úspěšně přidáno!", addPersonToPhotoButton);
 
-                    OnPhotoGettingBgWorker.RunWorkerAsync();
+                    Task.Run(() => GetPhotoContentLocking(_showedImageRelativePath));
                 }
                 else
                 {
@@ -443,6 +433,20 @@ namespace DBioPhoto.Frontend
 
         private void personAddButton_Click(object sender, EventArgs e)
         {
+            // If PersonAddForm already opened, bring to front, else create new
+            if (Application.OpenForms.OfType<PersonAddForm>().Count() == 1)
+            {
+                PersonAddForm openedForm = Application.OpenForms.OfType<PersonAddForm>().First();
+                openedForm.WindowState = FormWindowState.Normal;
+                openedForm.BringToFront();
+            }
+            else
+            {
+                PersonAddForm newGui = new PersonAddForm();
+                newGui.StartPosition = FormStartPosition.Manual;
+                newGui.Location = new Point(1536, 311);
+                newGui.Visible = true;
+            }
         }
     }
 }
