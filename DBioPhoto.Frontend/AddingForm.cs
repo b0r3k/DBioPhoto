@@ -268,28 +268,12 @@ namespace DBioPhoto.Frontend
             if (e.Error != null)
                 MessageBox.Show(e.Error.Message);
             else if (e.Cancelled)
-                ShowOnButtonForThreeSecs("Operace zrušena", addPhotoToDbButton);
+                Global.ShowOnButtonForThreeSecs("Operace zrušena", addPhotoToDbButton);
             else
             {
                 string result = (string)e.Result;
-                ShowOnButtonForThreeSecs(result, addPhotoToDbButton);
+                Global.ShowOnButtonForThreeSecs(result, addPhotoToDbButton);
             }
-        }
-        private void ShowOnButtonForThreeSecs(string textToShow, Button button)
-        {
-            // Show textToShow on the button, after 3 s show original again
-            string oldText = button.Text;
-            button.Text = textToShow;
-            System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer()
-            {
-                Interval = 3000,
-                Enabled = true
-            };
-            timer.Tick += (sender, e) =>
-            {
-                button.Text = oldText;
-                timer.Dispose();
-            };
         }
 
         private void locationTextBox_KeyUp(object sender, KeyEventArgs e)
@@ -467,18 +451,18 @@ namespace DBioPhoto.Frontend
                 if (successfull)
                 {
                     if (addingOrganism)
-                        ShowOnButtonForThreeSecs("Úspěšně přidáno!", addOrganismToPhotoButton);
+                        Global.ShowOnButtonForThreeSecs("Úspěšně přidáno!", addOrganismToPhotoButton);
                     else
-                        ShowOnButtonForThreeSecs("Úspěšně přidáno!", addPersonToPhotoButton);
+                        Global.ShowOnButtonForThreeSecs("Úspěšně přidáno!", addPersonToPhotoButton);
 
                     OnPhotoGettingBgWorker.RunWorkerAsync();
                 }
                 else
                 {
                     if (addingOrganism)
-                        ShowOnButtonForThreeSecs("Nešlo přidat.", addOrganismToPhotoButton);
+                        Global.ShowOnButtonForThreeSecs("Nešlo přidat.", addOrganismToPhotoButton);
                     else
-                        ShowOnButtonForThreeSecs("Nešlo přidat.", addPersonToPhotoButton);
+                        Global.ShowOnButtonForThreeSecs("Nešlo přidat.", addPersonToPhotoButton);
                 }
             }
         }

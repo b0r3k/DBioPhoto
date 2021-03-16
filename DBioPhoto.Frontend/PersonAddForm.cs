@@ -49,22 +49,7 @@ namespace DBioPhoto.Frontend
                 result = AddIndividual.TryAddPerson(_addingContext, tryPerson);
             }
             // Invoke showing result on the main thread
-            Invoke(new Action( () => ShowOnButtonForThreeSecs(result) ));
-        }
-        private void ShowOnButtonForThreeSecs(string textToShow)
-        {
-            // Show textToShow on the button, after 3 s show original again
-            addToDbButton.Text = textToShow;
-            System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer()
-            {
-                Interval = 3000,
-                Enabled = true
-            };
-            timer.Tick += (sender, e) =>
-            {
-                addToDbButton.Text = "Přidat do databáze";
-                timer.Dispose();
-            };
+            Invoke(new Action( () => Global.ShowOnButtonForThreeSecs(result, addToDbButton) ));
         }
     }
 }
