@@ -39,6 +39,11 @@ namespace DBioPhoto.Frontend
 
             // Add to ThreadPool task to TryAddPerson
             Task.Run(() => TryAddPersonLocking(_tryPerson));
+
+            // Reset the form
+            nameTextBox.Text = "";
+            surnameTextBox.Text = "";
+            nickTextBox.Text = "";
         }
 
         private void TryAddPersonLocking(Person tryPerson)
@@ -49,8 +54,16 @@ namespace DBioPhoto.Frontend
             {
                 result = AddIndividual.TryAddPerson(_addingContext, tryPerson);
             }
-            // Invoke showing result on the main thread
+            // Invoke showing result on the main thread, if unsuccessfull, invoke also showing the person
             Invoke(new Action( () => Global.ShowOnButtonForThreeSecs(result, addToDbButton) ));
+            if (result != "Úspěšně přidáno!")
+                Invoke(new Action(() => ShowPersonInForm(_tryPerson)));
+        }
+        private void ShowPersonInForm(Person person)
+        {
+            nameTextBox.Text = person.Name;
+            surnameTextBox.Text = person.Surname;
+            nickTextBox.Text = person.Nickname;
         }
 
         // When there are 3 chars in textbox and keyup, get autocomplete suggestions for that box in other thread
