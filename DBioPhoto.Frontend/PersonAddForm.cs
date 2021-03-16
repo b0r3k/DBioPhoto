@@ -23,6 +23,7 @@ namespace DBioPhoto.Frontend
             surnameTextBox.AutoCompleteCustomSource = _nameSuggestions;
             nickTextBox.AutoCompleteCustomSource = _nameSuggestions;
 
+            // Initialize DbContexts
             _addingContext = new DBioPhotoContext(Global.DbFilePath);
             _suggestionsContext = new DBioPhotoContext(Global.DbFilePath);
         }
@@ -50,6 +51,44 @@ namespace DBioPhoto.Frontend
             }
             // Invoke showing result on the main thread
             Invoke(new Action( () => Global.ShowOnButtonForThreeSecs(result, addToDbButton) ));
+        }
+
+        // When there are 3 chars in textbox and keyup, get autocomplete suggestions for that box in other thread
+        private void nameTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            TextBox t = sender as TextBox;
+            if (t != null && t.Text.Length == 3)
+            {
+                Task.Run(() => GetPersonNameSuggestionsLocking(t.Text, 0));
+            }
+        }
+        private void surnameTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            TextBox t = sender as TextBox;
+            if (t != null && t.Text.Length == 3)
+            {
+                Task.Run(() => GetPersonNameSuggestionsLocking(t.Text, 1));
+            }
+        }
+        private void nickTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            TextBox t = sender as TextBox;
+            if (t != null && t.Text.Length == 3)
+            {
+                Task.Run(() => GetPersonNameSuggestionsLocking(t.Text, 2));
+            }
+        }
+        // Get suggestions from db, lock context for it
+        private void GetPersonNameSuggestionsLocking(string beginning, int textBoxNumber)
+        {
+            string[] result;
+            // Lock the DbContext until finished
+            lock (_suggestionsContext)
+            {
+                result = Suggestions.GetPersonNameSuggestions(_suggestionsContext, beginning, textBoxNumber);
+            }
+            // Invoke using results for autocomplete on the main thread
+            Invoke(new Action( () => { _nameSuggestions.Clear(); _nameSuggestions.AddRange(result); }) );
         }
     }
 }

@@ -73,6 +73,7 @@ namespace DBioPhoto.Frontend
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(168, 23);
             this.nameTextBox.TabIndex = 3;
+            this.nameTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.nameTextBox_KeyUp);
             // 
             // surnameTextBox
             // 
@@ -82,6 +83,7 @@ namespace DBioPhoto.Frontend
             this.surnameTextBox.Name = "surnameTextBox";
             this.surnameTextBox.Size = new System.Drawing.Size(168, 23);
             this.surnameTextBox.TabIndex = 4;
+            this.surnameTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.surnameTextBox_KeyUp);
             // 
             // nickTextBox
             // 
@@ -91,6 +93,7 @@ namespace DBioPhoto.Frontend
             this.nickTextBox.Name = "nickTextBox";
             this.nickTextBox.Size = new System.Drawing.Size(168, 23);
             this.nickTextBox.TabIndex = 5;
+            this.nickTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.nickTextBox_KeyUp);
             // 
             // addToDbButton
             // 
