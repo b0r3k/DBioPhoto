@@ -34,16 +34,13 @@ namespace DBioPhoto.DataAccess.Services.Adding
             }
         }
 
-        public static List<Organism> QueryOrganismsOnPhoto(DBioPhotoContext dbContext, string fileRelativePath)
-        {
-            List<Organism> organismsOnPhoto = dbContext.Photos.Where(p => p.FilePath == fileRelativePath).Select(p => p.Organisms).ToList().FirstOrDefault();
-            return organismsOnPhoto;
-        }
 
-        public static List<Person> QueryPeopleOnPhoto(DBioPhotoContext dbContext, string fileRelativePath)
+        public static (List<Organism>, List<Person>) GetPhotoContent(DBioPhotoContext dbContext, string fileRelativePath)
         {
-            List<Person> peopleOnPhoto = dbContext.Photos.Where(p => p.FilePath == fileRelativePath).Select(p => p.People).ToList().FirstOrDefault();
-            return peopleOnPhoto;
+            var photoQuery = dbContext.Photos.Where(p => p.FilePath == fileRelativePath);
+            List<Organism> organismsOnPhoto = photoQuery.Select(p => p.Organisms).ToList().FirstOrDefault();
+            List<Person> peopleOnPhoto = photoQuery.Select(p => p.People).ToList().FirstOrDefault();
+            return (organismsOnPhoto, peopleOnPhoto);
         }
 
 
