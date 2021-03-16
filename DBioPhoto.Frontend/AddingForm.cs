@@ -33,6 +33,7 @@ namespace DBioPhoto.Frontend
         // DbContexts
         private DBioPhotoContext _photoAddingContext;
         private DBioPhotoContext _photoInfoSuggestionsContext;
+        private DBioPhotoContext _photoContentSuggestionsContext;
 
         // Backgroundworkers
         private BackgroundWorker LoadingImagesBgWorker;
@@ -60,6 +61,7 @@ namespace DBioPhoto.Frontend
             // Create the DbContexts
             _photoAddingContext = new DBioPhotoContext(Global.DbFilePath);
             _photoInfoSuggestionsContext = new DBioPhotoContext(Global.DbFilePath);
+            _photoContentSuggestionsContext = new DBioPhotoContext(Global.DbFilePath);
 
             // Create the BackgroundWorker for loading of images, bind tasks for him
             LoadingImagesBgWorker = new BackgroundWorker();
@@ -70,11 +72,6 @@ namespace DBioPhoto.Frontend
             OnPhotoGettingBgWorker = new BackgroundWorker();
             OnPhotoGettingBgWorker.DoWork += new DoWorkEventHandler(OnPhotoGettingBgWorker_DoWork);
             OnPhotoGettingBgWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(OnPhotoGettingBgWorker_RunWorkerEventCompleted);
-
-            // Create the BackgroundWorker for getting suggestion of organisms and people, bind tasks for him
-            PhotoContentSuggestionsBgWorker = new BackgroundWorker();
-            PhotoContentSuggestionsBgWorker.DoWork += new DoWorkEventHandler(PhotoContentSuggestionsBgWorker_DoWork);
-            PhotoContentSuggestionsBgWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(PhotoContentSuggestionsBgWorker_RunWorkerEventCompleted);
 
             // Set location and comment textboxes to autocomplete
             _photoInfoSuggestions = new AutoCompleteStringCollection();
@@ -348,43 +345,36 @@ namespace DBioPhoto.Frontend
             }
         }
 
+
+        // When there are 3 chars in textbox and keyup, get autocomplete suggestions for that box in other thread
         private void organismNameTextBox_KeyUp(object sender, KeyEventArgs e)
         {
             TextBox t = sender as TextBox;
-            if (t != null && t.Text.Length == 3 && !PhotoContentSuggestionsBgWorker.IsBusy)
+            if (t != null && t.Text.Length == 3)
             {
-                PhotoContentSuggestionsBgWorker.RunWorkerAsync((t.Text, 0));
+                Task.Run(() => GetPhotoContentSuggestionsLocking(t.Text, 0));
             }
         }
         private void personNameOrNickTextBox_KeyUp(object sender, KeyEventArgs e)
         {
             TextBox t = sender as TextBox;
-            if (t != null && t.Text.Length == 3 && !PhotoContentSuggestionsBgWorker.IsBusy)
+            if (t != null && t.Text.Length == 3)
             {
-                PhotoContentSuggestionsBgWorker.RunWorkerAsync((t.Text, 1));
+                Task.Run(() => GetPhotoContentSuggestionsLocking(t.Text, 1));
             }
         }
-        private void PhotoContentSuggestionsBgWorker_DoWork(object sender, DoWorkEventArgs e)
+
+        // Get suggestions from db, lock context for it
+        private void GetPhotoContentSuggestionsLocking(string beginning, int textBoxNumber)
         {
-            // Find the suggestions in the background
-            var usedContext = new DataAccess.Data.DBioPhotoContext(Global.DbFilePath);
-            (string beginning, int textBoxNumber) = (ValueTuple<string, int>)e.Argument;
-            e.Result = Suggestions.GetPhotoContentSuggestions(usedContext, beginning, textBoxNumber);
-            usedContext.SaveChanges();
-            usedContext.Dispose();
-        }
-        private void PhotoContentSuggestionsBgWorker_RunWorkerEventCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            // After finding the suggestions, use them
-            if (e.Error != null)
-                MessageBox.Show(e.Error.Message);
-            else if (e.Cancelled)
-                MessageBox.Show("Operace zrušena");
-            else
+            string[] result;
+            // Lock the DbContext until finished
+            lock (_photoContentSuggestionsContext)
             {
-                _photoContentSuggestions.Clear();
-                _photoContentSuggestions.AddRange((string[])e.Result);
+                result = Suggestions.GetPhotoContentSuggestions(_photoContentSuggestionsContext, beginning, textBoxNumber);
             }
+            // Invoke using results for autocomplete on the main thread
+            Invoke(new Action(() => { _photoContentSuggestions.Clear(); _photoContentSuggestions.AddRange(result); }));
         }
 
 
