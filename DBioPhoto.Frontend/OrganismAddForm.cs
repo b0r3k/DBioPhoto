@@ -10,8 +10,6 @@ namespace DBioPhoto.Frontend
 {
     public partial class OrganismAddForm : Form
     {
-        private BackgroundWorker AddingBgWorker;
-        private BackgroundWorker SuggestionsBgWorker;
         private Organism _tryOrganism;
         private AutoCompleteStringCollection _nameSuggestions;
         private DBioPhotoContext _addingContext;
