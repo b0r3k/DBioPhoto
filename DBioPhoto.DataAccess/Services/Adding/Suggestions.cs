@@ -32,6 +32,27 @@ namespace DBioPhoto.DataAccess.Services.Adding
             return suggestions;
         }
 
+        public static string[] GetPersonNameSuggestions(DBioPhotoContext dbContext, string beginning, int textBoxNumber)
+        {
+            string[] suggestions;
+            switch (textBoxNumber)
+            {
+                case 0:
+                    suggestions = dbContext.People.Where(p => p.Name.StartsWith(beginning.ToLower())).Select(p => p.Name).Distinct().ToArray();
+                    break;
+                case 1:
+                    suggestions = dbContext.People.Where(p => p.Surname.StartsWith(beginning.ToLower())).Select(p => p.Surname).Distinct().ToArray();
+                    break;
+                case 2:
+                    suggestions = dbContext.People.Where(p => p.Nickname.StartsWith(beginning.ToLower())).Select(p => p.Nickname).Distinct().ToArray();
+                    break;
+                default:
+                    suggestions = new string[0];
+                    break;
+            }
+            return suggestions;
+        }
+
         public static string[] GetPhotoInfoSuggestions(DBioPhotoContext dbContext, string beginning, int textBoxNumber)
         {
             string[] suggestions;
