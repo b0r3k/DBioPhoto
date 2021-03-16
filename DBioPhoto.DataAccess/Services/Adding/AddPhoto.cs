@@ -21,6 +21,7 @@ namespace DBioPhoto.DataAccess.Services.Adding
                 existingPhoto.Category = tryPhoto.Category;
                 existingPhoto.Comment = tryPhoto.Comment;
                 existingPhoto.Location = tryPhoto.Location;
+                dbContext.SaveChanges();
                 return "Úspěšně aktualizováno!";
             }
 
@@ -28,6 +29,7 @@ namespace DBioPhoto.DataAccess.Services.Adding
             else
             {
                 dbContext.Photos.Add(tryPhoto);
+                dbContext.SaveChanges();
                 return "Úspěšně přidáno!";
             }
         }
@@ -38,7 +40,7 @@ namespace DBioPhoto.DataAccess.Services.Adding
             return organismsOnPhoto;
         }
 
-    public static List<Person> QueryPeopleOnPhoto(DBioPhotoContext dbContext, string fileRelativePath)
+        public static List<Person> QueryPeopleOnPhoto(DBioPhotoContext dbContext, string fileRelativePath)
         {
             List<Person> peopleOnPhoto = dbContext.Photos.Where(p => p.FilePath == fileRelativePath).Select(p => p.People).ToList().FirstOrDefault();
             return peopleOnPhoto;
@@ -50,12 +52,14 @@ namespace DBioPhoto.DataAccess.Services.Adding
             Photo photo = dbContext.Photos.Where(p => p.FilePath == fileRelativePath).Include(p => p.Organisms).FirstOrDefault();
             if (indexInList < photo.Organisms.Count)
                 photo.Organisms.RemoveAt(indexInList);
+            dbContext.SaveChanges();
         }
         public static void RemovePersonFromPhoto(DBioPhotoContext dbContext, string fileRelativePath, int indexInList)
         {
             Photo photo = dbContext.Photos.Where(p => p.FilePath == fileRelativePath).Include(p => p.People).FirstOrDefault();
             if (indexInList < photo.People.Count)
                 photo.People.RemoveAt(indexInList);
+            dbContext.SaveChanges();
         }
 
 
@@ -74,6 +78,7 @@ namespace DBioPhoto.DataAccess.Services.Adding
             else
             {
                 photo.Organisms.Add(organism);
+                dbContext.SaveChanges();
                 return true;
             }
         }
@@ -92,6 +97,7 @@ namespace DBioPhoto.DataAccess.Services.Adding
             else
             {
                 photo.People.Add(person);
+                dbContext.SaveChanges();
                 return true;
             }
         }
