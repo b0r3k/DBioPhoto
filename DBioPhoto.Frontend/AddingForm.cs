@@ -9,7 +9,9 @@ using System.Drawing.Imaging;
 using System.Text;
 using System.Text.RegularExpressions;
 using DBioPhoto.Domain.Models;
+using DBioPhoto.DataAccess.Data;
 using DBioPhoto.DataAccess.Services.Adding;
+using System.Threading.Tasks;
 
 namespace DBioPhoto.Frontend
 {
@@ -27,6 +29,9 @@ namespace DBioPhoto.Frontend
         private string _showedImageRelativePath;
         private DateTime _showedImageDate;
         private int _selectedIndex;
+
+        // DbContexts
+        private DBioPhotoContext _photoAddingContext;
 
         // Backgroundworkers
         private BackgroundWorker LoadingImagesBgWorker;
@@ -51,15 +56,13 @@ namespace DBioPhoto.Frontend
             // Populate the combo box with data from enum
             categoryComboBox.DataSource = Enum.GetValues(typeof(Category));
 
+            // Create the DbContexts
+            _photoAddingContext = new DBioPhotoContext(Global.DbFilePath);
+
             // Create the BackgroundWorker for loading of images, bind tasks for him
             LoadingImagesBgWorker = new BackgroundWorker();
             LoadingImagesBgWorker.DoWork += new DoWorkEventHandler(LoadingImagesBgWorker_DoWork);
             LoadingImagesBgWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(LoadingImagesBgWorker_RunWorkerEventCompleted);
-
-            // Create the BackgroundWorker for adding photos, bind tasks for him
-            AddingPhotosBgWorker = new BackgroundWorker();
-            AddingPhotosBgWorker.DoWork += new DoWorkEventHandler(AddingPhotosBgWorker_DoWork);
-            AddingPhotosBgWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(AddingPhotosBgWorker_RunWorkerEventCompleted);
 
             // Create the BackgroundWorker for photo info suggestions, bind tasks for him
             PhotoInfoSuggestionsBgWorker = new BackgroundWorker();
@@ -142,7 +145,7 @@ namespace DBioPhoto.Frontend
 
         private void organismAddButton_Click(object sender, System.EventArgs e)
         {
-            // If already opened, bring to front, else create new
+            // If OrganismAddForm already opened, bring to front, else create new
             if (Application.OpenForms.OfType<OrganismAddForm>().Count() == 1)
             {
                 OrganismAddForm openedForm = Application.OpenForms.OfType<OrganismAddForm>().First();
@@ -182,6 +185,7 @@ namespace DBioPhoto.Frontend
                 selectedImagePictureBox.Image = null;
                 
                 // Reset showedImage values
+                _showedImage.Dispose();
                 _showedImage = null;
                 _showedImagePath = null;
                 _showedImageRelativePath = null;
@@ -249,31 +253,21 @@ namespace DBioPhoto.Frontend
 
             Photo tryPhoto = new Photo(date, fileName, filePath, category, comment, location);
 
-            // Add to db in background
-            AddingPhotosBgWorker.RunWorkerAsync(tryPhoto);
+            // Add to ThreadPool task to TryAddPhoto
+            Task.Run(() => TryAddPhotoLocking(tryPhoto));
 
             // Not resetting this form, because it can be useful to use the location again
         }
-        private void AddingPhotosBgWorker_DoWork(object sender, DoWorkEventArgs e)
+        private void TryAddPhotoLocking(Photo tryPhoto)
         {
-            var usedContext = new DataAccess.Data.DBioPhotoContext(Global.DbFilePath);
-            // Add the created instance to the database
-            e.Result = AddPhoto.TryAddPhoto(usedContext, (Photo)e.Argument);
-            usedContext.SaveChanges();
-            usedContext.Dispose();
-        }
-        private void AddingPhotosBgWorker_RunWorkerEventCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            // Check if the photo was added successfully, show result, if not successfull, refill the form
-            if (e.Error != null)
-                MessageBox.Show(e.Error.Message);
-            else if (e.Cancelled)
-                Global.ShowOnButtonForThreeSecs("Operace zrušena", addPhotoToDbButton);
-            else
+            string result;
+            // Lock the DbContext until finished
+            lock (_photoAddingContext)
             {
-                string result = (string)e.Result;
-                Global.ShowOnButtonForThreeSecs(result, addPhotoToDbButton);
+                result = AddPhoto.TryAddPhoto(_photoAddingContext, tryPhoto);
             }
+            // Invoke showing result on the main thread, if unsuccessfull, invoke also showing the person
+            Invoke(new Action( () => Global.ShowOnButtonForThreeSecs(result, addPhotoToDbButton) ));
         }
 
         private void locationTextBox_KeyUp(object sender, KeyEventArgs e)
