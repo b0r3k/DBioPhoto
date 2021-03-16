@@ -81,7 +81,8 @@ namespace DBioPhoto.DataAccess.Services.Adding
                         .Select(o => o.ToString()).Distinct().ToArray();
                     break;
                 case 1:
-                    suggestions = dbContext.People.Where(p => p.Name.StartsWith(beginning.ToLower()) || p.Nickname.StartsWith(beginning.ToLower()))
+                    suggestions = dbContext.People
+                        .Where(p => p.Name.StartsWith(beginning.ToLower()) || p.Nickname.StartsWith(beginning.ToLower()) || p.Surname.StartsWith(beginning.ToLower()))
                         .Select(p => p.ToString()).Distinct().ToArray();
                     break;
                 default:
