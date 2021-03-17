@@ -64,6 +64,9 @@ namespace DBioPhoto.DataAccess.Services.Adding
         {
             Photo photo = dbContext.Photos.Where(p => p.FilePath == photoRelativePath).Include(p => p.Organisms).FirstOrDefault();
             Organism organism = dbContext.Organisms.Where(o => o.FirstName == organismFirstName && o.SecondName == organismSecondName).FirstOrDefault();
+            // If the organism didn't have second name, then the SecondName is LatFirstName in fact
+            if (organism == null)
+                organism = dbContext.Organisms.Where(o => o.FirstName == organismFirstName && o.LatFirstName == organismSecondName).FirstOrDefault();
             if (photo == null || organism == null)
             {
                 return false;
