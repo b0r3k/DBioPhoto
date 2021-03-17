@@ -306,10 +306,7 @@ namespace DBioPhoto.Frontend
             // Remove organism from photo, update the listbox
             if (organismsOnPhotoListBox.SelectedIndices.Count == 1)
             {
-                var usedContext = new DataAccess.Data.DBioPhotoContext(Global.DbFilePath);
-                AddPhoto.RemoveOrganismFromPhoto(usedContext, _showedImageRelativePath, organismsOnPhotoListBox.SelectedIndex);
-                usedContext.SaveChanges();
-                usedContext.Dispose();
+                Task.Run( () => RemoveContentFromPhotoLocking(_showedImageRelativePath, organismsOnPhotoListBox.SelectedIndex, true) );
                 Task.Run( () => GetPhotoContentLocking(_showedImageRelativePath) );
             }
         }
@@ -319,11 +316,19 @@ namespace DBioPhoto.Frontend
             // Remove person from photo, update the listbox
             if (peopleOnPhotoListBox.SelectedIndices.Count == 1)
             {
-                var usedContext = new DataAccess.Data.DBioPhotoContext(Global.DbFilePath);
-                AddPhoto.RemovePersonFromPhoto(usedContext, _showedImageRelativePath, peopleOnPhotoListBox.SelectedIndex);
-                usedContext.SaveChanges();
-                usedContext.Dispose();
-                Task.Run(() => GetPhotoContentLocking(_showedImageRelativePath));
+                Task.Run( () => RemoveContentFromPhotoLocking(_showedImageRelativePath, peopleOnPhotoListBox.SelectedIndex, false) );
+                Task.Run( () => GetPhotoContentLocking(_showedImageRelativePath) );
+            }
+        }
+
+        private void RemoveContentFromPhotoLocking(string imageRelativePath, int index, bool removingOrganism)
+        {
+            lock (_photoContentContext)
+            {
+                if (removingOrganism)
+                    AddPhoto.RemoveOrganismFromPhoto(_photoContentContext, imageRelativePath, index);
+                else
+                    AddPhoto.RemovePersonFromPhoto(_photoContentContext, imageRelativePath, index);
             }
         }
 
@@ -404,6 +409,8 @@ namespace DBioPhoto.Frontend
                     Invoke(new Action( () => Global.ShowOnButtonForThreeSecs("Úspěšně přidáno!", addOrganismToPhotoButton) ));
                 else
                     Invoke(new Action( () => Global.ShowOnButtonForThreeSecs("Úspěšně přidáno!", addPersonToPhotoButton) ));
+
+                Task.Run(() => GetPhotoContentLocking(_showedImageRelativePath));
             }
             else
             {
