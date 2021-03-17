@@ -35,7 +35,7 @@ namespace DBioPhoto.Frontend
         private DBioPhotoContext _photoInfoSuggestionsContext;
         private DBioPhotoContext _photoContentContext;
 
-        // Backgroundworkers
+        // Backgroundworker for loading images
         private BackgroundWorker LoadingImagesBgWorker;
 
         // Collections for autocomplete
@@ -74,6 +74,7 @@ namespace DBioPhoto.Frontend
             personNameOrNickTextBox.AutoCompleteCustomSource = _photoContentSuggestions;
         }
 
+        // Load images from selected folder in the background, view it
         private void LoadingImagesBgWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             // Get all the images from selected directory, reset the thumbnails
@@ -181,11 +182,12 @@ namespace DBioPhoto.Frontend
         {
             if (imagesListView.SelectedIndices.Count > 0)
             {
-                // When selecting an image, save the index, path, get the datetime of creation
+                // When selecting an image, save the index and the path
                 _selectedIndex = imagesListView.SelectedIndices[0];
                 _showedImagePath = _imagePaths[_selectedIndex];
                 _showedImageRelativePath = _showedImagePath.Replace(Global.RootFolder, "");
 
+                // Dispose the old image, load new, get its datetime of creation / last write
                 if (_showedImage != null)
                     _showedImage.Dispose();
 
@@ -198,7 +200,7 @@ namespace DBioPhoto.Frontend
                 showedPhotoRelativePathTextBox.Text = _showedImageRelativePath;
                 showedPhotoDateTextBox.Text = _showedImageDate.ToString();
 
-                // Get what's on the photo in the background, populate the ListBoxes with it
+                // Get what's on the photo in another thread, populate the ListBoxes with it
                 Task.Run(() => GetPhotoContentLocking(_showedImageRelativePath));
             }
         }
@@ -225,7 +227,7 @@ namespace DBioPhoto.Frontend
 
         private void addPhotoToDbButton_Click(object sender, EventArgs e)
         {
-            // Get the values from the form, lowecase everything, create the instance of Organism
+            // Get the values from the form, lowercase everything, create the instance of Organism
             DateTime date = _showedImageDate;
             string fileName = Path.GetFileName(_showedImagePath);
             string filePath = _showedImageRelativePath;
@@ -296,6 +298,7 @@ namespace DBioPhoto.Frontend
             {
                 (organismsOnPhoto, peopleOnPhoto) = AddPhoto.GetPhotoContent(_photoContentContext, imageRelativePath);
             }
+            // Invoke viewing the results in the listboxes
             Invoke(new Action( () => { organismsOnPhotoListBox.DataSource = organismsOnPhoto; peopleOnPhotoListBox.DataSource = peopleOnPhoto; } ));
         }
 
@@ -367,6 +370,7 @@ namespace DBioPhoto.Frontend
 
 
 
+        // Parse the organism names in the textbox, try to add it to photo in another thread, refresh the listbox
         private void addOrganismToPhotoButton_Click(object sender, EventArgs e)
         {
             string tryOrganismInfo = organismNameTextBox.Text;
@@ -380,6 +384,7 @@ namespace DBioPhoto.Frontend
             }
         }
 
+        // Parse the person names in the textbox, try to add it to photo in another thread, refresh the listbox
         private void addPersonToPhotoButton_Click(object sender, EventArgs e)
         {
             string tryPersonInfo = personNameOrNickTextBox.Text;
