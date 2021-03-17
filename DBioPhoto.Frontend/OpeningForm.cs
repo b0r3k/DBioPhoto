@@ -6,23 +6,10 @@ using System.Windows.Forms;
 
 namespace DBioPhoto.Frontend
 {
-    /*
-    Zadám složku, ono to postupně otevírá fotky a nechává si dopsat informace
-
-    -- typ -- krajina, rostliny, houby, živočichové, mikro, lidi - případně možnost přidat typ
-    -- český a latinský název -- dělit na rodové a druhové jméno
-    -- datum(na různých úrovních, měsíc, rok, rozmezí)
-    -- lokalita, případně kreslit do mapy
-    -- obecná textová poznámka
-    -- případně u živočichů bezobratlí/obratlovci, při dalším přidání to už podle rodového jména doplní
-    -- případně u rostlin byliny/stromy/keře/výtrusné
-    -- barva květu -- bílá, žlutá, červená, růžová, fialová, zelená a nevytvořený, modrá
-        -- kliknout na místo a z okolních pixelů vybrat barvu, která je nejblíž
-    -- možná přístupná databáze biolib, ze které by se daly tahat další informace
-    */
     public partial class OpeningForm : Form
     {
         private string _filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) + "\\DBioPhotoDB.mdf";
+        private DataAccess.Data.DBioPhotoContext _dbContext;
         private Thread firstContextCreateThread, createContextThread;
         public OpeningForm()
         {
@@ -57,7 +44,19 @@ namespace DBioPhoto.Frontend
 
         private void buttonWantSearch_Click(object sender, EventArgs e)
         {
-
+            // If already opened, bring to front, else create new
+            if (Application.OpenForms.OfType<SearchingForm>().Count() == 1)
+            {
+                SearchingForm openedForm = Application.OpenForms.OfType<SearchingForm>().First();
+                openedForm.WindowState = FormWindowState.Normal;
+                openedForm.BringToFront();
+            }
+            else
+            {
+                SearchingForm newGui = new SearchingForm();
+                newGui.Visible = true;
+            }
+            this.Visible = false;
         }
 
         private void organismAddButton_Click(object sender, EventArgs e)
@@ -72,6 +71,22 @@ namespace DBioPhoto.Frontend
             else
             {
                 OrganismAddForm newGui = new OrganismAddForm();
+                newGui.Visible = true;
+            }
+        }
+
+        private void personAddButton_Click(object sender, EventArgs e)
+        {
+            // If already opened, bring to front, else create new
+            if (Application.OpenForms.OfType<PersonAddForm>().Count() == 1)
+            {
+                PersonAddForm openedForm = Application.OpenForms.OfType<PersonAddForm>().First();
+                openedForm.WindowState = FormWindowState.Normal;
+                openedForm.BringToFront();
+            }
+            else
+            {
+                PersonAddForm newGui = new PersonAddForm();
                 newGui.Visible = true;
             }
         }
@@ -96,7 +111,8 @@ namespace DBioPhoto.Frontend
 
         private void chooseThisDbButton_Click(object sender, EventArgs e)
         {
-            // If file exists, open db connection to it, save RootFolder path and DbFile path
+            SetActionButtonsVisible(false);
+            // If file exists, open db connection to it (create dbcontext in another thread), save RootFolder path and DbFile path
             if (File.Exists(_filePath))
             {
                 Global.RootFolder = Path.GetDirectoryName(_filePath);
@@ -110,17 +126,17 @@ namespace DBioPhoto.Frontend
         }
         private void CreateDbContext()
         {
-            // Create db context, if creating first db, wait for it
+            // Verify it's possible to create the dbcontext and there's database created, if creating first db, wait for it
             if (firstContextCreateThread != null && firstContextCreateThread.ThreadState == ThreadState.Running)
                 firstContextCreateThread.Join();
-            if (Global.DbContext != null)
+            if (_dbContext != null)
             {
-                Global.DbContext.SaveChanges();
-                Global.DbContext.Dispose();
+                _dbContext.SaveChanges();
+                _dbContext.Dispose();
             }
-            Global.DbContext = new DataAccess.Data.DBioPhotoContext(_filePath);
-            Global.DbContext.Database.EnsureCreated();
-            Global.DbContext.Dispose();
+            _dbContext = new DataAccess.Data.DBioPhotoContext(_filePath);
+            _dbContext.Database.EnsureCreated();
+            _dbContext.Dispose();
         }
 
         private void createNewDbButton_Click(object sender, EventArgs e)
@@ -145,29 +161,14 @@ namespace DBioPhoto.Frontend
             }
         }
 
-        private void personAddButton_Click(object sender, EventArgs e)
-        {
-            if (Application.OpenForms.OfType<PersonAddForm>().Count() == 1)
-            {
-                PersonAddForm openedForm = Application.OpenForms.OfType<PersonAddForm>().First();
-                openedForm.WindowState = FormWindowState.Normal;
-                openedForm.BringToFront();
-            }
-            else
-            {
-                PersonAddForm newGui = new PersonAddForm();
-                newGui.Visible = true;
-            }
-        }
-
         private void FirstCreateDbContext()
         {
             // Create new db and db file where selected
-            Global.DbContext = new DataAccess.Data.DBioPhotoContext(_filePath);
-            Global.DbContext.Database.EnsureCreated();
-            Global.DbContext.SaveChanges();
-            Global.DbContext.Dispose();
-            Global.DbContext = null;
+            _dbContext = new DataAccess.Data.DBioPhotoContext(_filePath);
+            _dbContext.Database.EnsureCreated();
+            _dbContext.SaveChanges();
+            _dbContext.Dispose();
+            _dbContext = null;
         }
     }
 }
