@@ -37,7 +37,6 @@ namespace DBioPhoto.Frontend
 
         // Backgroundworkers
         private BackgroundWorker LoadingImagesBgWorker;
-        private BackgroundWorker AddingContentToPhotoBgWorker;
 
         // Collections for autocomplete
         private AutoCompleteStringCollection _photoInfoSuggestions;
@@ -73,11 +72,6 @@ namespace DBioPhoto.Frontend
             _photoContentSuggestions = new AutoCompleteStringCollection();
             organismNameTextBox.AutoCompleteCustomSource = _photoContentSuggestions;
             personNameOrNickTextBox.AutoCompleteCustomSource = _photoContentSuggestions;
-
-            // Create the BackgroundWorker for adding content to photos, bind tasks for him
-            AddingContentToPhotoBgWorker = new BackgroundWorker();
-            AddingContentToPhotoBgWorker.DoWork += new DoWorkEventHandler(AddingContentToPhotoBgWorker_DoWork);
-            AddingContentToPhotoBgWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(AddingContentToPhotoBgWorker_RunWorkerEventCompleted);
         }
 
         private void LoadingImagesBgWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -293,6 +287,7 @@ namespace DBioPhoto.Frontend
         }
 
 
+
         private void GetPhotoContentLocking(string imageRelativePath)
         {
             List<Organism> organismsOnPhoto;
@@ -303,6 +298,8 @@ namespace DBioPhoto.Frontend
             }
             Invoke(new Action( () => { organismsOnPhotoListBox.DataSource = organismsOnPhoto; peopleOnPhotoListBox.DataSource = peopleOnPhoto; } ));
         }
+
+
 
         private void removeOrganismFromPhotoButton_Click(object sender, EventArgs e)
         {
@@ -371,10 +368,11 @@ namespace DBioPhoto.Frontend
             string[] tryOrganismNames = tryOrganismInfo.Split(' ');
             if (tryOrganismNames.Length >= 2 && _showedImageRelativePath != null)
             {
-                AddingContentToPhotoBgWorker.RunWorkerAsync((tryOrganismNames, true));
+                Task.Run(() => TryAddContentToPhotoLocking(tryOrganismNames, true, _showedImageRelativePath));
                 organismNameTextBox.Text = "";
+
+                Task.Run(() => GetPhotoContentLocking(_showedImageRelativePath));
             }
-            Task.Run(() => GetPhotoContentLocking(_showedImageRelativePath));
         }
 
         private void addPersonToPhotoButton_Click(object sender, EventArgs e)
@@ -383,52 +381,39 @@ namespace DBioPhoto.Frontend
             string[] tryPersonNames = tryPersonInfo.Split(' ');
             if (tryPersonNames.Length >= 3 && _showedImageRelativePath != null)
             {
-                AddingContentToPhotoBgWorker.RunWorkerAsync((tryPersonNames, false));
+                Task.Run( () => TryAddContentToPhotoLocking(tryPersonNames, false, _showedImageRelativePath) );
                 personNameOrNickTextBox.Text = "";
+
+                Task.Run(() => GetPhotoContentLocking(_showedImageRelativePath));
             }
-            Task.Run(() => GetPhotoContentLocking(_showedImageRelativePath));
         }
 
-        private void AddingContentToPhotoBgWorker_DoWork(object sender, DoWorkEventArgs e)
+        private void TryAddContentToPhotoLocking(string[] names, bool addingOrganism, string imageRelativePath)
         {
-            // Try to add the content to photo in the background
-            (string[] names, bool addingOrganism) = (ValueTuple<string[], bool>)e.Argument;
-            var usedContext = new DataAccess.Data.DBioPhotoContext(Global.DbFilePath);
-            if (addingOrganism)
-                e.Result = (AddPhoto.TryAddOrganismToPhoto(usedContext, _showedImageRelativePath, names[0], names[1]), true);
-            else
-                e.Result = (AddPhoto.TryAddPersonToPhoto(usedContext, _showedImageRelativePath, names[0], names[2]), false);
-            usedContext.SaveChanges();
-            usedContext.Dispose();
-        }
-        private void AddingContentToPhotoBgWorker_RunWorkerEventCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            // Show the result
-            if (e.Error != null)
-                MessageBox.Show(e.Error.Message);
-            else if (e.Cancelled)
-                MessageBox.Show("Operace zrušena");
+            bool successfull;
+            lock (_photoContentContext)
+            {
+                if (addingOrganism)
+                    successfull = AddPhoto.TryAddOrganismToPhoto(_photoContentContext, imageRelativePath, names[0], names[1]);
+                else
+                    successfull = AddPhoto.TryAddPersonToPhoto(_photoContentContext, imageRelativePath, names[0], names[2]);
+            }
+            if (successfull)
+            {
+                if (addingOrganism)
+                    Invoke(new Action( () => Global.ShowOnButtonForThreeSecs("Úspěšně přidáno!", addOrganismToPhotoButton) ));
+                else
+                    Invoke(new Action( () => Global.ShowOnButtonForThreeSecs("Úspěšně přidáno!", addPersonToPhotoButton) ));
+            }
             else
             {
-                (bool successfull, bool addingOrganism) = (ValueTuple<bool, bool>)e.Result;
-                if (successfull)
-                {
-                    if (addingOrganism)
-                        Global.ShowOnButtonForThreeSecs("Úspěšně přidáno!", addOrganismToPhotoButton);
-                    else
-                        Global.ShowOnButtonForThreeSecs("Úspěšně přidáno!", addPersonToPhotoButton);
-
-                    Task.Run(() => GetPhotoContentLocking(_showedImageRelativePath));
-                }
+                if (addingOrganism)
+                    Invoke(new Action( () => Global.ShowOnButtonForThreeSecs("Nešlo přidat.", addOrganismToPhotoButton) ));
                 else
-                {
-                    if (addingOrganism)
-                        Global.ShowOnButtonForThreeSecs("Nešlo přidat.", addOrganismToPhotoButton);
-                    else
-                        Global.ShowOnButtonForThreeSecs("Nešlo přidat.", addPersonToPhotoButton);
-                }
+                    Invoke(new Action( () => Global.ShowOnButtonForThreeSecs("Nešlo přidat.", addPersonToPhotoButton) ));
             }
         }
+        
 
 
         private void personAddButton_Click(object sender, EventArgs e)
