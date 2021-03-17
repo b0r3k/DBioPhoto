@@ -201,6 +201,7 @@ namespace DBioPhoto.Frontend
             this.Name = "OrganismAddForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "OrganismAddForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OrganismAddForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

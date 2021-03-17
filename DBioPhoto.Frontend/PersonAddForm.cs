@@ -9,10 +9,16 @@ namespace DBioPhoto.Frontend
 {
     public partial class PersonAddForm : Form
     {
+        // Collection for textboxes autocomplete
         private AutoCompleteStringCollection _nameSuggestions;
+
+        // Instance of person for adding
         private Person _tryPerson;
+
+        // DbContexts for communication with the db
         private DBioPhotoContext _addingContext;
         private DBioPhotoContext _suggestionsContext;
+
         public PersonAddForm()
         {
             InitializeComponent();
@@ -102,6 +108,14 @@ namespace DBioPhoto.Frontend
             }
             // Invoke using results for autocomplete on the main thread
             Invoke(new Action( () => { _nameSuggestions.Clear(); _nameSuggestions.AddRange(result); }) );
+        }
+
+        private void PersonAddForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (_addingContext != null)
+                _addingContext.Dispose();
+            if (_suggestionsContext != null)
+                _suggestionsContext.Dispose();
         }
     }
 }

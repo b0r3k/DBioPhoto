@@ -119,6 +119,7 @@ namespace DBioPhoto.Frontend
             this.Controls.Add(this.nameLabel);
             this.Name = "PersonAddForm";
             this.Text = "PersonAddForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PersonAddForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

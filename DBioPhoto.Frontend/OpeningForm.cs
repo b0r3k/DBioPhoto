@@ -136,6 +136,7 @@ namespace DBioPhoto.Frontend
             }
             _dbContext = new DataAccess.Data.DBioPhotoContext(_filePath);
             _dbContext.Database.EnsureCreated();
+            _dbContext.SaveChanges();
             _dbContext.Dispose();
         }
 
@@ -169,6 +170,12 @@ namespace DBioPhoto.Frontend
             _dbContext.SaveChanges();
             _dbContext.Dispose();
             _dbContext = null;
+        }
+
+        private void OpeningForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (_dbContext != null)
+                _dbContext.Dispose();
         }
     }
 }

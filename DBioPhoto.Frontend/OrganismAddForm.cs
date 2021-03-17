@@ -123,5 +123,13 @@ namespace DBioPhoto.Frontend
             // Invoke using results for autocomplete on the main thread
             Invoke(new Action(() => { _nameSuggestions.Clear(); _nameSuggestions.AddRange(result); }));
         }
+
+        private void OrganismAddForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (_addingContext != null)
+                _addingContext.Dispose();
+            if (_suggestionsContext != null)
+                _suggestionsContext.Dispose();
+        }
     }
 }

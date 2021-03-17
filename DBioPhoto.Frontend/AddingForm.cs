@@ -121,7 +121,13 @@ namespace DBioPhoto.Frontend
 
         private void AddingForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-        }
+            if (_photoAddingContext != null)
+                _photoAddingContext.Dispose();
+            if (_photoInfoSuggestionsContext != null)
+                _photoInfoSuggestionsContext.Dispose();
+            if (_photoContentContext != null)
+                _photoContentContext.Dispose();
+    }
 
         private void organismAddButton_Click(object sender, System.EventArgs e)
         {
