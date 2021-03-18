@@ -122,10 +122,10 @@ namespace DBioPhoto.Frontend
             this.selectedImagePictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.selectedImagePictureBox.Location = new System.Drawing.Point(37, 111);
+            this.selectedImagePictureBox.Location = new System.Drawing.Point(37, 90);
             this.selectedImagePictureBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.selectedImagePictureBox.Name = "selectedImagePictureBox";
-            this.selectedImagePictureBox.Size = new System.Drawing.Size(1029, 835);
+            this.selectedImagePictureBox.Size = new System.Drawing.Size(1042, 708);
             this.selectedImagePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.selectedImagePictureBox.TabIndex = 5;
             this.selectedImagePictureBox.TabStop = false;
