@@ -48,7 +48,7 @@ namespace DBioPhoto.DataAccess.Services.Filtering
             if (com != "")
                 photosQuery = photosQuery.Where(p => p.Comment.Contains(com.Trim().ToLower()));
 
-            photosFound = photosQuery.Select(p => p.FilePath).ToArray();
+            photosFound = photosQuery.OrderBy(p => p.TimeCreated).Select(p => p.FilePath).ToArray();
             return photosFound;
         }
             // Buď nic, nebo české, nebo latinské, nebo osoba. To vrátí věc/seznam věcí (ale jen query). Chci všechny fotky od té věci. Pak chci ty fotky projít a vyfiltrovat ještě
