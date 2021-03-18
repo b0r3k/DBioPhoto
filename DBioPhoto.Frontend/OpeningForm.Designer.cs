@@ -47,9 +47,9 @@
             this.labelWelcome.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labelWelcome.AutoSize = true;
             this.labelWelcome.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelWelcome.Location = new System.Drawing.Point(274, 25);
+            this.labelWelcome.Location = new System.Drawing.Point(314, 29);
             this.labelWelcome.Name = "labelWelcome";
-            this.labelWelcome.Size = new System.Drawing.Size(112, 41);
+            this.labelWelcome.Size = new System.Drawing.Size(138, 50);
             this.labelWelcome.TabIndex = 0;
             this.labelWelcome.Text = "Vítejte!";
             // 
@@ -57,9 +57,9 @@
             // 
             this.labelChoose.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labelChoose.AutoSize = true;
-            this.labelChoose.Location = new System.Drawing.Point(64, 82);
+            this.labelChoose.Location = new System.Drawing.Point(74, 105);
             this.labelChoose.Name = "labelChoose";
-            this.labelChoose.Size = new System.Drawing.Size(529, 15);
+            this.labelChoose.Size = new System.Drawing.Size(664, 20);
             this.labelChoose.TabIndex = 0;
             this.labelChoose.Text = "Jako první vyberte databázový soubor. Jeho umístění také určuje kořenový adresář " +
     "pro adresy fotek.";
@@ -68,9 +68,9 @@
             // 
             this.labelLocation.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labelLocation.AutoSize = true;
-            this.labelLocation.Location = new System.Drawing.Point(43, 108);
+            this.labelLocation.Location = new System.Drawing.Point(50, 140);
             this.labelLocation.Name = "labelLocation";
-            this.labelLocation.Size = new System.Drawing.Size(571, 15);
+            this.labelLocation.Size = new System.Drawing.Size(719, 20);
             this.labelLocation.TabIndex = 0;
             this.labelLocation.Text = "Standardní lokací pro databázový soubor je Obrázky/DBioPhoto.mdf a kořenovým adre" +
     "sářem jsou Obrázky.";
@@ -78,10 +78,9 @@
             // wantAddButton
             // 
             this.wantAddButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.wantAddButton.Location = new System.Drawing.Point(138, 230);
-            this.wantAddButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.wantAddButton.Location = new System.Drawing.Point(172, 321);
             this.wantAddButton.Name = "wantAddButton";
-            this.wantAddButton.Size = new System.Drawing.Size(109, 22);
+            this.wantAddButton.Size = new System.Drawing.Size(125, 29);
             this.wantAddButton.TabIndex = 2;
             this.wantAddButton.Text = "Chci přidávat!";
             this.wantAddButton.UseVisualStyleBackColor = true;
@@ -91,10 +90,9 @@
             // wantSearchButton
             // 
             this.wantSearchButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.wantSearchButton.Location = new System.Drawing.Point(409, 230);
-            this.wantSearchButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.wantSearchButton.Location = new System.Drawing.Point(481, 321);
             this.wantSearchButton.Name = "wantSearchButton";
-            this.wantSearchButton.Size = new System.Drawing.Size(109, 22);
+            this.wantSearchButton.Size = new System.Drawing.Size(125, 29);
             this.wantSearchButton.TabIndex = 3;
             this.wantSearchButton.Text = "Chci hledat!";
             this.wantSearchButton.UseVisualStyleBackColor = true;
@@ -104,9 +102,10 @@
             // organismAddButton
             // 
             this.organismAddButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.organismAddButton.Location = new System.Drawing.Point(54, 267);
+            this.organismAddButton.Location = new System.Drawing.Point(63, 370);
+            this.organismAddButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.organismAddButton.Name = "organismAddButton";
-            this.organismAddButton.Size = new System.Drawing.Size(193, 23);
+            this.organismAddButton.Size = new System.Drawing.Size(234, 31);
             this.organismAddButton.TabIndex = 4;
             this.organismAddButton.Text = "Přidávat organismy do databáze";
             this.organismAddButton.UseVisualStyleBackColor = true;
@@ -116,9 +115,10 @@
             // personAddButton
             // 
             this.personAddButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.personAddButton.Location = new System.Drawing.Point(409, 267);
+            this.personAddButton.Location = new System.Drawing.Point(481, 370);
+            this.personAddButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.personAddButton.Name = "personAddButton";
-            this.personAddButton.Size = new System.Drawing.Size(193, 23);
+            this.personAddButton.Size = new System.Drawing.Size(234, 31);
             this.personAddButton.TabIndex = 5;
             this.personAddButton.Text = "Přidat lidi do databáze";
             this.personAddButton.UseVisualStyleBackColor = true;
@@ -129,27 +129,29 @@
             // 
             this.labelDifferentLocation.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labelDifferentLocation.AutoSize = true;
-            this.labelDifferentLocation.Location = new System.Drawing.Point(177, 132);
+            this.labelDifferentLocation.Location = new System.Drawing.Point(203, 172);
             this.labelDifferentLocation.Name = "labelDifferentLocation";
-            this.labelDifferentLocation.Size = new System.Drawing.Size(293, 15);
+            this.labelDifferentLocation.Size = new System.Drawing.Size(367, 20);
             this.labelDifferentLocation.TabIndex = 6;
             this.labelDifferentLocation.Text = "Pokud chcete použít jiný, zvolte jeho lokaci v poli níže.";
             // 
             // locationTextBox
             // 
             this.locationTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.locationTextBox.Location = new System.Drawing.Point(164, 159);
+            this.locationTextBox.Location = new System.Drawing.Point(203, 210);
+            this.locationTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.locationTextBox.Name = "locationTextBox";
-            this.locationTextBox.Size = new System.Drawing.Size(318, 23);
+            this.locationTextBox.Size = new System.Drawing.Size(363, 27);
             this.locationTextBox.TabIndex = 7;
             this.locationTextBox.Click += new System.EventHandler(this.locationTextBox_Click);
             // 
             // chooseThisDbButton
             // 
             this.chooseThisDbButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.chooseThisDbButton.Location = new System.Drawing.Point(250, 197);
+            this.chooseThisDbButton.Location = new System.Drawing.Point(296, 269);
+            this.chooseThisDbButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.chooseThisDbButton.Name = "chooseThisDbButton";
-            this.chooseThisDbButton.Size = new System.Drawing.Size(144, 23);
+            this.chooseThisDbButton.Size = new System.Drawing.Size(181, 31);
             this.chooseThisDbButton.TabIndex = 8;
             this.chooseThisDbButton.Text = "Zvolit tuto databázi";
             this.chooseThisDbButton.UseVisualStyleBackColor = true;
@@ -159,18 +161,19 @@
             // 
             this.createDbLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.createDbLabel.AutoSize = true;
-            this.createDbLabel.Location = new System.Drawing.Point(177, 334);
+            this.createDbLabel.Location = new System.Drawing.Point(219, 441);
             this.createDbLabel.Name = "createDbLabel";
-            this.createDbLabel.Size = new System.Drawing.Size(277, 15);
+            this.createDbLabel.Size = new System.Drawing.Size(345, 20);
             this.createDbLabel.TabIndex = 9;
             this.createDbLabel.Text = "Pokud chcete vytvořit novou databázi, klikněte zde:";
             // 
             // createNewDbButton
             // 
             this.createNewDbButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.createNewDbButton.Location = new System.Drawing.Point(250, 366);
+            this.createNewDbButton.Location = new System.Drawing.Point(296, 481);
+            this.createNewDbButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.createNewDbButton.Name = "createNewDbButton";
-            this.createNewDbButton.Size = new System.Drawing.Size(144, 27);
+            this.createNewDbButton.Size = new System.Drawing.Size(181, 31);
             this.createNewDbButton.TabIndex = 10;
             this.createNewDbButton.Text = "Vytvořit novou databázi";
             this.createNewDbButton.UseVisualStyleBackColor = true;
@@ -178,9 +181,9 @@
             // 
             // OpeningForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(664, 411);
+            this.ClientSize = new System.Drawing.Size(807, 548);
             this.Controls.Add(this.createNewDbButton);
             this.Controls.Add(this.createDbLabel);
             this.Controls.Add(this.chooseThisDbButton);
@@ -193,8 +196,7 @@
             this.Controls.Add(this.labelLocation);
             this.Controls.Add(this.labelChoose);
             this.Controls.Add(this.labelWelcome);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MinimumSize = new System.Drawing.Size(680, 450);
+            this.MinimumSize = new System.Drawing.Size(775, 584);
             this.Name = "OpeningForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DBioPhoto";
