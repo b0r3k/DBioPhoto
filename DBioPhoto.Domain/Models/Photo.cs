@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DBioPhoto.Domain.Models
 {
-    public enum Category { People, Countryside, Plants, Animals, Fungi, Micro, All }
+    public enum Category { All, People, Countryside, Plants, Animals, Fungi, Micro }
     public class Photo
     {
         public int Id { get; set; }
