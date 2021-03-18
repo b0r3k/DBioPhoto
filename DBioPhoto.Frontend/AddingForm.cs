@@ -92,7 +92,10 @@ namespace DBioPhoto.Frontend
             // Get the thumbnails from paths
             for (int i = 0; i < imageFiles.Length; i++)
             {
-                _imageThumbnails[i] = Image.FromFile(imageFiles[i]).GetThumbnailImage(120, 90, new Image.GetThumbnailImageAbort(() => false), IntPtr.Zero);
+                if (File.Exists(imageFiles[i]))
+                    _imageThumbnails[i] = Image.FromFile(imageFiles[i]).GetThumbnailImage(120, 90, new Image.GetThumbnailImageAbort(() => false), IntPtr.Zero);
+                else
+                    MessageBox.Show("Soubor byl pravděpodobně změněn a na původní adrese se již nenachází: " + imageFiles[i]);
             }
 
             // Assign the thumbnails to the imageList
@@ -196,7 +199,10 @@ namespace DBioPhoto.Frontend
                 if (_showedImage != null)
                     _showedImage.Dispose();
 
-                _showedImage = Image.FromFile(_showedImagePath);
+                if (File.Exists(_showedImagePath))
+                    _showedImage = Image.FromFile(_showedImagePath);
+                else
+                    MessageBox.Show("Soubor byl pravděpodobně změněn a na původní adrese se již nenachází: " + _showedImagePath);
                 _showedImageDate = GetDateTakenFromImage(_showedImage);
 
                 // View the image, view info in textboxes
