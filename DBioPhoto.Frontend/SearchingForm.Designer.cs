@@ -317,7 +317,7 @@
             this.imagesListView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.imagesListView.MultiSelect = false;
             this.imagesListView.Name = "imagesListView";
-            this.imagesListView.Size = new System.Drawing.Size(813, 612);
+            this.imagesListView.Size = new System.Drawing.Size(813, 628);
             this.imagesListView.TabIndex = 10;
             this.imagesListView.UseCompatibleStateImageBehavior = false;
             this.imagesListView.SelectedIndexChanged += new System.EventHandler(this.imagesListView_SelectedIndexChanged);

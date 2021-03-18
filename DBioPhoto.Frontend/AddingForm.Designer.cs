@@ -243,7 +243,7 @@ namespace DBioPhoto.Frontend
             this.addPhotoToDbButton.Location = new System.Drawing.Point(1255, 376);
             this.addPhotoToDbButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.addPhotoToDbButton.Name = "addPhotoToDbButton";
-            this.addPhotoToDbButton.Size = new System.Drawing.Size(166, 31);
+            this.addPhotoToDbButton.Size = new System.Drawing.Size(185, 31);
             this.addPhotoToDbButton.TabIndex = 5;
             this.addPhotoToDbButton.Text = "Přidat fotku do databáze";
             this.addPhotoToDbButton.UseVisualStyleBackColor = true;
