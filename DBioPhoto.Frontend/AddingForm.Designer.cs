@@ -68,7 +68,7 @@ namespace DBioPhoto.Frontend
             this.organismAddButton.Location = new System.Drawing.Point(1325, 361);
             this.organismAddButton.Name = "organismAddButton";
             this.organismAddButton.Size = new System.Drawing.Size(124, 23);
-            this.organismAddButton.TabIndex = 0;
+            this.organismAddButton.TabIndex = 9;
             this.organismAddButton.Text = "Přidávat organismy";
             this.organismAddButton.UseVisualStyleBackColor = true;
             this.organismAddButton.Click += new System.EventHandler(this.organismAddButton_Click);
@@ -78,7 +78,7 @@ namespace DBioPhoto.Frontend
             this.folderPathTextBox.Location = new System.Drawing.Point(32, 38);
             this.folderPathTextBox.Name = "folderPathTextBox";
             this.folderPathTextBox.Size = new System.Drawing.Size(599, 23);
-            this.folderPathTextBox.TabIndex = 1;
+            this.folderPathTextBox.TabIndex = 0;
             this.folderPathTextBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.folderPathTextBox_MouseClick);
             // 
             // folderChooseButton
@@ -86,7 +86,7 @@ namespace DBioPhoto.Frontend
             this.folderChooseButton.Location = new System.Drawing.Point(649, 38);
             this.folderChooseButton.Name = "folderChooseButton";
             this.folderChooseButton.Size = new System.Drawing.Size(120, 23);
-            this.folderChooseButton.TabIndex = 2;
+            this.folderChooseButton.TabIndex = 1;
             this.folderChooseButton.Text = "Zvolit složku";
             this.folderChooseButton.UseVisualStyleBackColor = true;
             this.folderChooseButton.Click += new System.EventHandler(this.folderChooseButton_Click);
@@ -109,7 +109,7 @@ namespace DBioPhoto.Frontend
             this.imagesListView.MultiSelect = false;
             this.imagesListView.Name = "imagesListView";
             this.imagesListView.Size = new System.Drawing.Size(900, 176);
-            this.imagesListView.TabIndex = 4;
+            this.imagesListView.TabIndex = 16;
             this.imagesListView.UseCompatibleStateImageBehavior = false;
             this.imagesListView.SelectedIndexChanged += new System.EventHandler(this.imagesListView_SelectedIndexChanged);
             // 
@@ -142,7 +142,8 @@ namespace DBioPhoto.Frontend
             this.showedPhotoPathTextBox.Name = "showedPhotoPathTextBox";
             this.showedPhotoPathTextBox.ReadOnly = true;
             this.showedPhotoPathTextBox.Size = new System.Drawing.Size(231, 23);
-            this.showedPhotoPathTextBox.TabIndex = 7;
+            this.showedPhotoPathTextBox.TabIndex = 42;
+            this.showedPhotoPathTextBox.TabStop = false;
             // 
             // showedPhotoDateLabel
             // 
@@ -161,7 +162,8 @@ namespace DBioPhoto.Frontend
             this.showedPhotoDateTextBox.Name = "showedPhotoDateTextBox";
             this.showedPhotoDateTextBox.ReadOnly = true;
             this.showedPhotoDateTextBox.Size = new System.Drawing.Size(231, 23);
-            this.showedPhotoDateTextBox.TabIndex = 9;
+            this.showedPhotoDateTextBox.TabIndex = 42;
+            this.showedPhotoDateTextBox.TabStop = false;
             // 
             // categoryLabel
             // 
@@ -181,7 +183,7 @@ namespace DBioPhoto.Frontend
             this.categoryComboBox.Location = new System.Drawing.Point(1169, 168);
             this.categoryComboBox.Name = "categoryComboBox";
             this.categoryComboBox.Size = new System.Drawing.Size(231, 23);
-            this.categoryComboBox.TabIndex = 11;
+            this.categoryComboBox.TabIndex = 2;
             // 
             // commentLabel
             // 
@@ -211,7 +213,7 @@ namespace DBioPhoto.Frontend
             this.locationTextBox.Location = new System.Drawing.Point(1169, 206);
             this.locationTextBox.Name = "locationTextBox";
             this.locationTextBox.Size = new System.Drawing.Size(231, 23);
-            this.locationTextBox.TabIndex = 14;
+            this.locationTextBox.TabIndex = 3;
             this.locationTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.locationTextBox_KeyUp);
             // 
             // commentTextBox
@@ -222,7 +224,7 @@ namespace DBioPhoto.Frontend
             this.commentTextBox.Location = new System.Drawing.Point(1169, 244);
             this.commentTextBox.Name = "commentTextBox";
             this.commentTextBox.Size = new System.Drawing.Size(231, 23);
-            this.commentTextBox.TabIndex = 15;
+            this.commentTextBox.TabIndex = 4;
             this.commentTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.commentTextBox_KeyUp);
             // 
             // addPhotoToDbButton
@@ -231,7 +233,7 @@ namespace DBioPhoto.Frontend
             this.addPhotoToDbButton.Location = new System.Drawing.Point(1098, 282);
             this.addPhotoToDbButton.Name = "addPhotoToDbButton";
             this.addPhotoToDbButton.Size = new System.Drawing.Size(145, 23);
-            this.addPhotoToDbButton.TabIndex = 16;
+            this.addPhotoToDbButton.TabIndex = 5;
             this.addPhotoToDbButton.Text = "Přidat fotku do databáze";
             this.addPhotoToDbButton.UseVisualStyleBackColor = true;
             this.addPhotoToDbButton.Click += new System.EventHandler(this.addPhotoToDbButton_Click);
@@ -253,7 +255,8 @@ namespace DBioPhoto.Frontend
             this.showedPhotoRelativePathTextBox.Name = "showedPhotoRelativePathTextBox";
             this.showedPhotoRelativePathTextBox.ReadOnly = true;
             this.showedPhotoRelativePathTextBox.Size = new System.Drawing.Size(231, 23);
-            this.showedPhotoRelativePathTextBox.TabIndex = 18;
+            this.showedPhotoRelativePathTextBox.TabIndex = 42;
+            this.showedPhotoRelativePathTextBox.TabStop = false;
             // 
             // organismsOnPhotoListBox
             // 
@@ -263,7 +266,7 @@ namespace DBioPhoto.Frontend
             this.organismsOnPhotoListBox.Location = new System.Drawing.Point(959, 361);
             this.organismsOnPhotoListBox.Name = "organismsOnPhotoListBox";
             this.organismsOnPhotoListBox.Size = new System.Drawing.Size(360, 154);
-            this.organismsOnPhotoListBox.TabIndex = 19;
+            this.organismsOnPhotoListBox.TabIndex = 8;
             // 
             // peopleOnPhotoListBox
             // 
@@ -273,7 +276,7 @@ namespace DBioPhoto.Frontend
             this.peopleOnPhotoListBox.Location = new System.Drawing.Point(959, 586);
             this.peopleOnPhotoListBox.Name = "peopleOnPhotoListBox";
             this.peopleOnPhotoListBox.Size = new System.Drawing.Size(360, 139);
-            this.peopleOnPhotoListBox.TabIndex = 20;
+            this.peopleOnPhotoListBox.TabIndex = 13;
             // 
             // removeOrganismFromPhotoButton
             // 
@@ -281,7 +284,7 @@ namespace DBioPhoto.Frontend
             this.removeOrganismFromPhotoButton.Location = new System.Drawing.Point(1325, 476);
             this.removeOrganismFromPhotoButton.Name = "removeOrganismFromPhotoButton";
             this.removeOrganismFromPhotoButton.Size = new System.Drawing.Size(124, 39);
-            this.removeOrganismFromPhotoButton.TabIndex = 21;
+            this.removeOrganismFromPhotoButton.TabIndex = 10;
             this.removeOrganismFromPhotoButton.Text = "Odebrat organismus z fotky";
             this.removeOrganismFromPhotoButton.UseVisualStyleBackColor = true;
             this.removeOrganismFromPhotoButton.Click += new System.EventHandler(this.removeOrganismFromPhotoButton_Click);
@@ -292,7 +295,7 @@ namespace DBioPhoto.Frontend
             this.removePersonFromPhotoButton.Location = new System.Drawing.Point(1325, 686);
             this.removePersonFromPhotoButton.Name = "removePersonFromPhotoButton";
             this.removePersonFromPhotoButton.Size = new System.Drawing.Size(124, 39);
-            this.removePersonFromPhotoButton.TabIndex = 22;
+            this.removePersonFromPhotoButton.TabIndex = 15;
             this.removePersonFromPhotoButton.Text = "Odebrat člověka z fotky";
             this.removePersonFromPhotoButton.UseVisualStyleBackColor = true;
             this.removePersonFromPhotoButton.Click += new System.EventHandler(this.removePersonFromPhotoButton_Click);
@@ -325,7 +328,7 @@ namespace DBioPhoto.Frontend
             this.organismNameTextBox.Location = new System.Drawing.Point(959, 332);
             this.organismNameTextBox.Name = "organismNameTextBox";
             this.organismNameTextBox.Size = new System.Drawing.Size(259, 23);
-            this.organismNameTextBox.TabIndex = 25;
+            this.organismNameTextBox.TabIndex = 6;
             this.organismNameTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.organismNameTextBox_KeyUp);
             // 
             // addOrganismToPhotoButton
@@ -334,7 +337,7 @@ namespace DBioPhoto.Frontend
             this.addOrganismToPhotoButton.Location = new System.Drawing.Point(1224, 332);
             this.addOrganismToPhotoButton.Name = "addOrganismToPhotoButton";
             this.addOrganismToPhotoButton.Size = new System.Drawing.Size(95, 23);
-            this.addOrganismToPhotoButton.TabIndex = 26;
+            this.addOrganismToPhotoButton.TabIndex = 7;
             this.addOrganismToPhotoButton.Text = "Přidat na fotku";
             this.addOrganismToPhotoButton.UseVisualStyleBackColor = true;
             this.addOrganismToPhotoButton.Click += new System.EventHandler(this.addOrganismToPhotoButton_Click);
@@ -347,7 +350,7 @@ namespace DBioPhoto.Frontend
             this.personNameOrNickTextBox.Location = new System.Drawing.Point(959, 557);
             this.personNameOrNickTextBox.Name = "personNameOrNickTextBox";
             this.personNameOrNickTextBox.Size = new System.Drawing.Size(259, 23);
-            this.personNameOrNickTextBox.TabIndex = 27;
+            this.personNameOrNickTextBox.TabIndex = 11;
             this.personNameOrNickTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.personNameOrNickTextBox_KeyUp);
             // 
             // addPersonToPhotoButton
@@ -356,7 +359,7 @@ namespace DBioPhoto.Frontend
             this.addPersonToPhotoButton.Location = new System.Drawing.Point(1224, 557);
             this.addPersonToPhotoButton.Name = "addPersonToPhotoButton";
             this.addPersonToPhotoButton.Size = new System.Drawing.Size(95, 23);
-            this.addPersonToPhotoButton.TabIndex = 28;
+            this.addPersonToPhotoButton.TabIndex = 12;
             this.addPersonToPhotoButton.Text = "Přidat na fotku";
             this.addPersonToPhotoButton.UseVisualStyleBackColor = true;
             this.addPersonToPhotoButton.Click += new System.EventHandler(this.addPersonToPhotoButton_Click);
@@ -367,7 +370,7 @@ namespace DBioPhoto.Frontend
             this.personAddButton.Location = new System.Drawing.Point(1325, 586);
             this.personAddButton.Name = "personAddButton";
             this.personAddButton.Size = new System.Drawing.Size(124, 23);
-            this.personAddButton.TabIndex = 29;
+            this.personAddButton.TabIndex = 14;
             this.personAddButton.Text = "Přidávat lidi";
             this.personAddButton.UseVisualStyleBackColor = true;
             this.personAddButton.Click += new System.EventHandler(this.personAddButton_Click);

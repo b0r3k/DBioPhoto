@@ -323,7 +323,7 @@
             this.imagesListView.MultiSelect = false;
             this.imagesListView.Name = "imagesListView";
             this.imagesListView.Size = new System.Drawing.Size(900, 675);
-            this.imagesListView.TabIndex = 21;
+            this.imagesListView.TabIndex = 10;
             this.imagesListView.UseCompatibleStateImageBehavior = false;
             this.imagesListView.SelectedIndexChanged += new System.EventHandler(this.imagesListView_SelectedIndexChanged);
             // 
@@ -444,7 +444,7 @@
             this.copyPathToClipboardButton.Location = new System.Drawing.Point(1705, 293);
             this.copyPathToClipboardButton.Name = "copyPathToClipboardButton";
             this.copyPathToClipboardButton.Size = new System.Drawing.Size(132, 23);
-            this.copyPathToClipboardButton.TabIndex = 30;
+            this.copyPathToClipboardButton.TabIndex = 11;
             this.copyPathToClipboardButton.Text = "Kopírovat cestu";
             this.copyPathToClipboardButton.UseVisualStyleBackColor = true;
             this.copyPathToClipboardButton.Click += new System.EventHandler(this.copyPathToClipboardButton_Click);
@@ -457,7 +457,7 @@
             this.organismTypeComboBox.Location = new System.Drawing.Point(159, 2);
             this.organismTypeComboBox.Name = "organismTypeComboBox";
             this.organismTypeComboBox.Size = new System.Drawing.Size(250, 23);
-            this.organismTypeComboBox.TabIndex = 31;
+            this.organismTypeComboBox.TabIndex = 6;
             // 
             // organismColourComboBox
             // 
@@ -467,7 +467,7 @@
             this.organismColourComboBox.Location = new System.Drawing.Point(159, 31);
             this.organismColourComboBox.Name = "organismColourComboBox";
             this.organismColourComboBox.Size = new System.Drawing.Size(250, 23);
-            this.organismColourComboBox.TabIndex = 32;
+            this.organismColourComboBox.TabIndex = 7;
             // 
             // organismTypeLabel
             // 
