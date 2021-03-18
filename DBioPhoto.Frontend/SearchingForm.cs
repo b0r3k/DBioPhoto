@@ -80,8 +80,41 @@ namespace DBioPhoto.Frontend
                 _suggestionsContext.Dispose();
         }
 
+
+
+        // Change visibilty depending on what is the search based
+        private void basedOnComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (basedOnComboBox.SelectedIndex)
+            {
+                case 0:
+                    czNamesGroupBox.Visible = false;
+                    latNamesGroupBox.Visible = false;
+                    personNamesGroupBox.Visible = false;
+                    break;
+                case 1:
+                    czNamesGroupBox.Visible = true;
+                    latNamesGroupBox.Visible = false;
+                    personNamesGroupBox.Visible = false;
+                    break;
+                case 2:
+                    czNamesGroupBox.Visible = false;
+                    latNamesGroupBox.Visible = true;
+                    personNamesGroupBox.Visible = false;
+                    break;
+                case 3:
+                    czNamesGroupBox.Visible = false;
+                    latNamesGroupBox.Visible = false;
+                    personNamesGroupBox.Visible = true;
+                    break;
+            }
+        }
+
+
+
         private async void searchButton_Click(object sender, EventArgs e)
         {
+            // Get data that are always used
             Category category = (Category)categoryComboBox.SelectedItem;
             DateTime fromDate = fromDateTimePicker.Value;
             DateTime untilDate = untilDateTimePicker.Value;
@@ -89,6 +122,8 @@ namespace DBioPhoto.Frontend
             string comment = commentTextBox.Text.Trim().ToLower();
             string[] names = new string[3];
 
+            // Switch depending based on what is the search, get data from the form, check if valid, get the data from db in another thread,
+            // await it, then run worker to view pictures from the paths
             switch (basedOnComboBox.SelectedIndex)
             {
                 case 0:
@@ -123,6 +158,7 @@ namespace DBioPhoto.Frontend
             LoadingImagesBgWorker.RunWorkerAsync();
         }
 
+        // Lock dbcontext and query the searched stuff from there
         private void SearchPhotoLocking(DBioPhotoContext dbContext, int basedOn, string[] names, ValueTuple<Category, DateTime, DateTime, string, string> photoInfo)
         {
             string[] photosFound;
@@ -131,33 +167,6 @@ namespace DBioPhoto.Frontend
                 photosFound = SearchPhotos.SearchPhoto(dbContext, basedOn, names, photoInfo);
             }
             _imageRelativePaths = photosFound;
-        }
-
-        private void basedOnComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch (basedOnComboBox.SelectedIndex)
-            {
-                case 0:
-                    czNamesGroupBox.Visible = false;
-                    latNamesGroupBox.Visible = false;
-                    personNamesGroupBox.Visible = false;
-                    break;
-                case 1:
-                    czNamesGroupBox.Visible = true;
-                    latNamesGroupBox.Visible = false;
-                    personNamesGroupBox.Visible = false;
-                    break;
-                case 2:
-                    czNamesGroupBox.Visible = false;
-                    latNamesGroupBox.Visible = true;
-                    personNamesGroupBox.Visible = false;
-                    break;
-                case 3:
-                    czNamesGroupBox.Visible = false;
-                    latNamesGroupBox.Visible = false;
-                    personNamesGroupBox.Visible = true;
-                    break;
-            }
         }
 
         // Load images from paths got from db in the background, view it
@@ -173,7 +182,7 @@ namespace DBioPhoto.Frontend
         }
         private void GetThumbnailsForImagesRelativePaths(string[] imageFilesRelativePath)
         {
-            // Create absolutepath and get the thumbnails from paths there
+            // Create absolutepaths and get the thumbnails from paths there
             string imageAbsolutePath;
             for (int i = 0; i < imageFilesRelativePath.Length; i++)
             {
@@ -186,7 +195,6 @@ namespace DBioPhoto.Frontend
             _imageList.ImageSize = new Size(120, 90);
             _imageList.Images.AddRange(_imageThumbnails);
         }
-
         private void LoadingImagesBgWorker_RunWorkerEventCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             // View the imageList in imagesListView
@@ -199,6 +207,34 @@ namespace DBioPhoto.Frontend
                     imagesListView.Items.Add(new ListViewItem(Path.GetFileName(_imageRelativePaths[itemIndex]), itemIndex));
                 }
             }
+        }
+
+
+
+        private void imagesListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (imagesListView.SelectedIndices.Count > 0)
+            {
+                // When selecting an image, save the index and the path
+                _selectedIndex = imagesListView.SelectedIndices[0];
+                _showedImageRelativePath = _imageRelativePaths[_selectedIndex];
+                _showedImagePath = Global.RootFolder + _showedImageRelativePath;
+
+                // Dispose the old image, load new, get its datetime of creation / last write
+                if (_showedImage != null)
+                    _showedImage.Dispose();
+
+                _showedImage = Image.FromFile(_showedImagePath);
+
+                // View the image, view info in textboxes
+                selectedImagePictureBox.Image = _showedImage;
+                showedPhotoPathTextBox.Text = _showedImagePath;
+            }
+        }
+
+        private void copyPathToClipboardButton_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(_showedImagePath);
         }
     }
 }

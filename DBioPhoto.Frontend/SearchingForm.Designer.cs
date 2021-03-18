@@ -60,6 +60,9 @@
             this.latSecondNameTextBox = new System.Windows.Forms.TextBox();
             this.latNamesGroupBox = new System.Windows.Forms.GroupBox();
             this.czNamesGroupBox = new System.Windows.Forms.GroupBox();
+            this.showedPhotoPathTextBox = new System.Windows.Forms.TextBox();
+            this.showedPhotoPathLabel = new System.Windows.Forms.Label();
+            this.copyPathToClipboardButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.selectedImagePictureBox)).BeginInit();
             this.personNamesGroupBox.SuspendLayout();
             this.latNamesGroupBox.SuspendLayout();
@@ -274,6 +277,7 @@
             this.selectedImagePictureBox.Location = new System.Drawing.Point(959, 335);
             this.selectedImagePictureBox.Name = "selectedImagePictureBox";
             this.selectedImagePictureBox.Size = new System.Drawing.Size(900, 675);
+            this.selectedImagePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.selectedImagePictureBox.TabIndex = 19;
             this.selectedImagePictureBox.TabStop = false;
             // 
@@ -297,6 +301,7 @@
             this.imagesListView.Size = new System.Drawing.Size(900, 675);
             this.imagesListView.TabIndex = 21;
             this.imagesListView.UseCompatibleStateImageBehavior = false;
+            this.imagesListView.SelectedIndexChanged += new System.EventHandler(this.imagesListView_SelectedIndexChanged);
             // 
             // basedOnComboBox
             // 
@@ -384,11 +389,41 @@
             this.czNamesGroupBox.TabIndex = 27;
             this.czNamesGroupBox.TabStop = false;
             // 
+            // showedPhotoPathTextBox
+            // 
+            this.showedPhotoPathTextBox.Location = new System.Drawing.Point(1088, 306);
+            this.showedPhotoPathTextBox.Name = "showedPhotoPathTextBox";
+            this.showedPhotoPathTextBox.ReadOnly = true;
+            this.showedPhotoPathTextBox.Size = new System.Drawing.Size(633, 23);
+            this.showedPhotoPathTextBox.TabIndex = 28;
+            // 
+            // showedPhotoPathLabel
+            // 
+            this.showedPhotoPathLabel.AutoSize = true;
+            this.showedPhotoPathLabel.Location = new System.Drawing.Point(959, 309);
+            this.showedPhotoPathLabel.Name = "showedPhotoPathLabel";
+            this.showedPhotoPathLabel.Size = new System.Drawing.Size(123, 15);
+            this.showedPhotoPathLabel.TabIndex = 29;
+            this.showedPhotoPathLabel.Text = "Cesta k vybrané fotce:";
+            // 
+            // copyPathToClipboardButton
+            // 
+            this.copyPathToClipboardButton.Location = new System.Drawing.Point(1727, 306);
+            this.copyPathToClipboardButton.Name = "copyPathToClipboardButton";
+            this.copyPathToClipboardButton.Size = new System.Drawing.Size(132, 23);
+            this.copyPathToClipboardButton.TabIndex = 30;
+            this.copyPathToClipboardButton.Text = "Kopírovat cestu";
+            this.copyPathToClipboardButton.UseVisualStyleBackColor = true;
+            this.copyPathToClipboardButton.Click += new System.EventHandler(this.copyPathToClipboardButton_Click);
+            // 
             // SearchingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.Controls.Add(this.copyPathToClipboardButton);
+            this.Controls.Add(this.showedPhotoPathLabel);
+            this.Controls.Add(this.showedPhotoPathTextBox);
             this.Controls.Add(this.czNamesGroupBox);
             this.Controls.Add(this.latNamesGroupBox);
             this.Controls.Add(this.personNamesGroupBox);
@@ -460,5 +495,8 @@
         private System.Windows.Forms.TextBox latSecondNameTextBox;
         private System.Windows.Forms.GroupBox latNamesGroupBox;
         private System.Windows.Forms.GroupBox czNamesGroupBox;
+        private System.Windows.Forms.TextBox showedPhotoPathTextBox;
+        private System.Windows.Forms.Label showedPhotoPathLabel;
+        private System.Windows.Forms.Button copyPathToClipboardButton;
     }
 }
