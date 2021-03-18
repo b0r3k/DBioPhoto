@@ -10,7 +10,8 @@ namespace DBioPhoto.DataAccess.Services.Filtering
 {
     public class SearchPhotos
     {
-        public static string[] SearchPhoto(DBioPhotoContext dbContext, int basedOn, string[] names, ValueTuple<Category, DateTime, DateTime, string, string> photoInfo)
+        public static string[] SearchPhoto(DBioPhotoContext dbContext, int basedOn, string[] names, ValueTuple<OrganismType, Colour> organismTypeColour,
+            ValueTuple<Category, DateTime, DateTime, string, string> photoInfo)
         {
             string[] photosFound;
             IQueryable<Photo> photosQuery = dbContext.Photos.AsQueryable();
@@ -37,6 +38,9 @@ namespace DBioPhoto.DataAccess.Services.Filtering
                         photosQuery = dbContext.People.Where(p => p.Name == names[0] && p.Surname == names[1] && p.Nickname == names[2]).SelectMany(p => p.Photos);
                     else
                         photosQuery = dbContext.People.Where(p => p.Name == names[0] && p.Surname == names[1]).SelectMany(p => p.Photos);
+                    break;
+                case 4:
+                    photosQuery = dbContext.Organisms.Where(o => o.OrganismType == organismTypeColour.Item1 && o.Colour == organismTypeColour.Item2).SelectMany(o => o.Photos);
                     break;
             }
             (Category cat, DateTime frDate, DateTime untDate, string loc, string com) = photoInfo;

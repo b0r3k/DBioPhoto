@@ -63,10 +63,16 @@
             this.showedPhotoPathTextBox = new System.Windows.Forms.TextBox();
             this.showedPhotoPathLabel = new System.Windows.Forms.Label();
             this.copyPathToClipboardButton = new System.Windows.Forms.Button();
+            this.organismTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.organismColourComboBox = new System.Windows.Forms.ComboBox();
+            this.organismTypeLabel = new System.Windows.Forms.Label();
+            this.organismColourLabel = new System.Windows.Forms.Label();
+            this.typeColourGroupBox = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.selectedImagePictureBox)).BeginInit();
             this.personNamesGroupBox.SuspendLayout();
             this.latNamesGroupBox.SuspendLayout();
             this.czNamesGroupBox.SuspendLayout();
+            this.typeColourGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // categoryLabel
@@ -328,7 +334,7 @@
             this.personNamesGroupBox.Controls.Add(this.personSurnameTextBox);
             this.personNamesGroupBox.Controls.Add(this.personNickTextBox);
             this.personNamesGroupBox.Controls.Add(this.personNameTextBox);
-            this.personNamesGroupBox.Location = new System.Drawing.Point(1141, 183);
+            this.personNamesGroupBox.Location = new System.Drawing.Point(793, 181);
             this.personNamesGroupBox.Name = "personNamesGroupBox";
             this.personNamesGroupBox.Size = new System.Drawing.Size(476, 101);
             this.personNamesGroupBox.TabIndex = 25;
@@ -380,7 +386,7 @@
             this.latNamesGroupBox.Controls.Add(this.latSecondNameLabel);
             this.latNamesGroupBox.Controls.Add(this.latFirstNameTextBox);
             this.latNamesGroupBox.Controls.Add(this.latFirstNameLabel);
-            this.latNamesGroupBox.Location = new System.Drawing.Point(203, 225);
+            this.latNamesGroupBox.Location = new System.Drawing.Point(15, 229);
             this.latNamesGroupBox.Name = "latNamesGroupBox";
             this.latNamesGroupBox.Size = new System.Drawing.Size(735, 59);
             this.latNamesGroupBox.TabIndex = 26;
@@ -392,7 +398,7 @@
             this.czNamesGroupBox.Controls.Add(this.czSecondNameTextBox);
             this.czNamesGroupBox.Controls.Add(this.czFirstNameTextBox);
             this.czNamesGroupBox.Controls.Add(this.czFirstNameLabel);
-            this.czNamesGroupBox.Location = new System.Drawing.Point(200, 165);
+            this.czNamesGroupBox.Location = new System.Drawing.Point(12, 169);
             this.czNamesGroupBox.Name = "czNamesGroupBox";
             this.czNamesGroupBox.Size = new System.Drawing.Size(737, 60);
             this.czNamesGroupBox.TabIndex = 27;
@@ -425,11 +431,60 @@
             this.copyPathToClipboardButton.UseVisualStyleBackColor = true;
             this.copyPathToClipboardButton.Click += new System.EventHandler(this.copyPathToClipboardButton_Click);
             // 
+            // organismTypeComboBox
+            // 
+            this.organismTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.organismTypeComboBox.FormattingEnabled = true;
+            this.organismTypeComboBox.Location = new System.Drawing.Point(159, 2);
+            this.organismTypeComboBox.Name = "organismTypeComboBox";
+            this.organismTypeComboBox.Size = new System.Drawing.Size(250, 23);
+            this.organismTypeComboBox.TabIndex = 31;
+            // 
+            // organismColourComboBox
+            // 
+            this.organismColourComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.organismColourComboBox.FormattingEnabled = true;
+            this.organismColourComboBox.Location = new System.Drawing.Point(159, 31);
+            this.organismColourComboBox.Name = "organismColourComboBox";
+            this.organismColourComboBox.Size = new System.Drawing.Size(250, 23);
+            this.organismColourComboBox.TabIndex = 32;
+            // 
+            // organismTypeLabel
+            // 
+            this.organismTypeLabel.AutoSize = true;
+            this.organismTypeLabel.Location = new System.Drawing.Point(1, 7);
+            this.organismTypeLabel.Name = "organismTypeLabel";
+            this.organismTypeLabel.Size = new System.Drawing.Size(96, 15);
+            this.organismTypeLabel.TabIndex = 33;
+            this.organismTypeLabel.Text = "Druh organismu:";
+            // 
+            // organismColourLabel
+            // 
+            this.organismColourLabel.AutoSize = true;
+            this.organismColourLabel.Location = new System.Drawing.Point(1, 34);
+            this.organismColourLabel.Name = "organismColourLabel";
+            this.organismColourLabel.Size = new System.Drawing.Size(99, 15);
+            this.organismColourLabel.TabIndex = 34;
+            this.organismColourLabel.Text = "Barva organismu:";
+            // 
+            // typeColourGroupBox
+            // 
+            this.typeColourGroupBox.Controls.Add(this.organismColourLabel);
+            this.typeColourGroupBox.Controls.Add(this.organismTypeLabel);
+            this.typeColourGroupBox.Controls.Add(this.organismColourComboBox);
+            this.typeColourGroupBox.Controls.Add(this.organismTypeComboBox);
+            this.typeColourGroupBox.Location = new System.Drawing.Point(1368, 204);
+            this.typeColourGroupBox.Name = "typeColourGroupBox";
+            this.typeColourGroupBox.Size = new System.Drawing.Size(418, 58);
+            this.typeColourGroupBox.TabIndex = 35;
+            this.typeColourGroupBox.TabStop = false;
+            // 
             // SearchingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.Controls.Add(this.typeColourGroupBox);
             this.Controls.Add(this.copyPathToClipboardButton);
             this.Controls.Add(this.showedPhotoPathLabel);
             this.Controls.Add(this.showedPhotoPathTextBox);
@@ -464,6 +519,8 @@
             this.latNamesGroupBox.PerformLayout();
             this.czNamesGroupBox.ResumeLayout(false);
             this.czNamesGroupBox.PerformLayout();
+            this.typeColourGroupBox.ResumeLayout(false);
+            this.typeColourGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -507,5 +564,10 @@
         private System.Windows.Forms.TextBox showedPhotoPathTextBox;
         private System.Windows.Forms.Label showedPhotoPathLabel;
         private System.Windows.Forms.Button copyPathToClipboardButton;
+        private System.Windows.Forms.ComboBox organismTypeComboBox;
+        private System.Windows.Forms.ComboBox organismColourComboBox;
+        private System.Windows.Forms.Label organismTypeLabel;
+        private System.Windows.Forms.Label organismColourLabel;
+        private System.Windows.Forms.GroupBox typeColourGroupBox;
     }
 }

@@ -40,10 +40,12 @@ namespace DBioPhoto.Frontend
             untilDateTimePicker.Value = DateTime.Now;
 
             // Populate the basedOnComboBox
-            basedOnComboBox.DataSource = new string[] { "Nic dalšího", "Český název organimu", "Latinský název organismu",  "Jméno osoby" };
+            basedOnComboBox.DataSource = new string[] { "Nic dalšího", "Český název organimu", "Latinský název organismu",  "Jméno osoby", "Typ a barva organismu" };
 
-            // Populate the combo box with data from enum
+            // Populate the combo boxes with data from enums
             categoryComboBox.DataSource = Enum.GetValues(typeof(Category));
+            organismTypeComboBox.DataSource = Enum.GetValues(typeof(OrganismType));
+            organismColourComboBox.DataSource = Enum.GetValues(typeof(Colour));
 
             // Create the DbContexts
             _searchingContext = new DBioPhotoContext(Global.DbFilePath);
@@ -91,21 +93,31 @@ namespace DBioPhoto.Frontend
                     czNamesGroupBox.Visible = false;
                     latNamesGroupBox.Visible = false;
                     personNamesGroupBox.Visible = false;
+                    typeColourGroupBox.Visible = false;
                     break;
                 case 1:
                     czNamesGroupBox.Visible = true;
                     latNamesGroupBox.Visible = false;
                     personNamesGroupBox.Visible = false;
+                    typeColourGroupBox.Visible = false;
                     break;
                 case 2:
                     czNamesGroupBox.Visible = false;
                     latNamesGroupBox.Visible = true;
                     personNamesGroupBox.Visible = false;
+                    typeColourGroupBox.Visible = false;
                     break;
                 case 3:
                     czNamesGroupBox.Visible = false;
                     latNamesGroupBox.Visible = false;
                     personNamesGroupBox.Visible = true;
+                    typeColourGroupBox.Visible = false;
+                    break;
+                case 4:
+                    czNamesGroupBox.Visible = false;
+                    latNamesGroupBox.Visible = false;
+                    personNamesGroupBox.Visible = false;
+                    typeColourGroupBox.Visible = true;
                     break;
             }
         }
@@ -122,12 +134,16 @@ namespace DBioPhoto.Frontend
             string comment = commentTextBox.Text.Trim().ToLower();
             string[] names = new string[3];
 
+            // For when this is not needed
+            var dummyTuple = (OrganismType.Animal, Colour.Blue);
+
+
             // Switch depending based on what is the search, get data from the form, check if valid, get the data from db in another thread,
             // await it, then run worker to view pictures from the paths
             switch (basedOnComboBox.SelectedIndex)
             {
                 case 0:
-                    await Task.Run(() => SearchPhotoLocking(_searchingContext, 0, names, (category, fromDate, untilDate, location, comment)));
+                    await Task.Run(() => SearchPhotoLocking(_searchingContext, 0, names, dummyTuple, (category, fromDate, untilDate, location, comment)));
                     break;
                 case 1:
                     names[0] = czFirstNameTextBox.Text.Trim().ToLower();
@@ -135,7 +151,7 @@ namespace DBioPhoto.Frontend
                     if (names[0] == "" || names[1] == "")
                         Global.ShowOnButtonForThreeSecs("Vyplňte jména", searchButton);
                     else
-                        await Task.Run(() => SearchPhotoLocking(_searchingContext, 1, names, (category, fromDate, untilDate, location, comment)));
+                        await Task.Run(() => SearchPhotoLocking(_searchingContext, 1, names, dummyTuple, (category, fromDate, untilDate, location, comment)));
                     break;
                 case 2:
                     names[0] = latFirstNameTextBox.Text.Trim().ToLower();
@@ -143,7 +159,7 @@ namespace DBioPhoto.Frontend
                     if (names[0] == "" || names[1] == "")
                         Global.ShowOnButtonForThreeSecs("Vyplňte jména", searchButton);
                     else
-                        await Task.Run(() => SearchPhotoLocking(_searchingContext, 2, names, (category, fromDate, untilDate, location, comment)));
+                        await Task.Run(() => SearchPhotoLocking(_searchingContext, 2, names, dummyTuple, (category, fromDate, untilDate, location, comment)));
                     break;
                 case 3:
                     names[0] = personNameTextBox.Text.Trim().ToLower();
@@ -152,19 +168,26 @@ namespace DBioPhoto.Frontend
                     if (names[0] == "" || names[1] == "")
                         Global.ShowOnButtonForThreeSecs("Vyplňte jména", searchButton);
                     else
-                        await Task.Run( () => SearchPhotoLocking(_searchingContext, 3, names, (category, fromDate, untilDate, location, comment)));
+                        await Task.Run( () => SearchPhotoLocking(_searchingContext, 3, names, dummyTuple, (category, fromDate, untilDate, location, comment)));
+                    break;
+                case 4:
+                    OrganismType organismType = (OrganismType)organismTypeComboBox.SelectedItem;
+                    Colour colour = (Colour)organismColourComboBox.SelectedItem;
+                    await Task.Run(() => SearchPhotoLocking(_searchingContext, 4, names, (organismType, colour), (category, fromDate, untilDate, location, comment)));
                     break;
             }
+            MessageBox.Show(_imageRelativePaths[0]);
             LoadingImagesBgWorker.RunWorkerAsync();
         }
 
         // Lock dbcontext and query the searched stuff from there
-        private void SearchPhotoLocking(DBioPhotoContext dbContext, int basedOn, string[] names, ValueTuple<Category, DateTime, DateTime, string, string> photoInfo)
+        private void SearchPhotoLocking(DBioPhotoContext dbContext, int basedOn, string[] names, ValueTuple<OrganismType, Colour> organismTypeColour,
+            ValueTuple<Category, DateTime, DateTime, string, string> photoInfo)
         {
             string[] photosFound;
             lock (dbContext)
             {
-                photosFound = SearchPhotos.SearchPhoto(dbContext, basedOn, names, photoInfo);
+                photosFound = SearchPhotos.SearchPhoto(dbContext, basedOn, names, organismTypeColour, photoInfo);
             }
             _imageRelativePaths = photosFound;
         }
