@@ -41,7 +41,7 @@ namespace DBioPhoto.DataAccess.Services.Filtering
                     break;
             }
             (Category cat, DateTime frDate, DateTime untDate, string loc, string com) = photoInfo;
-            if (cat != Category.All)
+            if (cat != Category.Vše)
                 photosQuery = photosQuery.Where(p => p.Category == cat);
             photosQuery = photosQuery.Where(p => p.TimeCreated.Date >= frDate.Date && p.TimeCreated.Date <= untDate.Date);
             if (loc != "")

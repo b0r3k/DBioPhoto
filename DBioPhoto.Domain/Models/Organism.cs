@@ -2,8 +2,10 @@
 
 namespace DBioPhoto.Domain.Models
 {
-    public enum OrganismType { Plant, Animal, Fungus, Micro }
-    public enum Colour { None, White, Red, Yellow, Green, Blue, Violet, Pink }
+    //public enum OrganismType { Plant, Animal, Fungus, Micro }
+    public enum OrganismType { Rostlina, Zvíře, Fungus, Micro }
+    //public enum Colour { None, White, Red, Yellow, Green, Blue, Violet, Pink }
+    public enum Colour { Žádná, Bílá, Červená, Žlutá, Zelená, Modrá, Fialová, Růžová }
 
     public class Organism
     {

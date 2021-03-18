@@ -135,7 +135,7 @@ namespace DBioPhoto.Frontend
             string[] names = new string[3];
 
             // For when this is not needed
-            var dummyTuple = (OrganismType.Animal, Colour.Blue);
+            var dummyTuple = (OrganismType.Fungus, Colour.Bílá);
 
 
             // Switch depending based on what is the search, get data from the form, check if valid, get the data from db in another thread,
