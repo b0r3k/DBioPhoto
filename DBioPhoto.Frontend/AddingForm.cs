@@ -78,7 +78,7 @@ namespace DBioPhoto.Frontend
         private void LoadingImagesBgWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             // Get all the images from selected directory, reset the thumbnails
-            _imagePaths = Directory.EnumerateFiles(_folderPath, "*.jpg*", SearchOption.TopDirectoryOnly)
+            _imagePaths = Directory.EnumerateFiles(_folderPath, "*.*", SearchOption.TopDirectoryOnly)
                 .Where(f => f.ToLower().EndsWith(".jpg") || f.ToLower().EndsWith(".jpeg") || f.ToLower().EndsWith(".png")).ToArray();
             _imageThumbnails = new Image[_imagePaths.Length];
             _imageList = new ImageList();
