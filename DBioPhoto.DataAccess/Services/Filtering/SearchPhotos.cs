@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using DBioPhoto.DataAccess.Data;
+﻿using DBioPhoto.DataAccess.Data;
 using DBioPhoto.Domain.Models;
+using System;
+using System.Linq;
 
 namespace DBioPhoto.DataAccess.Services.Filtering
 {
@@ -55,7 +52,7 @@ namespace DBioPhoto.DataAccess.Services.Filtering
             photosFound = photosQuery.OrderBy(p => p.TimeCreated).Select(p => p.FilePath).ToArray();
             return photosFound;
         }
-            // Buď nic, nebo české, nebo latinské, nebo osoba. To vrátí věc/seznam věcí (ale jen query). Chci všechny fotky od té věci. Pak chci ty fotky projít a vyfiltrovat ještě
-            // datum, místo, poznámku.
+        // Buď nic, nebo české, nebo latinské, nebo osoba. To vrátí věc/seznam věcí (ale jen query). Chci všechny fotky od té věci. Pak chci ty fotky projít a vyfiltrovat ještě
+        // datum, místo, poznámku.
     }
 }

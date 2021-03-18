@@ -1,17 +1,17 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-using System.ComponentModel;
+﻿using DBioPhoto.DataAccess.Data;
+using DBioPhoto.DataAccess.Services.Adding;
+using DBioPhoto.Domain.Models;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using System.Drawing.Imaging;
 using System.Text;
 using System.Text.RegularExpressions;
-using DBioPhoto.Domain.Models;
-using DBioPhoto.DataAccess.Data;
-using DBioPhoto.DataAccess.Services.Adding;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace DBioPhoto.Frontend
 {
@@ -128,7 +128,7 @@ namespace DBioPhoto.Frontend
                 _photoInfoSuggestionsContext.Dispose();
             if (_photoContentContext != null)
                 _photoContentContext.Dispose();
-    }
+        }
 
         private void organismAddButton_Click(object sender, System.EventArgs e)
         {
@@ -170,16 +170,16 @@ namespace DBioPhoto.Frontend
                 // Clear the images now loaded
                 imagesListView.Items.Clear();
                 selectedImagePictureBox.Image = null;
-                
+
                 // Reset showedImage values
                 if (_showedImage != null)
                     _showedImage.Dispose();
                 _showedImage = null;
                 _showedImagePath = null;
                 _showedImageRelativePath = null;
-                
+
                 // Load images in the background
-                 LoadingImagesBgWorker.RunWorkerAsync();
+                LoadingImagesBgWorker.RunWorkerAsync();
             }
             else
                 MessageBox.Show("Tato složka není ve zvoleném kořenovém adresáři, databáze by nefungovala správně! Zvolte jinou.");
@@ -259,7 +259,7 @@ namespace DBioPhoto.Frontend
                 result = AddPhoto.TryAddPhoto(_photoAddingContext, tryPhoto);
             }
             // Invoke showing result on the main thread
-            Invoke(new Action( () => Global.ShowOnButtonForThreeSecs(result, addPhotoToDbButton) ));
+            Invoke(new Action(() => Global.ShowOnButtonForTwoSecs(result, addPhotoToDbButton)));
         }
 
 
@@ -278,7 +278,7 @@ namespace DBioPhoto.Frontend
             TextBox t = sender as TextBox;
             if (t != null && t.Text.Length == 3)
             {
-                Task.Run( () => GetPhotoInfoSuggestionsLocking(t.Text, 1) );
+                Task.Run(() => GetPhotoInfoSuggestionsLocking(t.Text, 1));
             }
         }
 
@@ -306,7 +306,7 @@ namespace DBioPhoto.Frontend
                 (organismsOnPhoto, peopleOnPhoto) = AddPhoto.GetPhotoContent(_photoContentContext, imageRelativePath);
             }
             // Invoke viewing the results in the listboxes
-            Invoke(new Action( () => { organismsOnPhotoListBox.DataSource = organismsOnPhoto; peopleOnPhotoListBox.DataSource = peopleOnPhoto; } ));
+            Invoke(new Action(() => { organismsOnPhotoListBox.DataSource = organismsOnPhoto; peopleOnPhotoListBox.DataSource = peopleOnPhoto; }));
         }
 
 
@@ -316,8 +316,8 @@ namespace DBioPhoto.Frontend
             // Remove organism from photo, update the listbox
             if (organismsOnPhotoListBox.SelectedIndices.Count == 1)
             {
-                Task.Run( () => RemoveContentFromPhotoLocking(_showedImageRelativePath, organismsOnPhotoListBox.SelectedIndex, true) );
-                Task.Run( () => GetPhotoContentLocking(_showedImageRelativePath) );
+                Task.Run(() => RemoveContentFromPhotoLocking(_showedImageRelativePath, organismsOnPhotoListBox.SelectedIndex, true));
+                Task.Run(() => GetPhotoContentLocking(_showedImageRelativePath));
             }
         }
 
@@ -326,8 +326,8 @@ namespace DBioPhoto.Frontend
             // Remove person from photo, update the listbox
             if (peopleOnPhotoListBox.SelectedIndices.Count == 1)
             {
-                Task.Run( () => RemoveContentFromPhotoLocking(_showedImageRelativePath, peopleOnPhotoListBox.SelectedIndex, false) );
-                Task.Run( () => GetPhotoContentLocking(_showedImageRelativePath) );
+                Task.Run(() => RemoveContentFromPhotoLocking(_showedImageRelativePath, peopleOnPhotoListBox.SelectedIndex, false));
+                Task.Run(() => GetPhotoContentLocking(_showedImageRelativePath));
             }
         }
 
@@ -398,7 +398,7 @@ namespace DBioPhoto.Frontend
             string[] tryPersonNames = tryPersonInfo.Split(' ');
             if (tryPersonNames.Length >= 3 && _showedImageRelativePath != null)
             {
-                Task.Run( () => TryAddContentToPhotoLocking(tryPersonNames, false, _showedImageRelativePath) );
+                Task.Run(() => TryAddContentToPhotoLocking(tryPersonNames, false, _showedImageRelativePath));
                 personNameOrNickTextBox.Text = "";
 
                 Task.Run(() => GetPhotoContentLocking(_showedImageRelativePath));
@@ -418,21 +418,21 @@ namespace DBioPhoto.Frontend
             if (successfull)
             {
                 if (addingOrganism)
-                    Invoke(new Action( () => Global.ShowOnButtonForThreeSecs("Úspěšně přidáno!", addOrganismToPhotoButton) ));
+                    Invoke(new Action(() => Global.ShowOnButtonForTwoSecs("Úspěšně přidáno!", addOrganismToPhotoButton)));
                 else
-                    Invoke(new Action( () => Global.ShowOnButtonForThreeSecs("Úspěšně přidáno!", addPersonToPhotoButton) ));
+                    Invoke(new Action(() => Global.ShowOnButtonForTwoSecs("Úspěšně přidáno!", addPersonToPhotoButton)));
 
                 Task.Run(() => GetPhotoContentLocking(_showedImageRelativePath));
             }
             else
             {
                 if (addingOrganism)
-                    Invoke(new Action( () => Global.ShowOnButtonForThreeSecs("Nešlo přidat.", addOrganismToPhotoButton) ));
+                    Invoke(new Action(() => Global.ShowOnButtonForTwoSecs("Nešlo přidat.", addOrganismToPhotoButton)));
                 else
-                    Invoke(new Action( () => Global.ShowOnButtonForThreeSecs("Nešlo přidat.", addPersonToPhotoButton) ));
+                    Invoke(new Action(() => Global.ShowOnButtonForTwoSecs("Nešlo přidat.", addPersonToPhotoButton)));
             }
         }
-        
+
 
 
         private void personAddButton_Click(object sender, EventArgs e)

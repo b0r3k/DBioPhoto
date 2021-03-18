@@ -1,13 +1,13 @@
-﻿using System;
+﻿using DBioPhoto.DataAccess.Data;
+using DBioPhoto.DataAccess.Services.Adding;
+using DBioPhoto.DataAccess.Services.Filtering;
+using DBioPhoto.Domain.Models;
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DBioPhoto.DataAccess.Data;
-using DBioPhoto.DataAccess.Services.Filtering;
-using DBioPhoto.DataAccess.Services.Adding;
-using DBioPhoto.Domain.Models;
 
 namespace DBioPhoto.Frontend
 {
@@ -40,7 +40,7 @@ namespace DBioPhoto.Frontend
             untilDateTimePicker.Value = DateTime.Now;
 
             // Populate the basedOnComboBox
-            basedOnComboBox.DataSource = new string[] { "Nic dalšího", "Český název organimu", "Latinský název organismu",  "Jméno osoby", "Typ a barva organismu" };
+            basedOnComboBox.DataSource = new string[] { "Nic dalšího", "Český název organimu", "Latinský název organismu", "Jméno osoby", "Typ a barva organismu" };
 
             // Populate the combo boxes with data from enums
             categoryComboBox.DataSource = Enum.GetValues(typeof(Category));
@@ -149,7 +149,7 @@ namespace DBioPhoto.Frontend
                     names[0] = czFirstNameTextBox.Text.Trim().ToLower();
                     names[1] = czSecondNameTextBox.Text.Trim().ToLower();
                     if (names[0] == "" || names[1] == "")
-                        Global.ShowOnButtonForThreeSecs("Vyplňte jména", searchButton);
+                        Global.ShowOnButtonForTwoSecs("Vyplňte jména", searchButton);
                     else
                         await Task.Run(() => SearchPhotoLocking(_searchingContext, 1, names, dummyTuple, (category, fromDate, untilDate, location, comment)));
                     break;
@@ -157,7 +157,7 @@ namespace DBioPhoto.Frontend
                     names[0] = latFirstNameTextBox.Text.Trim().ToLower();
                     names[1] = latSecondNameTextBox.Text.Trim().ToLower();
                     if (names[0] == "" || names[1] == "")
-                        Global.ShowOnButtonForThreeSecs("Vyplňte jména", searchButton);
+                        Global.ShowOnButtonForTwoSecs("Vyplňte jména", searchButton);
                     else
                         await Task.Run(() => SearchPhotoLocking(_searchingContext, 2, names, dummyTuple, (category, fromDate, untilDate, location, comment)));
                     break;
@@ -166,9 +166,9 @@ namespace DBioPhoto.Frontend
                     names[1] = personSurnameTextBox.Text.Trim().ToLower();
                     names[2] = personNickTextBox.Text.Trim().ToLower();
                     if (names[0] == "" || names[1] == "")
-                        Global.ShowOnButtonForThreeSecs("Vyplňte jména", searchButton);
+                        Global.ShowOnButtonForTwoSecs("Vyplňte jména", searchButton);
                     else
-                        await Task.Run( () => SearchPhotoLocking(_searchingContext, 3, names, dummyTuple, (category, fromDate, untilDate, location, comment)));
+                        await Task.Run(() => SearchPhotoLocking(_searchingContext, 3, names, dummyTuple, (category, fromDate, untilDate, location, comment)));
                     break;
                 case 4:
                     OrganismType organismType = (OrganismType)organismTypeComboBox.SelectedItem;

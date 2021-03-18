@@ -1,9 +1,9 @@
-﻿using System.Windows.Forms;
-using DBioPhoto.Domain.Models;
+﻿using DBioPhoto.DataAccess.Data;
 using DBioPhoto.DataAccess.Services.Adding;
-using DBioPhoto.DataAccess.Data;
+using DBioPhoto.Domain.Models;
 using System;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace DBioPhoto.Frontend
 {
@@ -61,7 +61,7 @@ namespace DBioPhoto.Frontend
                 result = AddIndividual.TryAddPerson(_addingContext, tryPerson);
             }
             // Invoke showing result on the main thread, if unsuccessfull, invoke also showing the person
-            Invoke(new Action( () => Global.ShowOnButtonForThreeSecs(result, addToDbButton) ));
+            Invoke(new Action(() => Global.ShowOnButtonForTwoSecs(result, addToDbButton)));
             if (result != "Úspěšně přidáno!")
                 Invoke(new Action(() => ShowPersonInForm(_tryPerson)));
         }
@@ -107,7 +107,7 @@ namespace DBioPhoto.Frontend
                 result = Suggestions.GetPersonNameSuggestions(_suggestionsContext, beginning, textBoxNumber);
             }
             // Invoke using results for autocomplete on the main thread
-            Invoke(new Action( () => { _nameSuggestions.Clear(); _nameSuggestions.AddRange(result); }) );
+            Invoke(new Action(() => { _nameSuggestions.Clear(); _nameSuggestions.AddRange(result); }));
         }
 
         private void PersonAddForm_FormClosing(object sender, FormClosingEventArgs e)

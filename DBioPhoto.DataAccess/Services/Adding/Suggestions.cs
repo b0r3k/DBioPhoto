@@ -1,8 +1,6 @@
-﻿using System;
+﻿using DBioPhoto.DataAccess.Data;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
-using DBioPhoto.DataAccess.Data;
 
 namespace DBioPhoto.DataAccess.Services.Adding
 {

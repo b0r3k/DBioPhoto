@@ -1,8 +1,7 @@
-﻿using DBioPhoto.DataAccess.Services.Adding;
-using DBioPhoto.DataAccess.Data;
+﻿using DBioPhoto.DataAccess.Data;
+using DBioPhoto.DataAccess.Services.Adding;
 using DBioPhoto.Domain.Models;
 using System;
-using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -25,7 +24,7 @@ namespace DBioPhoto.Frontend
             // Create the DbContexts
             _addingContext = new DBioPhotoContext(Global.DbFilePath);
             _suggestionsContext = new DBioPhotoContext(Global.DbFilePath);
-            
+
             // Set all the textboxes to autocomplete
             _nameSuggestions = new AutoCompleteStringCollection();
             firstNameTextBox.AutoCompleteCustomSource = _nameSuggestions;
@@ -64,9 +63,9 @@ namespace DBioPhoto.Frontend
                 result = AddIndividual.TryAddOrganism(_addingContext, tryOrganism);
             }
             // Invoke showing result on the main thread, if unsuccessfull, invoke also showing the organism
-            Invoke(new Action(() => Global.ShowOnButtonForThreeSecs(result, addToDbButton)));
+            Invoke(new Action(() => Global.ShowOnButtonForTwoSecs(result, addToDbButton)));
             if (result != "Úspěšně přidáno!")
-                Invoke(new Action( () => ShowOrganismInForm(_tryOrganism) ));
+                Invoke(new Action(() => ShowOrganismInForm(_tryOrganism)));
         }
         private void ShowOrganismInForm(Organism organism)
         {

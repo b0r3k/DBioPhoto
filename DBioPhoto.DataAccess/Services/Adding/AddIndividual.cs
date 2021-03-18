@@ -16,7 +16,7 @@ namespace DBioPhoto.DataAccess.Services.Adding
                 return "Organismus již existuje";
             else if (dbContext.Organisms
                                     .Any(o => o.LatFirstName == tryOrganism.LatFirstName
-                                    && (o.LatSecondName== tryOrganism.LatSecondName)))
+                                    && (o.LatSecondName == tryOrganism.LatSecondName)))
                 return "Organismus již existuje";
             else
             {
@@ -32,7 +32,7 @@ namespace DBioPhoto.DataAccess.Services.Adding
                 return "Vyplňte jméno";
             else if (dbContext.People
                                     .Any(p => (p.Name == tryPerson.Name)
-                                    && (p.Surname == tryPerson.Surname) 
+                                    && (p.Surname == tryPerson.Surname)
                                     && (p.Nickname == tryPerson.Nickname)))
                 return "Člověk již existuje";
             else
