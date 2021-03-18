@@ -176,7 +176,6 @@ namespace DBioPhoto.Frontend
                     await Task.Run(() => SearchPhotoLocking(_searchingContext, 4, names, (organismType, colour), (category, fromDate, untilDate, location, comment)));
                     break;
             }
-            MessageBox.Show(_imageRelativePaths[0]);
             LoadingImagesBgWorker.RunWorkerAsync();
         }
 

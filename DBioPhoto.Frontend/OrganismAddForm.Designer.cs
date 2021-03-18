@@ -46,7 +46,7 @@ namespace DBioPhoto.Frontend
             // 
             // firstNameLabel
             // 
-            this.firstNameLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.firstNameLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.firstNameLabel.AutoSize = true;
             this.firstNameLabel.Location = new System.Drawing.Point(12, 59);
             this.firstNameLabel.Name = "firstNameLabel";
@@ -56,7 +56,7 @@ namespace DBioPhoto.Frontend
             // 
             // secondNameLabel
             // 
-            this.secondNameLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.secondNameLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.secondNameLabel.AutoSize = true;
             this.secondNameLabel.Location = new System.Drawing.Point(12, 88);
             this.secondNameLabel.Name = "secondNameLabel";
@@ -66,7 +66,7 @@ namespace DBioPhoto.Frontend
             // 
             // latFirstNameLabel
             // 
-            this.latFirstNameLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.latFirstNameLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.latFirstNameLabel.AutoSize = true;
             this.latFirstNameLabel.Location = new System.Drawing.Point(12, 117);
             this.latFirstNameLabel.Name = "latFirstNameLabel";
@@ -76,7 +76,7 @@ namespace DBioPhoto.Frontend
             // 
             // latSecondNameLabel
             // 
-            this.latSecondNameLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.latSecondNameLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.latSecondNameLabel.AutoSize = true;
             this.latSecondNameLabel.Location = new System.Drawing.Point(12, 146);
             this.latSecondNameLabel.Name = "latSecondNameLabel";
@@ -86,7 +86,7 @@ namespace DBioPhoto.Frontend
             // 
             // colourLabel
             // 
-            this.colourLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.colourLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.colourLabel.AutoSize = true;
             this.colourLabel.Location = new System.Drawing.Point(12, 175);
             this.colourLabel.Name = "colourLabel";
@@ -96,7 +96,7 @@ namespace DBioPhoto.Frontend
             // 
             // organismTypeLabel
             // 
-            this.organismTypeLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.organismTypeLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.organismTypeLabel.AutoSize = true;
             this.organismTypeLabel.Location = new System.Drawing.Point(12, 30);
             this.organismTypeLabel.Name = "organismTypeLabel";
@@ -106,7 +106,7 @@ namespace DBioPhoto.Frontend
             // 
             // organismTypeComboBox
             // 
-            this.organismTypeComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.organismTypeComboBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.organismTypeComboBox.DataSource = this.latSecondNameTextBox.Controls;
             this.organismTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.organismTypeComboBox.FormattingEnabled = true;
@@ -117,7 +117,7 @@ namespace DBioPhoto.Frontend
             // 
             // latSecondNameTextBox
             // 
-            this.latSecondNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.latSecondNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.latSecondNameTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.latSecondNameTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.latSecondNameTextBox.Location = new System.Drawing.Point(168, 143);
@@ -128,7 +128,7 @@ namespace DBioPhoto.Frontend
             // 
             // colourComboBox
             // 
-            this.colourComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.colourComboBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.colourComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.colourComboBox.FormattingEnabled = true;
             this.colourComboBox.Location = new System.Drawing.Point(168, 172);
@@ -138,7 +138,7 @@ namespace DBioPhoto.Frontend
             // 
             // firstNameTextBox
             // 
-            this.firstNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.firstNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.firstNameTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.firstNameTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.firstNameTextBox.Location = new System.Drawing.Point(168, 56);
@@ -149,7 +149,7 @@ namespace DBioPhoto.Frontend
             // 
             // latFirstNameTextBox
             // 
-            this.latFirstNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.latFirstNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.latFirstNameTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.latFirstNameTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.latFirstNameTextBox.Location = new System.Drawing.Point(168, 114);
@@ -160,7 +160,7 @@ namespace DBioPhoto.Frontend
             // 
             // secondNameTextBox
             // 
-            this.secondNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.secondNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.secondNameTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.secondNameTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.secondNameTextBox.Location = new System.Drawing.Point(168, 85);
@@ -171,7 +171,7 @@ namespace DBioPhoto.Frontend
             // 
             // addToDbButton
             // 
-            this.addToDbButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.addToDbButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.addToDbButton.Location = new System.Drawing.Point(96, 220);
             this.addToDbButton.Name = "addToDbButton";
             this.addToDbButton.Size = new System.Drawing.Size(145, 23);

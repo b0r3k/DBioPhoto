@@ -287,6 +287,9 @@
             // 
             // selectedImagePictureBox
             // 
+            this.selectedImagePictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.selectedImagePictureBox.Location = new System.Drawing.Point(959, 335);
             this.selectedImagePictureBox.Name = "selectedImagePictureBox";
             this.selectedImagePictureBox.Size = new System.Drawing.Size(900, 675);
@@ -307,6 +310,8 @@
             // 
             // imagesListView
             // 
+            this.imagesListView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.imagesListView.HideSelection = false;
             this.imagesListView.Location = new System.Drawing.Point(30, 335);
             this.imagesListView.MultiSelect = false;
@@ -320,7 +325,7 @@
             // 
             this.basedOnComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.basedOnComboBox.FormattingEnabled = true;
-            this.basedOnComboBox.Location = new System.Drawing.Point(846, 137);
+            this.basedOnComboBox.Location = new System.Drawing.Point(821, 142);
             this.basedOnComboBox.Name = "basedOnComboBox";
             this.basedOnComboBox.Size = new System.Drawing.Size(173, 23);
             this.basedOnComboBox.TabIndex = 5;

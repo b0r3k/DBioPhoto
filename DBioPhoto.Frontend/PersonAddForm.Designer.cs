@@ -40,6 +40,7 @@ namespace DBioPhoto.Frontend
             // 
             // nameLabel
             // 
+            this.nameLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.nameLabel.AutoSize = true;
             this.nameLabel.Location = new System.Drawing.Point(46, 59);
             this.nameLabel.Name = "nameLabel";
@@ -49,6 +50,7 @@ namespace DBioPhoto.Frontend
             // 
             // surnameLabel
             // 
+            this.surnameLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.surnameLabel.AutoSize = true;
             this.surnameLabel.Location = new System.Drawing.Point(46, 96);
             this.surnameLabel.Name = "surnameLabel";
@@ -58,6 +60,7 @@ namespace DBioPhoto.Frontend
             // 
             // nickLabel
             // 
+            this.nickLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.nickLabel.AutoSize = true;
             this.nickLabel.Location = new System.Drawing.Point(46, 135);
             this.nickLabel.Name = "nickLabel";
@@ -67,6 +70,7 @@ namespace DBioPhoto.Frontend
             // 
             // nameTextBox
             // 
+            this.nameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.nameTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.nameTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.nameTextBox.Location = new System.Drawing.Point(139, 56);
@@ -77,6 +81,7 @@ namespace DBioPhoto.Frontend
             // 
             // surnameTextBox
             // 
+            this.surnameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.surnameTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.surnameTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.surnameTextBox.Location = new System.Drawing.Point(139, 93);
@@ -87,6 +92,7 @@ namespace DBioPhoto.Frontend
             // 
             // nickTextBox
             // 
+            this.nickTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.nickTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.nickTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.nickTextBox.Location = new System.Drawing.Point(139, 132);
@@ -97,6 +103,7 @@ namespace DBioPhoto.Frontend
             // 
             // addToDbButton
             // 
+            this.addToDbButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.addToDbButton.Location = new System.Drawing.Point(95, 176);
             this.addToDbButton.Name = "addToDbButton";
             this.addToDbButton.Size = new System.Drawing.Size(145, 23);
