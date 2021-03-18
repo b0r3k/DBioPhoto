@@ -137,6 +137,8 @@ namespace DBioPhoto.Frontend
             // For when this is not needed
             var dummyTuple = (OrganismType.Fungus, Colour.Bílá);
 
+            // Stop viewing the last found images
+            imagesListView.Items.Clear();
 
             // Switch depending based on what is the search, get data from the form, check if valid, get the data from db in another thread,
             // await it, then run worker to view pictures from the paths
@@ -148,16 +150,16 @@ namespace DBioPhoto.Frontend
                 case 1:
                     names[0] = czFirstNameTextBox.Text.Trim().ToLower();
                     names[1] = czSecondNameTextBox.Text.Trim().ToLower();
-                    if (names[0] == "" || names[1] == "")
-                        Global.ShowOnButtonForTwoSecs("Vyplňte jména", searchButton);
+                    if (names[0] == "")
+                        Global.ShowOnButtonForTwoSecs("Vyplňte jméno", "Hledat", searchButton);
                     else
                         await Task.Run(() => SearchPhotoLocking(_searchingContext, 1, names, dummyTuple, (category, fromDate, untilDate, location, comment)));
                     break;
                 case 2:
                     names[0] = latFirstNameTextBox.Text.Trim().ToLower();
                     names[1] = latSecondNameTextBox.Text.Trim().ToLower();
-                    if (names[0] == "" || names[1] == "")
-                        Global.ShowOnButtonForTwoSecs("Vyplňte jména", searchButton);
+                    if (names[0] == "")
+                        Global.ShowOnButtonForTwoSecs("Vyplňte jméno", "Hledat", searchButton);
                     else
                         await Task.Run(() => SearchPhotoLocking(_searchingContext, 2, names, dummyTuple, (category, fromDate, untilDate, location, comment)));
                     break;
@@ -166,7 +168,7 @@ namespace DBioPhoto.Frontend
                     names[1] = personSurnameTextBox.Text.Trim().ToLower();
                     names[2] = personNickTextBox.Text.Trim().ToLower();
                     if (names[0] == "" || names[1] == "")
-                        Global.ShowOnButtonForTwoSecs("Vyplňte jména", searchButton);
+                        Global.ShowOnButtonForTwoSecs("Vyplňte jména", "Hledat", searchButton);
                     else
                         await Task.Run(() => SearchPhotoLocking(_searchingContext, 3, names, dummyTuple, (category, fromDate, untilDate, location, comment)));
                     break;

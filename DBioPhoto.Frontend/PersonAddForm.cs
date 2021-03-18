@@ -61,7 +61,7 @@ namespace DBioPhoto.Frontend
                 result = AddIndividual.TryAddPerson(_addingContext, tryPerson);
             }
             // Invoke showing result on the main thread, if unsuccessfull, invoke also showing the person
-            Invoke(new Action(() => Global.ShowOnButtonForTwoSecs(result, addToDbButton)));
+            Invoke(new Action(() => Global.ShowOnButtonForTwoSecs(result, "Přidat do databáze", addToDbButton)));
             if (result != "Úspěšně přidáno!")
                 Invoke(new Action(() => ShowPersonInForm(_tryPerson)));
         }

@@ -63,7 +63,7 @@ namespace DBioPhoto.Frontend
                 result = AddIndividual.TryAddOrganism(_addingContext, tryOrganism);
             }
             // Invoke showing result on the main thread, if unsuccessfull, invoke also showing the organism
-            Invoke(new Action(() => Global.ShowOnButtonForTwoSecs(result, addToDbButton)));
+            Invoke(new Action(() => Global.ShowOnButtonForTwoSecs(result, "Přidat do databáze", addToDbButton)));
             if (result != "Úspěšně přidáno!")
                 Invoke(new Action(() => ShowOrganismInForm(_tryOrganism)));
         }

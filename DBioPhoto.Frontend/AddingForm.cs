@@ -263,7 +263,7 @@ namespace DBioPhoto.Frontend
                 result = AddPhoto.TryAddPhoto(_photoAddingContext, tryPhoto);
             }
             // Invoke showing result on the main thread
-            Invoke(new Action(() => Global.ShowOnButtonForTwoSecs(result, addPhotoToDbButton)));
+            Invoke(new Action(() => Global.ShowOnButtonForTwoSecs(result, "Přidat fotku do databáze", addPhotoToDbButton)));
         }
 
 
@@ -422,18 +422,18 @@ namespace DBioPhoto.Frontend
             if (successfull)
             {
                 if (addingOrganism)
-                    Invoke(new Action(() => Global.ShowOnButtonForTwoSecs("Úspěšně přidáno!", addOrganismToPhotoButton)));
+                    Invoke(new Action(() => Global.ShowOnButtonForTwoSecs("Úspěšně přidáno!", "Přidat na fotku", addOrganismToPhotoButton)));
                 else
-                    Invoke(new Action(() => Global.ShowOnButtonForTwoSecs("Úspěšně přidáno!", addPersonToPhotoButton)));
+                    Invoke(new Action(() => Global.ShowOnButtonForTwoSecs("Úspěšně přidáno!", "Přidat na fotku", addPersonToPhotoButton)));
 
                 Task.Run(() => GetPhotoContentLocking(_showedImageRelativePath));
             }
             else
             {
                 if (addingOrganism)
-                    Invoke(new Action(() => Global.ShowOnButtonForTwoSecs("Nešlo přidat.", addOrganismToPhotoButton)));
+                    Invoke(new Action(() => Global.ShowOnButtonForTwoSecs("Nešlo přidat.", "Přidat na fotku", addOrganismToPhotoButton)));
                 else
-                    Invoke(new Action(() => Global.ShowOnButtonForTwoSecs("Nešlo přidat.", addPersonToPhotoButton)));
+                    Invoke(new Action(() => Global.ShowOnButtonForTwoSecs("Nešlo přidat.",  "Přidat na fotku", addPersonToPhotoButton)));
             }
         }
 
