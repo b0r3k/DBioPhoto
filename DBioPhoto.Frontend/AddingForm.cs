@@ -105,6 +105,7 @@ namespace DBioPhoto.Frontend
         {
             // View the imageList in imagesListView
             imagesListView.LargeImageList = _imageList;
+            imagesListView.Items.Clear();
             if (_imageThumbnails != null && _imagePaths != null && _imageThumbnails.Length == _imagePaths.Length)
             {
                 for (int itemIndex = 0; itemIndex < _imageThumbnails.Length; itemIndex++)
