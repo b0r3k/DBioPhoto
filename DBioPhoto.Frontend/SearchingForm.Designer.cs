@@ -339,15 +339,14 @@
             // 
             // personNamesGroupBox
             // 
-            this.personNamesGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.personNamesGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.personNamesGroupBox.Controls.Add(this.personSurnameLabel);
             this.personNamesGroupBox.Controls.Add(this.personNickLabel);
             this.personNamesGroupBox.Controls.Add(this.personNameLabel);
             this.personNamesGroupBox.Controls.Add(this.personSurnameTextBox);
             this.personNamesGroupBox.Controls.Add(this.personNickTextBox);
             this.personNamesGroupBox.Controls.Add(this.personNameTextBox);
-            this.personNamesGroupBox.Location = new System.Drawing.Point(702, 159);
+            this.personNamesGroupBox.Location = new System.Drawing.Point(843, 160);
             this.personNamesGroupBox.Name = "personNamesGroupBox";
             this.personNamesGroupBox.Size = new System.Drawing.Size(476, 101);
             this.personNamesGroupBox.TabIndex = 25;
@@ -496,7 +495,7 @@
             this.typeColourGroupBox.Controls.Add(this.organismTypeLabel);
             this.typeColourGroupBox.Controls.Add(this.organismColourComboBox);
             this.typeColourGroupBox.Controls.Add(this.organismTypeComboBox);
-            this.typeColourGroupBox.Location = new System.Drawing.Point(1221, 187);
+            this.typeColourGroupBox.Location = new System.Drawing.Point(1396, 187);
             this.typeColourGroupBox.Name = "typeColourGroupBox";
             this.typeColourGroupBox.Size = new System.Drawing.Size(418, 58);
             this.typeColourGroupBox.TabIndex = 35;

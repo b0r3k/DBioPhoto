@@ -64,7 +64,7 @@ namespace DBioPhoto.Frontend
             // 
             // organismAddButton
             // 
-            this.organismAddButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.organismAddButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.organismAddButton.Location = new System.Drawing.Point(1325, 361);
             this.organismAddButton.Name = "organismAddButton";
             this.organismAddButton.Size = new System.Drawing.Size(124, 23);
@@ -260,7 +260,7 @@ namespace DBioPhoto.Frontend
             // 
             // organismsOnPhotoListBox
             // 
-            this.organismsOnPhotoListBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.organismsOnPhotoListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.organismsOnPhotoListBox.FormattingEnabled = true;
             this.organismsOnPhotoListBox.ItemHeight = 15;
             this.organismsOnPhotoListBox.Location = new System.Drawing.Point(959, 361);
@@ -270,7 +270,7 @@ namespace DBioPhoto.Frontend
             // 
             // peopleOnPhotoListBox
             // 
-            this.peopleOnPhotoListBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.peopleOnPhotoListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.peopleOnPhotoListBox.FormattingEnabled = true;
             this.peopleOnPhotoListBox.ItemHeight = 15;
             this.peopleOnPhotoListBox.Location = new System.Drawing.Point(959, 586);
@@ -280,7 +280,7 @@ namespace DBioPhoto.Frontend
             // 
             // removeOrganismFromPhotoButton
             // 
-            this.removeOrganismFromPhotoButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.removeOrganismFromPhotoButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.removeOrganismFromPhotoButton.Location = new System.Drawing.Point(1325, 476);
             this.removeOrganismFromPhotoButton.Name = "removeOrganismFromPhotoButton";
             this.removeOrganismFromPhotoButton.Size = new System.Drawing.Size(124, 39);
@@ -291,7 +291,7 @@ namespace DBioPhoto.Frontend
             // 
             // removePersonFromPhotoButton
             // 
-            this.removePersonFromPhotoButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.removePersonFromPhotoButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.removePersonFromPhotoButton.Location = new System.Drawing.Point(1325, 686);
             this.removePersonFromPhotoButton.Name = "removePersonFromPhotoButton";
             this.removePersonFromPhotoButton.Size = new System.Drawing.Size(124, 39);
@@ -302,7 +302,7 @@ namespace DBioPhoto.Frontend
             // 
             // organismNameLabel
             // 
-            this.organismNameLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.organismNameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.organismNameLabel.AutoSize = true;
             this.organismNameLabel.Location = new System.Drawing.Point(959, 314);
             this.organismNameLabel.Name = "organismNameLabel";
@@ -312,7 +312,7 @@ namespace DBioPhoto.Frontend
             // 
             // personNameOrNickLabel
             // 
-            this.personNameOrNickLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.personNameOrNickLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.personNameOrNickLabel.AutoSize = true;
             this.personNameOrNickLabel.Location = new System.Drawing.Point(959, 539);
             this.personNameOrNickLabel.Name = "personNameOrNickLabel";
@@ -322,7 +322,7 @@ namespace DBioPhoto.Frontend
             // 
             // organismNameTextBox
             // 
-            this.organismNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.organismNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.organismNameTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.organismNameTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.organismNameTextBox.Location = new System.Drawing.Point(959, 332);
@@ -333,7 +333,7 @@ namespace DBioPhoto.Frontend
             // 
             // addOrganismToPhotoButton
             // 
-            this.addOrganismToPhotoButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.addOrganismToPhotoButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.addOrganismToPhotoButton.Location = new System.Drawing.Point(1224, 332);
             this.addOrganismToPhotoButton.Name = "addOrganismToPhotoButton";
             this.addOrganismToPhotoButton.Size = new System.Drawing.Size(95, 23);
@@ -344,7 +344,7 @@ namespace DBioPhoto.Frontend
             // 
             // personNameOrNickTextBox
             // 
-            this.personNameOrNickTextBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.personNameOrNickTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.personNameOrNickTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.personNameOrNickTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.personNameOrNickTextBox.Location = new System.Drawing.Point(959, 557);
@@ -355,7 +355,7 @@ namespace DBioPhoto.Frontend
             // 
             // addPersonToPhotoButton
             // 
-            this.addPersonToPhotoButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.addPersonToPhotoButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.addPersonToPhotoButton.Location = new System.Drawing.Point(1224, 557);
             this.addPersonToPhotoButton.Name = "addPersonToPhotoButton";
             this.addPersonToPhotoButton.Size = new System.Drawing.Size(95, 23);
@@ -366,7 +366,7 @@ namespace DBioPhoto.Frontend
             // 
             // personAddButton
             // 
-            this.personAddButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.personAddButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.personAddButton.Location = new System.Drawing.Point(1325, 586);
             this.personAddButton.Name = "personAddButton";
             this.personAddButton.Size = new System.Drawing.Size(124, 23);
