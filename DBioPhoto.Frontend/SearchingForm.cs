@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DBioPhoto.DataAccess.Data;
 using DBioPhoto.DataAccess.Services.Filtering;
+using DBioPhoto.DataAccess.Services.Adding;
 using DBioPhoto.Domain.Models;
 
 namespace DBioPhoto.Frontend
@@ -24,7 +25,6 @@ namespace DBioPhoto.Frontend
         private Image _showedImage;
         private string _showedImagePath;
         private string _showedImageRelativePath;
-        private DateTime _showedImageDate;
         private int _selectedIndex;
 
         // Backgroundworker for loading images
@@ -232,9 +232,127 @@ namespace DBioPhoto.Frontend
             }
         }
 
+
+
         private void copyPathToClipboardButton_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(_showedImagePath);
+        }
+
+
+
+        // When there are 3 chars in textbox and keyup, get autocomplete suggestions for that box in other thread
+        private void locationTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            TextBox t = sender as TextBox;
+            if (t != null && t.Text.Length == 3)
+            {
+                Task.Run(() => GetPhotoInfoSuggestionsLocking(t.Text, 0));
+            }
+        }
+        private void commentTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            TextBox t = sender as TextBox;
+            if (t != null && t.Text.Length == 3)
+            {
+                Task.Run(() => GetPhotoInfoSuggestionsLocking(t.Text, 1));
+            }
+        }
+        // Get suggestions from db, lock context for it
+        private void GetPhotoInfoSuggestionsLocking(string beginning, int textBoxNumber)
+        {
+            string[] result;
+            // Lock the DbContext until finished
+            lock (_suggestionsContext)
+            {
+                result = Suggestions.GetPhotoInfoSuggestions(_suggestionsContext, beginning, textBoxNumber);
+            }
+            // Invoke using results for autocomplete on the main thread
+            Invoke(new Action(() => { _suggestions.Clear(); _suggestions.AddRange(result); }));
+        }
+
+
+        private void czFirstNameTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            TextBox t = sender as TextBox;
+            if (t != null && t.Text.Length == 3)
+            {
+                Task.Run(() => GetOrganismNameSuggestionsLocking(t.Text, 0));
+            }
+        }
+        private void czSecondNameTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            TextBox t = sender as TextBox;
+            if (t != null && t.Text.Length == 3)
+            {
+                Task.Run(() => GetOrganismNameSuggestionsLocking(t.Text, 1));
+            }
+        }
+        private void latFirstNameTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            TextBox t = sender as TextBox;
+            if (t != null && t.Text.Length == 3)
+            {
+                Task.Run(() => GetOrganismNameSuggestionsLocking(t.Text, 2));
+            }
+        }
+        private void latSecondNameTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            TextBox t = sender as TextBox;
+            if (t != null && t.Text.Length == 3)
+            {
+                Task.Run(() => GetOrganismNameSuggestionsLocking(t.Text, 3));
+            }
+        }
+        // Get suggestions from db, lock context for it
+        private void GetOrganismNameSuggestionsLocking(string beginning, int textBoxNumber)
+        {
+            string[] result;
+            // Lock the DbContext until finished
+            lock (_suggestionsContext)
+            {
+                result = Suggestions.GetOrganismNameSuggestions(_suggestionsContext, beginning, textBoxNumber);
+            }
+            // Invoke using results for autocomplete on the main thread
+            Invoke(new Action(() => { _suggestions.Clear(); _suggestions.AddRange(result); }));
+        }
+
+
+        private void personNameTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            TextBox t = sender as TextBox;
+            if (t != null && t.Text.Length == 3)
+            {
+                Task.Run(() => GetPersonNameSuggestionsLocking(t.Text, 0));
+            }
+        }
+        private void personSurnameTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            TextBox t = sender as TextBox;
+            if (t != null && t.Text.Length == 3)
+            {
+                Task.Run(() => GetPersonNameSuggestionsLocking(t.Text, 1));
+            }
+        }
+        private void personNickTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            TextBox t = sender as TextBox;
+            if (t != null && t.Text.Length == 3)
+            {
+                Task.Run(() => GetPersonNameSuggestionsLocking(t.Text, 2));
+            }
+        }
+        // Get suggestions from db, lock context for it
+        private void GetPersonNameSuggestionsLocking(string beginning, int textBoxNumber)
+        {
+            string[] result;
+            // Lock the DbContext until finished
+            lock (_suggestionsContext)
+            {
+                result = Suggestions.GetPersonNameSuggestions(_suggestionsContext, beginning, textBoxNumber);
+            }
+            // Invoke using results for autocomplete on the main thread
+            Invoke(new Action(() => { _suggestions.Clear(); _suggestions.AddRange(result); }));
         }
     }
 }

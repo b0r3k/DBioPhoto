@@ -150,6 +150,7 @@
             this.czFirstNameTextBox.Name = "czFirstNameTextBox";
             this.czFirstNameTextBox.Size = new System.Drawing.Size(250, 23);
             this.czFirstNameTextBox.TabIndex = 6;
+            this.czFirstNameTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.czFirstNameTextBox_KeyUp);
             // 
             // commentTextBox
             // 
@@ -160,6 +161,7 @@
             this.commentTextBox.Name = "commentTextBox";
             this.commentTextBox.Size = new System.Drawing.Size(250, 23);
             this.commentTextBox.TabIndex = 4;
+            this.commentTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.commentTextBox_KeyUp);
             // 
             // fromDateTimePicker
             // 
@@ -187,6 +189,7 @@
             this.czSecondNameTextBox.Name = "czSecondNameTextBox";
             this.czSecondNameTextBox.Size = new System.Drawing.Size(250, 23);
             this.czSecondNameTextBox.TabIndex = 7;
+            this.czSecondNameTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.czSecondNameTextBox_KeyUp);
             // 
             // czSecondNameLabel
             // 
@@ -206,6 +209,7 @@
             this.personSurnameTextBox.Name = "personSurnameTextBox";
             this.personSurnameTextBox.Size = new System.Drawing.Size(250, 23);
             this.personSurnameTextBox.TabIndex = 7;
+            this.personSurnameTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.personSurnameTextBox_KeyUp);
             // 
             // personNickTextBox
             // 
@@ -216,6 +220,7 @@
             this.personNickTextBox.Name = "personNickTextBox";
             this.personNickTextBox.Size = new System.Drawing.Size(250, 23);
             this.personNickTextBox.TabIndex = 8;
+            this.personNickTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.personNickTextBox_KeyUp);
             // 
             // personNameTextBox
             // 
@@ -226,6 +231,7 @@
             this.personNameTextBox.Name = "personNameTextBox";
             this.personNameTextBox.Size = new System.Drawing.Size(250, 23);
             this.personNameTextBox.TabIndex = 6;
+            this.personNameTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.personNameTextBox_KeyUp);
             // 
             // personSurnameLabel
             // 
@@ -271,6 +277,7 @@
             this.locationTextBox.Name = "locationTextBox";
             this.locationTextBox.Size = new System.Drawing.Size(250, 23);
             this.locationTextBox.TabIndex = 3;
+            this.locationTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.locationTextBox_KeyUp);
             // 
             // selectedImagePictureBox
             // 
@@ -345,6 +352,7 @@
             this.latFirstNameTextBox.Name = "latFirstNameTextBox";
             this.latFirstNameTextBox.Size = new System.Drawing.Size(250, 23);
             this.latFirstNameTextBox.TabIndex = 6;
+            this.latFirstNameTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.latFirstNameTextBox_KeyUp);
             // 
             // latSecondNameLabel
             // 
@@ -364,6 +372,7 @@
             this.latSecondNameTextBox.Name = "latSecondNameTextBox";
             this.latSecondNameTextBox.Size = new System.Drawing.Size(250, 23);
             this.latSecondNameTextBox.TabIndex = 7;
+            this.latSecondNameTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.latSecondNameTextBox_KeyUp);
             // 
             // latNamesGroupBox
             // 
