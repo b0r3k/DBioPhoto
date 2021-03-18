@@ -292,6 +292,7 @@
             // 
             this.imagesListView.HideSelection = false;
             this.imagesListView.Location = new System.Drawing.Point(30, 335);
+            this.imagesListView.MultiSelect = false;
             this.imagesListView.Name = "imagesListView";
             this.imagesListView.Size = new System.Drawing.Size(900, 675);
             this.imagesListView.TabIndex = 21;

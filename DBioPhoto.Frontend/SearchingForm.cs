@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DBioPhoto.DataAccess.Data;
@@ -15,7 +16,7 @@ namespace DBioPhoto.Frontend
         private DBioPhotoContext _suggestionsContext;
 
         // Information about folder and thumbnails
-        private string[] _imagePaths;
+        private string[] _imageRelativePaths;
         private ImageList _imageList;
         private Image[] _imageThumbnails;
 
@@ -37,6 +38,8 @@ namespace DBioPhoto.Frontend
             InitializeComponent();
 
             untilDateTimePicker.Value = DateTime.Now;
+
+            // Populate the basedOnComboBox
             basedOnComboBox.DataSource = new string[] { "Nic dalšího", "Český název organimu", "Latinský název organismu",  "Jméno osoby" };
 
             // Populate the combo box with data from enum
@@ -48,8 +51,8 @@ namespace DBioPhoto.Frontend
 
             // Create the BackgroundWorker for loading of images, bind tasks for him
             LoadingImagesBgWorker = new BackgroundWorker();
-            //LoadingImagesBgWorker.DoWork += new DoWorkEventHandler(LoadingImagesBgWorker_DoWork);
-            //LoadingImagesBgWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(LoadingImagesBgWorker_RunWorkerEventCompleted);
+            LoadingImagesBgWorker.DoWork += new DoWorkEventHandler(LoadingImagesBgWorker_DoWork);
+            LoadingImagesBgWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(LoadingImagesBgWorker_RunWorkerEventCompleted);
 
             // Set all textboxes to autocomplete
             _suggestions = new AutoCompleteStringCollection();
@@ -117,6 +120,7 @@ namespace DBioPhoto.Frontend
                         await Task.Run( () => SearchPhotoLocking(_searchingContext, 3, names, (category, fromDate, untilDate, location, comment)));
                     break;
             }
+            LoadingImagesBgWorker.RunWorkerAsync();
         }
 
         private void SearchPhotoLocking(DBioPhotoContext dbContext, int basedOn, string[] names, ValueTuple<Category, DateTime, DateTime, string, string> photoInfo)
@@ -126,7 +130,7 @@ namespace DBioPhoto.Frontend
             {
                 photosFound = SearchPhotos.SearchPhoto(dbContext, basedOn, names, photoInfo);
             }
-            _imagePaths = photosFound;
+            _imageRelativePaths = photosFound;
         }
 
         private void basedOnComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -153,6 +157,47 @@ namespace DBioPhoto.Frontend
                     latNamesGroupBox.Visible = false;
                     personNamesGroupBox.Visible = true;
                     break;
+            }
+        }
+
+        // Load images from paths got from db in the background, view it
+        private void LoadingImagesBgWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            // Reset the thumbnails and imagelist
+            _imageThumbnails = new Image[_imageRelativePaths.Length];
+            _imageList = new ImageList();
+
+            // If there are any images, get thumbnails for them
+            if (_imageRelativePaths.Length > 0)
+                GetThumbnailsForImagesRelativePaths(_imageRelativePaths);
+        }
+        private void GetThumbnailsForImagesRelativePaths(string[] imageFilesRelativePath)
+        {
+            // Create absolutepath and get the thumbnails from paths there
+            string imageAbsolutePath;
+            for (int i = 0; i < imageFilesRelativePath.Length; i++)
+            {
+                imageAbsolutePath = Global.RootFolder + imageFilesRelativePath[i];
+                _imageThumbnails[i] = Image.FromFile(imageAbsolutePath).GetThumbnailImage(120, 90, new Image.GetThumbnailImageAbort(() => false), IntPtr.Zero);
+            }
+
+            // Assign the thumbnails to the imageList
+            _imageList = new ImageList();
+            _imageList.ImageSize = new Size(120, 90);
+            _imageList.Images.AddRange(_imageThumbnails);
+        }
+
+        private void LoadingImagesBgWorker_RunWorkerEventCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            // View the imageList in imagesListView
+            imagesListView.LargeImageList = _imageList;
+            imagesListView.Items.Clear();
+            if (_imageThumbnails != null && _imageRelativePaths != null && _imageThumbnails.Length == _imageRelativePaths.Length)
+            {
+                for (int itemIndex = 0; itemIndex < _imageThumbnails.Length; itemIndex++)
+                {
+                    imagesListView.Items.Add(new ListViewItem(Path.GetFileName(_imageRelativePaths[itemIndex]), itemIndex));
+                }
             }
         }
     }
