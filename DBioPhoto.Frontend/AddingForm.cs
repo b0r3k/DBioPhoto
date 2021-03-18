@@ -142,8 +142,6 @@ namespace DBioPhoto.Frontend
             else
             {
                 OrganismAddForm newGui = new OrganismAddForm();
-                newGui.StartPosition = FormStartPosition.Manual;
-                newGui.Location = new Point(1536, 0);
                 newGui.Visible = true;
             }
         }
@@ -447,8 +445,6 @@ namespace DBioPhoto.Frontend
             else
             {
                 PersonAddForm newGui = new PersonAddForm();
-                newGui.StartPosition = FormStartPosition.Manual;
-                newGui.Location = new Point(1536, 311);
                 newGui.Visible = true;
             }
         }

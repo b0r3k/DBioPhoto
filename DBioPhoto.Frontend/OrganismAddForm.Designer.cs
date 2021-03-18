@@ -198,6 +198,7 @@ namespace DBioPhoto.Frontend
             this.Controls.Add(this.latFirstNameLabel);
             this.Controls.Add(this.secondNameLabel);
             this.Controls.Add(this.firstNameLabel);
+            this.MinimumSize = new System.Drawing.Size(370, 310);
             this.Name = "OrganismAddForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "OrganismAddForm";

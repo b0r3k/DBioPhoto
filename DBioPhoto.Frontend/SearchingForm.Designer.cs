@@ -78,7 +78,7 @@
             // categoryLabel
             // 
             this.categoryLabel.AutoSize = true;
-            this.categoryLabel.Location = new System.Drawing.Point(513, 24);
+            this.categoryLabel.Location = new System.Drawing.Point(370, 9);
             this.categoryLabel.Name = "categoryLabel";
             this.categoryLabel.Size = new System.Drawing.Size(60, 15);
             this.categoryLabel.TabIndex = 0;
@@ -96,7 +96,7 @@
             // fromDateLabel
             // 
             this.fromDateLabel.AutoSize = true;
-            this.fromDateLabel.Location = new System.Drawing.Point(513, 54);
+            this.fromDateLabel.Location = new System.Drawing.Point(370, 39);
             this.fromDateLabel.Name = "fromDateLabel";
             this.fromDateLabel.Size = new System.Drawing.Size(51, 15);
             this.fromDateLabel.TabIndex = 0;
@@ -106,7 +106,7 @@
             // 
             this.basedOnLabel.AutoSize = true;
             this.basedOnLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.basedOnLabel.Location = new System.Drawing.Point(30, 14);
+            this.basedOnLabel.Location = new System.Drawing.Point(26, 9);
             this.basedOnLabel.Name = "basedOnLabel";
             this.basedOnLabel.Size = new System.Drawing.Size(212, 25);
             this.basedOnLabel.TabIndex = 0;
@@ -115,7 +115,7 @@
             // untilDateLabel
             // 
             this.untilDateLabel.AutoSize = true;
-            this.untilDateLabel.Location = new System.Drawing.Point(938, 52);
+            this.untilDateLabel.Location = new System.Drawing.Point(795, 37);
             this.untilDateLabel.Name = "untilDateLabel";
             this.untilDateLabel.Size = new System.Drawing.Size(24, 15);
             this.untilDateLabel.TabIndex = 0;
@@ -124,7 +124,7 @@
             // commentLabel
             // 
             this.commentLabel.AutoSize = true;
-            this.commentLabel.Location = new System.Drawing.Point(513, 107);
+            this.commentLabel.Location = new System.Drawing.Point(370, 92);
             this.commentLabel.Name = "commentLabel";
             this.commentLabel.Size = new System.Drawing.Size(116, 15);
             this.commentLabel.TabIndex = 0;
@@ -141,7 +141,7 @@
             "Zvířata",
             "Houby",
             "Mikroorganismy"});
-            this.categoryComboBox.Location = new System.Drawing.Point(986, 21);
+            this.categoryComboBox.Location = new System.Drawing.Point(843, 6);
             this.categoryComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.categoryComboBox.Name = "categoryComboBox";
             this.categoryComboBox.Size = new System.Drawing.Size(250, 23);
@@ -151,10 +151,10 @@
             // 
             this.czFirstNameTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.czFirstNameTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.czFirstNameTextBox.Location = new System.Drawing.Point(480, 7);
+            this.czFirstNameTextBox.Location = new System.Drawing.Point(227, 6);
             this.czFirstNameTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.czFirstNameTextBox.Name = "czFirstNameTextBox";
-            this.czFirstNameTextBox.Size = new System.Drawing.Size(250, 23);
+            this.czFirstNameTextBox.Size = new System.Drawing.Size(188, 23);
             this.czFirstNameTextBox.TabIndex = 6;
             this.czFirstNameTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.czFirstNameTextBox_KeyUp);
             // 
@@ -162,7 +162,7 @@
             // 
             this.commentTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.commentTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.commentTextBox.Location = new System.Drawing.Point(986, 104);
+            this.commentTextBox.Location = new System.Drawing.Point(843, 89);
             this.commentTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.commentTextBox.Name = "commentTextBox";
             this.commentTextBox.Size = new System.Drawing.Size(250, 23);
@@ -171,7 +171,7 @@
             // 
             // fromDateTimePicker
             // 
-            this.fromDateTimePicker.Location = new System.Drawing.Point(630, 48);
+            this.fromDateTimePicker.Location = new System.Drawing.Point(487, 33);
             this.fromDateTimePicker.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.fromDateTimePicker.Name = "fromDateTimePicker";
             this.fromDateTimePicker.Size = new System.Drawing.Size(250, 23);
@@ -180,7 +180,7 @@
             // 
             // untilDateTimePicker
             // 
-            this.untilDateTimePicker.Location = new System.Drawing.Point(986, 48);
+            this.untilDateTimePicker.Location = new System.Drawing.Point(843, 33);
             this.untilDateTimePicker.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.untilDateTimePicker.Name = "untilDateTimePicker";
             this.untilDateTimePicker.Size = new System.Drawing.Size(250, 23);
@@ -190,10 +190,10 @@
             // 
             this.czSecondNameTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.czSecondNameTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.czSecondNameTextBox.Location = new System.Drawing.Point(480, 34);
+            this.czSecondNameTextBox.Location = new System.Drawing.Point(227, 34);
             this.czSecondNameTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.czSecondNameTextBox.Name = "czSecondNameTextBox";
-            this.czSecondNameTextBox.Size = new System.Drawing.Size(250, 23);
+            this.czSecondNameTextBox.Size = new System.Drawing.Size(188, 23);
             this.czSecondNameTextBox.TabIndex = 7;
             this.czSecondNameTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.czSecondNameTextBox_KeyUp);
             // 
@@ -208,9 +208,10 @@
             // 
             // personSurnameTextBox
             // 
+            this.personSurnameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.personSurnameTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.personSurnameTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.personSurnameTextBox.Location = new System.Drawing.Point(211, 40);
+            this.personSurnameTextBox.Location = new System.Drawing.Point(224, 40);
             this.personSurnameTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.personSurnameTextBox.Name = "personSurnameTextBox";
             this.personSurnameTextBox.Size = new System.Drawing.Size(250, 23);
@@ -219,9 +220,10 @@
             // 
             // personNickTextBox
             // 
+            this.personNickTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.personNickTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.personNickTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.personNickTextBox.Location = new System.Drawing.Point(211, 67);
+            this.personNickTextBox.Location = new System.Drawing.Point(224, 67);
             this.personNickTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.personNickTextBox.Name = "personNickTextBox";
             this.personNickTextBox.Size = new System.Drawing.Size(250, 23);
@@ -230,9 +232,10 @@
             // 
             // personNameTextBox
             // 
+            this.personNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.personNameTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.personNameTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.personNameTextBox.Location = new System.Drawing.Point(211, 13);
+            this.personNameTextBox.Location = new System.Drawing.Point(224, 13);
             this.personNameTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.personNameTextBox.Name = "personNameTextBox";
             this.personNameTextBox.Size = new System.Drawing.Size(250, 23);
@@ -241,8 +244,9 @@
             // 
             // personSurnameLabel
             // 
+            this.personSurnameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.personSurnameLabel.AutoSize = true;
-            this.personSurnameLabel.Location = new System.Drawing.Point(16, 44);
+            this.personSurnameLabel.Location = new System.Drawing.Point(29, 44);
             this.personSurnameLabel.Name = "personSurnameLabel";
             this.personSurnameLabel.Size = new System.Drawing.Size(89, 15);
             this.personSurnameLabel.TabIndex = 16;
@@ -250,8 +254,9 @@
             // 
             // personNickLabel
             // 
+            this.personNickLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.personNickLabel.AutoSize = true;
-            this.personNickLabel.Location = new System.Drawing.Point(16, 71);
+            this.personNickLabel.Location = new System.Drawing.Point(29, 71);
             this.personNickLabel.Name = "personNickLabel";
             this.personNickLabel.Size = new System.Drawing.Size(95, 15);
             this.personNickLabel.TabIndex = 14;
@@ -259,8 +264,9 @@
             // 
             // personNameLabel
             // 
+            this.personNameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.personNameLabel.AutoSize = true;
-            this.personNameLabel.Location = new System.Drawing.Point(16, 16);
+            this.personNameLabel.Location = new System.Drawing.Point(29, 16);
             this.personNameLabel.Name = "personNameLabel";
             this.personNameLabel.Size = new System.Drawing.Size(79, 15);
             this.personNameLabel.TabIndex = 15;
@@ -269,7 +275,7 @@
             // locationLabel
             // 
             this.locationLabel.AutoSize = true;
-            this.locationLabel.Location = new System.Drawing.Point(513, 79);
+            this.locationLabel.Location = new System.Drawing.Point(370, 64);
             this.locationLabel.Name = "locationLabel";
             this.locationLabel.Size = new System.Drawing.Size(39, 15);
             this.locationLabel.TabIndex = 17;
@@ -279,7 +285,7 @@
             // 
             this.locationTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.locationTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.locationTextBox.Location = new System.Drawing.Point(986, 76);
+            this.locationTextBox.Location = new System.Drawing.Point(843, 61);
             this.locationTextBox.Name = "locationTextBox";
             this.locationTextBox.Size = new System.Drawing.Size(250, 23);
             this.locationTextBox.TabIndex = 3;
@@ -290,7 +296,7 @@
             this.selectedImagePictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.selectedImagePictureBox.Location = new System.Drawing.Point(959, 335);
+            this.selectedImagePictureBox.Location = new System.Drawing.Point(937, 319);
             this.selectedImagePictureBox.Name = "selectedImagePictureBox";
             this.selectedImagePictureBox.Size = new System.Drawing.Size(900, 675);
             this.selectedImagePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -300,7 +306,7 @@
             // searchButton
             // 
             this.searchButton.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.searchButton.Location = new System.Drawing.Point(513, 284);
+            this.searchButton.Location = new System.Drawing.Point(509, 266);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(194, 45);
             this.searchButton.TabIndex = 9;
@@ -313,7 +319,7 @@
             this.imagesListView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.imagesListView.HideSelection = false;
-            this.imagesListView.Location = new System.Drawing.Point(30, 335);
+            this.imagesListView.Location = new System.Drawing.Point(8, 319);
             this.imagesListView.MultiSelect = false;
             this.imagesListView.Name = "imagesListView";
             this.imagesListView.Size = new System.Drawing.Size(900, 675);
@@ -325,7 +331,7 @@
             // 
             this.basedOnComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.basedOnComboBox.FormattingEnabled = true;
-            this.basedOnComboBox.Location = new System.Drawing.Point(821, 142);
+            this.basedOnComboBox.Location = new System.Drawing.Point(678, 118);
             this.basedOnComboBox.Name = "basedOnComboBox";
             this.basedOnComboBox.Size = new System.Drawing.Size(173, 23);
             this.basedOnComboBox.TabIndex = 5;
@@ -333,13 +339,15 @@
             // 
             // personNamesGroupBox
             // 
+            this.personNamesGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.personNamesGroupBox.Controls.Add(this.personSurnameLabel);
             this.personNamesGroupBox.Controls.Add(this.personNickLabel);
             this.personNamesGroupBox.Controls.Add(this.personNameLabel);
             this.personNamesGroupBox.Controls.Add(this.personSurnameTextBox);
             this.personNamesGroupBox.Controls.Add(this.personNickTextBox);
             this.personNamesGroupBox.Controls.Add(this.personNameTextBox);
-            this.personNamesGroupBox.Location = new System.Drawing.Point(793, 181);
+            this.personNamesGroupBox.Location = new System.Drawing.Point(702, 159);
             this.personNamesGroupBox.Name = "personNamesGroupBox";
             this.personNamesGroupBox.Size = new System.Drawing.Size(476, 101);
             this.personNamesGroupBox.TabIndex = 25;
@@ -358,10 +366,10 @@
             // 
             this.latFirstNameTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.latFirstNameTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.latFirstNameTextBox.Location = new System.Drawing.Point(477, 3);
+            this.latFirstNameTextBox.Location = new System.Drawing.Point(227, 3);
             this.latFirstNameTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.latFirstNameTextBox.Name = "latFirstNameTextBox";
-            this.latFirstNameTextBox.Size = new System.Drawing.Size(250, 23);
+            this.latFirstNameTextBox.Size = new System.Drawing.Size(188, 23);
             this.latFirstNameTextBox.TabIndex = 6;
             this.latFirstNameTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.latFirstNameTextBox_KeyUp);
             // 
@@ -378,10 +386,10 @@
             // 
             this.latSecondNameTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.latSecondNameTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.latSecondNameTextBox.Location = new System.Drawing.Point(477, 30);
+            this.latSecondNameTextBox.Location = new System.Drawing.Point(227, 30);
             this.latSecondNameTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.latSecondNameTextBox.Name = "latSecondNameTextBox";
-            this.latSecondNameTextBox.Size = new System.Drawing.Size(250, 23);
+            this.latSecondNameTextBox.Size = new System.Drawing.Size(188, 23);
             this.latSecondNameTextBox.TabIndex = 7;
             this.latSecondNameTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.latSecondNameTextBox_KeyUp);
             // 
@@ -391,9 +399,9 @@
             this.latNamesGroupBox.Controls.Add(this.latSecondNameLabel);
             this.latNamesGroupBox.Controls.Add(this.latFirstNameTextBox);
             this.latNamesGroupBox.Controls.Add(this.latFirstNameLabel);
-            this.latNamesGroupBox.Location = new System.Drawing.Point(15, 229);
+            this.latNamesGroupBox.Location = new System.Drawing.Point(15, 202);
             this.latNamesGroupBox.Name = "latNamesGroupBox";
-            this.latNamesGroupBox.Size = new System.Drawing.Size(735, 59);
+            this.latNamesGroupBox.Size = new System.Drawing.Size(645, 59);
             this.latNamesGroupBox.TabIndex = 26;
             this.latNamesGroupBox.TabStop = false;
             // 
@@ -403,15 +411,17 @@
             this.czNamesGroupBox.Controls.Add(this.czSecondNameTextBox);
             this.czNamesGroupBox.Controls.Add(this.czFirstNameTextBox);
             this.czNamesGroupBox.Controls.Add(this.czFirstNameLabel);
-            this.czNamesGroupBox.Location = new System.Drawing.Point(12, 169);
+            this.czNamesGroupBox.Location = new System.Drawing.Point(15, 140);
             this.czNamesGroupBox.Name = "czNamesGroupBox";
-            this.czNamesGroupBox.Size = new System.Drawing.Size(737, 60);
+            this.czNamesGroupBox.Size = new System.Drawing.Size(647, 60);
             this.czNamesGroupBox.TabIndex = 27;
             this.czNamesGroupBox.TabStop = false;
             // 
             // showedPhotoPathTextBox
             // 
-            this.showedPhotoPathTextBox.Location = new System.Drawing.Point(1088, 306);
+            this.showedPhotoPathTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.showedPhotoPathTextBox.Location = new System.Drawing.Point(1066, 293);
             this.showedPhotoPathTextBox.Name = "showedPhotoPathTextBox";
             this.showedPhotoPathTextBox.ReadOnly = true;
             this.showedPhotoPathTextBox.Size = new System.Drawing.Size(633, 23);
@@ -419,8 +429,10 @@
             // 
             // showedPhotoPathLabel
             // 
+            this.showedPhotoPathLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.showedPhotoPathLabel.AutoSize = true;
-            this.showedPhotoPathLabel.Location = new System.Drawing.Point(959, 309);
+            this.showedPhotoPathLabel.Location = new System.Drawing.Point(937, 296);
             this.showedPhotoPathLabel.Name = "showedPhotoPathLabel";
             this.showedPhotoPathLabel.Size = new System.Drawing.Size(123, 15);
             this.showedPhotoPathLabel.TabIndex = 29;
@@ -428,7 +440,8 @@
             // 
             // copyPathToClipboardButton
             // 
-            this.copyPathToClipboardButton.Location = new System.Drawing.Point(1727, 306);
+            this.copyPathToClipboardButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.copyPathToClipboardButton.Location = new System.Drawing.Point(1705, 293);
             this.copyPathToClipboardButton.Name = "copyPathToClipboardButton";
             this.copyPathToClipboardButton.Size = new System.Drawing.Size(132, 23);
             this.copyPathToClipboardButton.TabIndex = 30;
@@ -438,6 +451,7 @@
             // 
             // organismTypeComboBox
             // 
+            this.organismTypeComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.organismTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.organismTypeComboBox.FormattingEnabled = true;
             this.organismTypeComboBox.Location = new System.Drawing.Point(159, 2);
@@ -447,6 +461,7 @@
             // 
             // organismColourComboBox
             // 
+            this.organismColourComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.organismColourComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.organismColourComboBox.FormattingEnabled = true;
             this.organismColourComboBox.Location = new System.Drawing.Point(159, 31);
@@ -456,6 +471,7 @@
             // 
             // organismTypeLabel
             // 
+            this.organismTypeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.organismTypeLabel.AutoSize = true;
             this.organismTypeLabel.Location = new System.Drawing.Point(1, 7);
             this.organismTypeLabel.Name = "organismTypeLabel";
@@ -465,6 +481,7 @@
             // 
             // organismColourLabel
             // 
+            this.organismColourLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.organismColourLabel.AutoSize = true;
             this.organismColourLabel.Location = new System.Drawing.Point(1, 34);
             this.organismColourLabel.Name = "organismColourLabel";
@@ -474,21 +491,23 @@
             // 
             // typeColourGroupBox
             // 
+            this.typeColourGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.typeColourGroupBox.Controls.Add(this.organismColourLabel);
             this.typeColourGroupBox.Controls.Add(this.organismTypeLabel);
             this.typeColourGroupBox.Controls.Add(this.organismColourComboBox);
             this.typeColourGroupBox.Controls.Add(this.organismTypeComboBox);
-            this.typeColourGroupBox.Location = new System.Drawing.Point(1368, 204);
+            this.typeColourGroupBox.Location = new System.Drawing.Point(1221, 187);
             this.typeColourGroupBox.Name = "typeColourGroupBox";
             this.typeColourGroupBox.Size = new System.Drawing.Size(418, 58);
             this.typeColourGroupBox.TabIndex = 35;
             this.typeColourGroupBox.TabStop = false;
+            this.typeColourGroupBox.Enter += new System.EventHandler(this.typeColourGroupBox_Enter);
             // 
             // SearchingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.ClientSize = new System.Drawing.Size(1844, 1001);
             this.Controls.Add(this.typeColourGroupBox);
             this.Controls.Add(this.copyPathToClipboardButton);
             this.Controls.Add(this.showedPhotoPathLabel);
@@ -512,6 +531,7 @@
             this.Controls.Add(this.fromDateLabel);
             this.Controls.Add(this.categoryLabel);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MinimumSize = new System.Drawing.Size(1850, 500);
             this.Name = "SearchingForm";
             this.Text = "DBioPhoto - vyhledávání";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

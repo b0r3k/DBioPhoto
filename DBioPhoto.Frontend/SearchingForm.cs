@@ -376,5 +376,10 @@ namespace DBioPhoto.Frontend
             // Invoke using results for autocomplete on the main thread
             Invoke(new Action(() => { _suggestions.Clear(); _suggestions.AddRange(result); }));
         }
+
+        private void typeColourGroupBox_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }

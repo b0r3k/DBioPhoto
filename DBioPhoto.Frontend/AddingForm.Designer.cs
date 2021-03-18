@@ -65,7 +65,7 @@ namespace DBioPhoto.Frontend
             // organismAddButton
             // 
             this.organismAddButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.organismAddButton.Location = new System.Drawing.Point(1313, 394);
+            this.organismAddButton.Location = new System.Drawing.Point(1325, 361);
             this.organismAddButton.Name = "organismAddButton";
             this.organismAddButton.Size = new System.Drawing.Size(124, 23);
             this.organismAddButton.TabIndex = 0;
@@ -105,10 +105,10 @@ namespace DBioPhoto.Frontend
             this.imagesListView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.imagesListView.HideSelection = false;
-            this.imagesListView.Location = new System.Drawing.Point(32, 782);
+            this.imagesListView.Location = new System.Drawing.Point(32, 723);
             this.imagesListView.MultiSelect = false;
             this.imagesListView.Name = "imagesListView";
-            this.imagesListView.Size = new System.Drawing.Size(900, 216);
+            this.imagesListView.Size = new System.Drawing.Size(900, 176);
             this.imagesListView.TabIndex = 4;
             this.imagesListView.UseCompatibleStateImageBehavior = false;
             this.imagesListView.SelectedIndexChanged += new System.EventHandler(this.imagesListView_SelectedIndexChanged);
@@ -120,7 +120,7 @@ namespace DBioPhoto.Frontend
             | System.Windows.Forms.AnchorStyles.Right)));
             this.selectedImagePictureBox.Location = new System.Drawing.Point(32, 83);
             this.selectedImagePictureBox.Name = "selectedImagePictureBox";
-            this.selectedImagePictureBox.Size = new System.Drawing.Size(900, 675);
+            this.selectedImagePictureBox.Size = new System.Drawing.Size(900, 626);
             this.selectedImagePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.selectedImagePictureBox.TabIndex = 5;
             this.selectedImagePictureBox.TabStop = false;
@@ -129,7 +129,7 @@ namespace DBioPhoto.Frontend
             // 
             this.showedPhotoPathLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.showedPhotoPathLabel.AutoSize = true;
-            this.showedPhotoPathLabel.Location = new System.Drawing.Point(947, 86);
+            this.showedPhotoPathLabel.Location = new System.Drawing.Point(959, 65);
             this.showedPhotoPathLabel.Name = "showedPhotoPathLabel";
             this.showedPhotoPathLabel.Size = new System.Drawing.Size(39, 15);
             this.showedPhotoPathLabel.TabIndex = 6;
@@ -138,7 +138,7 @@ namespace DBioPhoto.Frontend
             // showedPhotoPathTextBox
             // 
             this.showedPhotoPathTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.showedPhotoPathTextBox.Location = new System.Drawing.Point(1157, 83);
+            this.showedPhotoPathTextBox.Location = new System.Drawing.Point(1169, 62);
             this.showedPhotoPathTextBox.Name = "showedPhotoPathTextBox";
             this.showedPhotoPathTextBox.ReadOnly = true;
             this.showedPhotoPathTextBox.Size = new System.Drawing.Size(231, 23);
@@ -148,7 +148,7 @@ namespace DBioPhoto.Frontend
             // 
             this.showedPhotoDateLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.showedPhotoDateLabel.AutoSize = true;
-            this.showedPhotoDateLabel.Location = new System.Drawing.Point(947, 158);
+            this.showedPhotoDateLabel.Location = new System.Drawing.Point(959, 137);
             this.showedPhotoDateLabel.Name = "showedPhotoDateLabel";
             this.showedPhotoDateLabel.Size = new System.Drawing.Size(74, 15);
             this.showedPhotoDateLabel.TabIndex = 8;
@@ -157,7 +157,7 @@ namespace DBioPhoto.Frontend
             // showedPhotoDateTextBox
             // 
             this.showedPhotoDateTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.showedPhotoDateTextBox.Location = new System.Drawing.Point(1157, 155);
+            this.showedPhotoDateTextBox.Location = new System.Drawing.Point(1169, 134);
             this.showedPhotoDateTextBox.Name = "showedPhotoDateTextBox";
             this.showedPhotoDateTextBox.ReadOnly = true;
             this.showedPhotoDateTextBox.Size = new System.Drawing.Size(231, 23);
@@ -167,7 +167,7 @@ namespace DBioPhoto.Frontend
             // 
             this.categoryLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.categoryLabel.AutoSize = true;
-            this.categoryLabel.Location = new System.Drawing.Point(947, 192);
+            this.categoryLabel.Location = new System.Drawing.Point(959, 171);
             this.categoryLabel.Name = "categoryLabel";
             this.categoryLabel.Size = new System.Drawing.Size(60, 15);
             this.categoryLabel.TabIndex = 10;
@@ -178,7 +178,7 @@ namespace DBioPhoto.Frontend
             this.categoryComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.categoryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.categoryComboBox.FormattingEnabled = true;
-            this.categoryComboBox.Location = new System.Drawing.Point(1157, 189);
+            this.categoryComboBox.Location = new System.Drawing.Point(1169, 168);
             this.categoryComboBox.Name = "categoryComboBox";
             this.categoryComboBox.Size = new System.Drawing.Size(231, 23);
             this.categoryComboBox.TabIndex = 11;
@@ -187,7 +187,7 @@ namespace DBioPhoto.Frontend
             // 
             this.commentLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.commentLabel.AutoSize = true;
-            this.commentLabel.Location = new System.Drawing.Point(947, 268);
+            this.commentLabel.Location = new System.Drawing.Point(959, 247);
             this.commentLabel.Name = "commentLabel";
             this.commentLabel.Size = new System.Drawing.Size(65, 15);
             this.commentLabel.TabIndex = 12;
@@ -197,7 +197,7 @@ namespace DBioPhoto.Frontend
             // 
             this.locationLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.locationLabel.AutoSize = true;
-            this.locationLabel.Location = new System.Drawing.Point(947, 230);
+            this.locationLabel.Location = new System.Drawing.Point(959, 209);
             this.locationLabel.Name = "locationLabel";
             this.locationLabel.Size = new System.Drawing.Size(85, 15);
             this.locationLabel.TabIndex = 13;
@@ -208,7 +208,7 @@ namespace DBioPhoto.Frontend
             this.locationTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.locationTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.locationTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.locationTextBox.Location = new System.Drawing.Point(1157, 227);
+            this.locationTextBox.Location = new System.Drawing.Point(1169, 206);
             this.locationTextBox.Name = "locationTextBox";
             this.locationTextBox.Size = new System.Drawing.Size(231, 23);
             this.locationTextBox.TabIndex = 14;
@@ -219,7 +219,7 @@ namespace DBioPhoto.Frontend
             this.commentTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.commentTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.commentTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.commentTextBox.Location = new System.Drawing.Point(1157, 265);
+            this.commentTextBox.Location = new System.Drawing.Point(1169, 244);
             this.commentTextBox.Name = "commentTextBox";
             this.commentTextBox.Size = new System.Drawing.Size(231, 23);
             this.commentTextBox.TabIndex = 15;
@@ -228,7 +228,7 @@ namespace DBioPhoto.Frontend
             // addPhotoToDbButton
             // 
             this.addPhotoToDbButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.addPhotoToDbButton.Location = new System.Drawing.Point(1086, 303);
+            this.addPhotoToDbButton.Location = new System.Drawing.Point(1098, 282);
             this.addPhotoToDbButton.Name = "addPhotoToDbButton";
             this.addPhotoToDbButton.Size = new System.Drawing.Size(145, 23);
             this.addPhotoToDbButton.TabIndex = 16;
@@ -240,7 +240,7 @@ namespace DBioPhoto.Frontend
             // 
             this.showedPhotoRelativePathLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.showedPhotoRelativePathLabel.AutoSize = true;
-            this.showedPhotoRelativePathLabel.Location = new System.Drawing.Point(947, 120);
+            this.showedPhotoRelativePathLabel.Location = new System.Drawing.Point(959, 99);
             this.showedPhotoRelativePathLabel.Name = "showedPhotoRelativePathLabel";
             this.showedPhotoRelativePathLabel.Size = new System.Drawing.Size(204, 15);
             this.showedPhotoRelativePathLabel.TabIndex = 17;
@@ -249,7 +249,7 @@ namespace DBioPhoto.Frontend
             // showedPhotoRelativePathTextBox
             // 
             this.showedPhotoRelativePathTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.showedPhotoRelativePathTextBox.Location = new System.Drawing.Point(1157, 117);
+            this.showedPhotoRelativePathTextBox.Location = new System.Drawing.Point(1169, 96);
             this.showedPhotoRelativePathTextBox.Name = "showedPhotoRelativePathTextBox";
             this.showedPhotoRelativePathTextBox.ReadOnly = true;
             this.showedPhotoRelativePathTextBox.Size = new System.Drawing.Size(231, 23);
@@ -260,7 +260,7 @@ namespace DBioPhoto.Frontend
             this.organismsOnPhotoListBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.organismsOnPhotoListBox.FormattingEnabled = true;
             this.organismsOnPhotoListBox.ItemHeight = 15;
-            this.organismsOnPhotoListBox.Location = new System.Drawing.Point(947, 394);
+            this.organismsOnPhotoListBox.Location = new System.Drawing.Point(959, 361);
             this.organismsOnPhotoListBox.Name = "organismsOnPhotoListBox";
             this.organismsOnPhotoListBox.Size = new System.Drawing.Size(360, 154);
             this.organismsOnPhotoListBox.TabIndex = 19;
@@ -270,7 +270,7 @@ namespace DBioPhoto.Frontend
             this.peopleOnPhotoListBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.peopleOnPhotoListBox.FormattingEnabled = true;
             this.peopleOnPhotoListBox.ItemHeight = 15;
-            this.peopleOnPhotoListBox.Location = new System.Drawing.Point(947, 619);
+            this.peopleOnPhotoListBox.Location = new System.Drawing.Point(959, 586);
             this.peopleOnPhotoListBox.Name = "peopleOnPhotoListBox";
             this.peopleOnPhotoListBox.Size = new System.Drawing.Size(360, 139);
             this.peopleOnPhotoListBox.TabIndex = 20;
@@ -278,7 +278,7 @@ namespace DBioPhoto.Frontend
             // removeOrganismFromPhotoButton
             // 
             this.removeOrganismFromPhotoButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.removeOrganismFromPhotoButton.Location = new System.Drawing.Point(1313, 509);
+            this.removeOrganismFromPhotoButton.Location = new System.Drawing.Point(1325, 476);
             this.removeOrganismFromPhotoButton.Name = "removeOrganismFromPhotoButton";
             this.removeOrganismFromPhotoButton.Size = new System.Drawing.Size(124, 39);
             this.removeOrganismFromPhotoButton.TabIndex = 21;
@@ -289,7 +289,7 @@ namespace DBioPhoto.Frontend
             // removePersonFromPhotoButton
             // 
             this.removePersonFromPhotoButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.removePersonFromPhotoButton.Location = new System.Drawing.Point(1313, 719);
+            this.removePersonFromPhotoButton.Location = new System.Drawing.Point(1325, 686);
             this.removePersonFromPhotoButton.Name = "removePersonFromPhotoButton";
             this.removePersonFromPhotoButton.Size = new System.Drawing.Size(124, 39);
             this.removePersonFromPhotoButton.TabIndex = 22;
@@ -301,7 +301,7 @@ namespace DBioPhoto.Frontend
             // 
             this.organismNameLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.organismNameLabel.AutoSize = true;
-            this.organismNameLabel.Location = new System.Drawing.Point(947, 347);
+            this.organismNameLabel.Location = new System.Drawing.Point(959, 314);
             this.organismNameLabel.Name = "organismNameLabel";
             this.organismNameLabel.Size = new System.Drawing.Size(207, 15);
             this.organismNameLabel.TabIndex = 23;
@@ -311,7 +311,7 @@ namespace DBioPhoto.Frontend
             // 
             this.personNameOrNickLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.personNameOrNickLabel.AutoSize = true;
-            this.personNameOrNickLabel.Location = new System.Drawing.Point(947, 572);
+            this.personNameOrNickLabel.Location = new System.Drawing.Point(959, 539);
             this.personNameOrNickLabel.Name = "personNameOrNickLabel";
             this.personNameOrNickLabel.Size = new System.Drawing.Size(227, 15);
             this.personNameOrNickLabel.TabIndex = 24;
@@ -322,7 +322,7 @@ namespace DBioPhoto.Frontend
             this.organismNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.organismNameTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.organismNameTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.organismNameTextBox.Location = new System.Drawing.Point(947, 365);
+            this.organismNameTextBox.Location = new System.Drawing.Point(959, 332);
             this.organismNameTextBox.Name = "organismNameTextBox";
             this.organismNameTextBox.Size = new System.Drawing.Size(259, 23);
             this.organismNameTextBox.TabIndex = 25;
@@ -331,7 +331,7 @@ namespace DBioPhoto.Frontend
             // addOrganismToPhotoButton
             // 
             this.addOrganismToPhotoButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.addOrganismToPhotoButton.Location = new System.Drawing.Point(1212, 365);
+            this.addOrganismToPhotoButton.Location = new System.Drawing.Point(1224, 332);
             this.addOrganismToPhotoButton.Name = "addOrganismToPhotoButton";
             this.addOrganismToPhotoButton.Size = new System.Drawing.Size(95, 23);
             this.addOrganismToPhotoButton.TabIndex = 26;
@@ -344,7 +344,7 @@ namespace DBioPhoto.Frontend
             this.personNameOrNickTextBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.personNameOrNickTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.personNameOrNickTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.personNameOrNickTextBox.Location = new System.Drawing.Point(947, 590);
+            this.personNameOrNickTextBox.Location = new System.Drawing.Point(959, 557);
             this.personNameOrNickTextBox.Name = "personNameOrNickTextBox";
             this.personNameOrNickTextBox.Size = new System.Drawing.Size(259, 23);
             this.personNameOrNickTextBox.TabIndex = 27;
@@ -353,7 +353,7 @@ namespace DBioPhoto.Frontend
             // addPersonToPhotoButton
             // 
             this.addPersonToPhotoButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.addPersonToPhotoButton.Location = new System.Drawing.Point(1212, 590);
+            this.addPersonToPhotoButton.Location = new System.Drawing.Point(1224, 557);
             this.addPersonToPhotoButton.Name = "addPersonToPhotoButton";
             this.addPersonToPhotoButton.Size = new System.Drawing.Size(95, 23);
             this.addPersonToPhotoButton.TabIndex = 28;
@@ -364,7 +364,7 @@ namespace DBioPhoto.Frontend
             // personAddButton
             // 
             this.personAddButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.personAddButton.Location = new System.Drawing.Point(1313, 619);
+            this.personAddButton.Location = new System.Drawing.Point(1325, 586);
             this.personAddButton.Name = "personAddButton";
             this.personAddButton.Size = new System.Drawing.Size(124, 23);
             this.personAddButton.TabIndex = 29;
@@ -376,7 +376,7 @@ namespace DBioPhoto.Frontend
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1534, 1041);
+            this.ClientSize = new System.Drawing.Size(1484, 911);
             this.Controls.Add(this.personAddButton);
             this.Controls.Add(this.addPersonToPhotoButton);
             this.Controls.Add(this.personNameOrNickTextBox);
@@ -407,9 +407,11 @@ namespace DBioPhoto.Frontend
             this.Controls.Add(this.folderChooseButton);
             this.Controls.Add(this.folderPathTextBox);
             this.Controls.Add(this.organismAddButton);
+            this.MinimumSize = new System.Drawing.Size(1500, 950);
             this.Name = "AddingForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "AddingForm";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddingForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AddingForm_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.selectedImagePictureBox)).EndInit();
