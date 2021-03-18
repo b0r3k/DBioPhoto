@@ -116,6 +116,7 @@ namespace DBioPhoto.Frontend
             this.selectedImagePictureBox.Location = new System.Drawing.Point(32, 83);
             this.selectedImagePictureBox.Name = "selectedImagePictureBox";
             this.selectedImagePictureBox.Size = new System.Drawing.Size(900, 675);
+            this.selectedImagePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.selectedImagePictureBox.TabIndex = 5;
             this.selectedImagePictureBox.TabStop = false;
             // 
