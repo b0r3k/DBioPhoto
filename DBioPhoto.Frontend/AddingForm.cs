@@ -315,22 +315,24 @@ namespace DBioPhoto.Frontend
 
 
 
-        private void removeOrganismFromPhotoButton_Click(object sender, EventArgs e)
+        private async void removeOrganismFromPhotoButton_Click(object sender, EventArgs e)
         {
             // Remove organism from photo, update the listbox
             if (organismsOnPhotoListBox.SelectedIndices.Count == 1)
             {
-                Task.Run(() => RemoveContentFromPhotoLocking(_showedImageRelativePath, organismsOnPhotoListBox.SelectedIndex, true));
+                int selectedIndex = organismsOnPhotoListBox.SelectedIndex;
+                await Task.Run(() => RemoveContentFromPhotoLocking(_showedImageRelativePath, selectedIndex, true));
                 Task.Run(() => GetPhotoContentLocking(_showedImageRelativePath));
             }
         }
 
-        private void removePersonFromPhotoButton_Click(object sender, EventArgs e)
+        private async void removePersonFromPhotoButton_Click(object sender, EventArgs e)
         {
             // Remove person from photo, update the listbox
             if (peopleOnPhotoListBox.SelectedIndices.Count == 1)
             {
-                Task.Run(() => RemoveContentFromPhotoLocking(_showedImageRelativePath, peopleOnPhotoListBox.SelectedIndex, false));
+                int selectedIndex = peopleOnPhotoListBox.SelectedIndex;
+                await Task.Run(() => RemoveContentFromPhotoLocking(_showedImageRelativePath, selectedIndex, false));
                 Task.Run(() => GetPhotoContentLocking(_showedImageRelativePath));
             }
         }
