@@ -126,6 +126,7 @@ namespace DBioPhoto.Frontend
             this.Controls.Add(this.nameLabel);
             this.MinimumSize = new System.Drawing.Size(370, 310);
             this.Name = "PersonAddForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PersonAddForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PersonAddForm_FormClosing);
             this.ResumeLayout(false);
